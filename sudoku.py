@@ -1,5 +1,4 @@
 import argparse
-
 from tkinter import Tk, Canvas, Frame, Button, BOTH, TOP, BOTTOM
 
 BOARDS = ['debug', 'n00b', 'l33t', 'error']  # Available Sudoku boards
@@ -20,9 +19,9 @@ class SudokuBoard(object):
     Sudoku board representation
     """
     def __init__(self, board_file):
-        self.board = SudokuBoard.__create_board(board_file)
+        self.board = SudokuBoard._create_board(board_file)
 
-    def __create_board(self, board_file):
+    def _create_board(self, board_file):
         # create an initial matrix, or a list of a list
         board = []
 
@@ -93,19 +92,19 @@ class SudokuGame(object):
         self.game_over = True  # if the above conditions are met, the game is completed
         return True
 
-    def __check_block(self, block):
+    def _check_block(self, block):  # block we pass in (square, row, or column) must be between 1 and 9
         return set(block) == set(range(1, 10))
 
-    def __check_row(self, row):
-        return self.__check_block(self.puzzle[row])
+    def _check_row(self, row):
+        return self._check_block(self.puzzle[row])
 
-    def __check_col(self, col):
-        return self.__check_block(
+    def _check_col(self, col):
+        return self._check_block(
             [self.puzzle[row][col] for row in range(9)]
         )
 
-    def __check_square(self, row, col):
-        return self.__check_block(
+    def _check_square(self, row, col):
+        return self._check_block(
             [
                 self.puzzle[r][c]
                 for r in range(row * 3, (row + 1) * 3)
@@ -126,32 +125,32 @@ class SudokuUI(Frame):
 
         self.row, self.col = 0, 0
 
-        self.__init_ui()
+        self._init_ui()
 
-    def __init_ui(self):
+    def _init_ui(self):
         self.parent.title('Sudoku')
-        self.pack(fill=BOTH, expand=1)
-        self.canvas = Canvas(
+        self.pack(fill=BOTH, expand=1)  # organizes frame's geometry relative to parent
+        self.canvas = Canvas(  # sets up width and height of puzzle canvas
             self,
             width=WIDTH,
             height=HEIGHT
         )
 
         self.canvas.pack(fill=BOTH, side=TOP)
-        clear_button = Button(
+        clear_button = Button(  # creates a "clear answers" button
             self,
             text='Clear answers',
-            command=self.__clear_answers
+            command=self._clear_answers
         )
         clear_button.pack(fill=BOTH, side=BOTTOM)
 
-        self.__draw_grid()
-        self.__draw_puzzle()
+        self._draw_grid()
+        self._draw_puzzle()
 
-        self.canvas.bind('<Button-1>', self.__cell_clicked)
-        self.canvas.bind('<Key>', self.__key_pressed)
+        self.canvas.bind('<Button-1>', self._cell_clicked)  # button-1 = left mouse button
+        self.canvas.bind('<Key>', self._key_pressed)
 
-    def __draw_grid(self):
+    def _draw_grid(self):
         """
         draws grid divided with blue lines into 3x3 squares
         """
@@ -170,12 +169,12 @@ class SudokuUI(Frame):
             y1 = MARGIN + i * SIDE
             self.canvas.create_line(x0, y0, x1, y1, fill=color)
 
-    def __draw_puzzle(self):
-        self.canvas.delete('numbers')
-        for i in range(9):
+    def _draw_puzzle(self):
+        self.canvas.delete('numbers')  # clears out previous numbers
+        for i in range(9):  # iterate over all rows and columns
             for j in range(9):
                 answer = self.game.puzzle[i][j]
-                if answer != 0:
+                if answer != 0:  # fill in the text if the answer in the cell is not zero
                     x = MARGIN + j * SIDE + SIDE / 2
                     y = MARGIN + i * SIDE + SIDE / 2
                     original = self.game.start_puzzle[i][j]
@@ -183,3 +182,96 @@ class SudokuUI(Frame):
                     self.canvas.create_text(
                         x, y, text=answer, tags='numbers', fill=color
                     )
+
+    def _clear_answers(self):
+        self.game.start()  # reset puzzle to original state
+        self.canvas.delete('victory')  # delete victory status
+        self._draw_puzzle()  # re-draw puzzle
+
+    def _cell_clicked(self, event):
+        if self.game.game_over:  # if game is over, no need for this function so just return
+            return
+
+        x, y = event.x, event.y  # get x, y location of the click
+        if (MARGIN < x < WIDTH - MARGIN and MARGIN < y < HEIGHT - MARGIN):  # make sure click is within puzzle widget
+            self.canvas.focus_set()
+
+            # get row and col numbers from x, y coordinates
+            row, col = (y - MARGIN) / SIDE, (x - MARGIN) / SIDE
+
+            # if cell was selected already, de-select it
+            if (row, col) == (self.row, self.col):
+                self.row, self.col = -1, -1
+            elif self.game.puzzle[row][col] == 0:
+                self.row, self.col = row, col
+
+            self._draw_cursor()
+
+    def _draw_cursor(self):  # highlight cell that user has clicked on
+        self.canvas.delete('cursor')
+        # if self.row and self.col are set, compute dimensions of cell and then outline it
+        if self.row >= 0 and self.col >= 0:
+            x0 = MARGIN + self.col * SIDE + 1
+            y0 = MARGIN + self.row * SIDE + 1
+            x1 = MARGIN + (self.col + 1) * SIDE - 1
+            y1 = MARGIN + (self.row + 1) * SIDE - 1
+
+            self.canvas.create_rectangle(x0, y0, x1, y1, outline='red', tags='cursor')
+
+    def _key_pressed(self, event):
+        if self.game.game_over:
+            return
+        if self.row and self.col >= 0 and event.char in '1234567890':
+            self.game.puzzle[self.row][self.col] = int(event.char)
+            self.col, self.row = -1, -1
+            self._draw_puzzle()
+            self._draw_cursor()
+            if self.game.check_win():
+                self._draw_victory()
+
+    def _draw_victory(self):
+        # Create an oval (which will be a circle)
+        x0 = y0 = MARGIN + SIDE * 2
+        x1 = y1 = MARGIN + SIDE * 7
+        self.canvas.create_oval(x0, y0, x1, y1,
+                                tags='victory', color='dark orange', outline='orange')
+        # create text
+        x = y = MARGIN + 4 * SIDE + SIDE / 2
+        self.canvas.create_text(
+            x, y, text='You win!', tags='winner',
+            fill='white', font=('Arial', 32))
+
+
+def parse_arguments():
+    """
+    Parses command line arguments in the form:
+        sudoku.py <board name>
+    Where board name must be in the 'BOARD' list
+    """
+    arg_parser = argparse.ArgumentParser()
+    # tells parser to expect a string input and accept --board flag
+    arg_parser.add_argument('--board',
+                            help='Desired board name',
+                            type=str,
+                            choices=BOARDS,
+                            required=True)
+    # Creates a dictionary of keys = argument flag, and value = argument
+    args = arg_parser.parse_args()
+    return args['board']
+
+
+if __name__ == '__main__':
+    board_name = parse_arguments()
+
+    # open Sudoku board file
+    with open('%s.sudoku' % board_name, 'r') as boards_file:
+        game = SudokuGame(boards_file)
+        game.start()
+
+        # create root widget, which is then passed in as parent widget when constructing UI
+        root = Tk()
+        SudokuUI(root, game)
+        root.geometry('%d%d' % (WIDTH, HEIGHT + 40))
+        root.mainloop()  # start program
+
+
