@@ -1,0 +1,8 @@
+README.rst
+setup.py
+gui_workspace/__init__.py
+gui_workspace.egg-info/PKG-INFO
+gui_workspace.egg-info/SOURCES.txt
+gui_workspace.egg-info/dependency_links.txt
+gui_workspace.egg-info/requires.txt
+gui_workspace.egg-info/top_level.txt

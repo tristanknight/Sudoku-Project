@@ -1,6 +1,5 @@
-c = 7
+import tkinter as tk
 
-if type(c) == int:
-    print("True")
-
-
+a = 1
+b = 2
+print(a + b)
