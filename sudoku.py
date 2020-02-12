@@ -96,7 +96,7 @@ class SudokuUI(Frame):
                 if answer != 0:  # fill in the text if the answer in the cell is not zero
                     x = MARGIN + j * SIDE + SIDE / 2
                     y = MARGIN + i * SIDE + SIDE / 2
-                    original = self.game.start_puzzle[i][j]
+                    original = self.game.start_puzzle[i][j]  # numbers given by the board
                     color = 'black' if answer == original else 'sea green'
                     self.canvas.create_text(
                         x, y, text=answer, tags='numbers', fill=color
@@ -115,16 +115,15 @@ class SudokuUI(Frame):
             self.canvas.focus_set()
 
             # get row and col numbers from x, y coordinates
-            print(x)
-            print(y)
             row, col = int((y - MARGIN) / SIDE), int((x - MARGIN) / SIDE)
-            print(row)
-            print(col)
 
+            current_answer = self.game.puzzle[row][col]
+            original_answer = self.game.start_puzzle[row][col]
             # if cell was selected already, de-select it
             if (row, col) == (self.row, self.col):
                 self.row, self.col = -1, -1
-            elif self.game.puzzle[row][col] == 0:
+            # condition for whether cell should be modifiable
+            elif self.game.puzzle[row][col] == 0 or current_answer != original_answer:
                 self.row, self.col = row, col
 
         else:
@@ -146,7 +145,7 @@ class SudokuUI(Frame):
     def _key_pressed(self, event):
         if self.game.game_over:
             return
-        if self.row and self.col >= 0 and event.char in '1234567890':
+        if self.row >= 0 and self.col >= 0 and event.char in '1234567890':
             self.game.puzzle[self.row][self.col] = int(event.char)
             self.col, self.row = -1, -1
             self._draw_puzzle()
@@ -226,18 +225,18 @@ class SudokuGame(object):
         for i in range(9):
             self.puzzle.append([])
             for j in range(9):
-                self.puzzle[i].append(self.start_puzzle)
+                self.puzzle[i].append(self.start_puzzle[i][j])
 
     def check_win(self):
         for row in range(9):
-            if not self.check_row:
+            if not self._check_row:
                 return False
         for col in range(9):
-            if not self.check_col:
+            if not self._check_col:
                 return False
         for row in range(3):
             for col in range(3):
-                if not self.check_square(row, col):
+                if not self._check_square(row, col):
                     return False
 
         self.game_over = True  # if the above conditions are met, the game is completed
