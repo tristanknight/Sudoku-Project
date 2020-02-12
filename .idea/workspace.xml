@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="17e7c499-cc3e-429a-922e-e66198e34e10" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gui_workspace.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gui_workspace.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_sudoku.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sudoku.py" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_misc.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_misc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +36,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
   </component>
-  <component name="RunManager" selected="Python.sudoku">
+  <component name="RunManager" selected="Python tests.Unittests in test_sudoku.py">
     <configuration name="sudoku" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="gui_workspace" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -81,10 +79,25 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Unittests in test_sudoku.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="gui_workspace" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test_sudoku.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.sudoku" />
+        <item itemvalue="Python tests.Unittests in test_sudoku.py" />
         <item itemvalue="Python.test_misc" />
+        <item itemvalue="Python.sudoku" />
       </list>
     </recent_temporary>
   </component>
@@ -122,22 +135,22 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="507" y="212" key="FileChooserDialogImpl/0.0.1440.900@0.0.1440.900" timestamp="1581350259529" />
-    <state width="1419" height="245" key="GridCell.Tab.0.bottom" timestamp="1581418261893">
+    <state width="1419" height="245" key="GridCell.Tab.0.bottom" timestamp="1581521985809">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1581418261893" />
-    <state width="1419" height="245" key="GridCell.Tab.0.center" timestamp="1581418261891">
+    <state width="1419" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1581521985809" />
+    <state width="1419" height="245" key="GridCell.Tab.0.center" timestamp="1581521985808">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1581418261891" />
-    <state width="1419" height="245" key="GridCell.Tab.0.left" timestamp="1581418261890">
+    <state width="1419" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1581521985808" />
+    <state width="1419" height="245" key="GridCell.Tab.0.left" timestamp="1581521985807">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1581418261890" />
-    <state width="1419" height="245" key="GridCell.Tab.0.right" timestamp="1581418261892">
+    <state width="1419" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1581521985807" />
+    <state width="1419" height="245" key="GridCell.Tab.0.right" timestamp="1581521985809">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1581418261892" />
+    <state width="1419" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1581521985809" />
     <state x="229" y="89" key="SettingsEditor" timestamp="1581349518004">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

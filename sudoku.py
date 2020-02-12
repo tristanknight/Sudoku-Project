@@ -88,6 +88,30 @@ class SudokuUI(Frame):
             y1 = MARGIN + i * SIDE
             self.canvas.create_line(x0, y0, x1, y1, fill=color)
 
+    def find_square(self, row, col):
+        square = []  # initialize square as an empty list
+        row_adjustment = row % 3  # adjustment needed (0 = beginning of square, 2 = end of square)
+        col_adjustment = col % 3
+        row_start = row - row_adjustment  # position to start counting from (i.e. where square begins)
+        col_start = col - col_adjustment
+        square += [self.game.puzzle[i][j] for i in range(row_start, row_start + 3) for j in range(col_start, col_start + 3)]
+        return square  # return list with all the numbers in the current square
+
+    def check_conflict(self, i, j, row, col, square):
+        """
+        Function to check conflicts. Takes three lists (row, col, and square)
+        and returns a list of conflict locations
+        """
+        conflict_locations = []  # list to store conflict locations on board
+        current = self.game.puzzle[i][j]  # current number
+        if row.count(current) > 1:
+            conflict_locations += [[i, j] for i in range(len(row)) if self.game.puzzle[i][j] == current]
+        if col.count(current) > 1:
+            conflict_locations += [[i, j] for j in range(len(col)) if self.game.puzzle[i][j] == current]
+        if square.count(current) > 1:
+            conflict_locations += [[i, j] for i in range(len(square)) if square[i] == current]
+        return conflict_locations
+
     def _draw_puzzle(self):
         self.canvas.delete('numbers')  # clears out previous numbers
         for i in range(9):  # iterate over all rows and columns
@@ -97,7 +121,21 @@ class SudokuUI(Frame):
                     x = MARGIN + j * SIDE + SIDE / 2
                     y = MARGIN + i * SIDE + SIDE / 2
                     original = self.game.start_puzzle[i][j]  # numbers given by the board
-                    color = 'black' if answer == original else 'sea green'
+                    # list of numbers in current square
+                    print(i, j)
+                    square = SudokuUI.find_square(self, i, j)
+                    print(square)
+                    # find locations of any conflicts (if applicable)
+                    conflict_locations = SudokuUI.check_conflict(self, i, j, self.game.puzzle[i], self.game.puzzle[j], square)
+                    # if len(conflict_locations) > 0:
+                    #     print(conflict_locations)
+
+                    if answer == original:
+                        color = 'black'
+                    elif [i, j] in conflict_locations:
+                        color = 'red'
+                    else:
+                        color = 'sea green'
                     self.canvas.create_text(
                         x, y, text=answer, tags='numbers', fill=color
                     )
@@ -170,7 +208,6 @@ class SudokuBoard(object):
     """
     Sudoku board representation
     """
-
     def __init__(self, board_file):
         self.board = SudokuBoard._create_board(self, board_file)
 
@@ -229,20 +266,19 @@ class SudokuGame(object):
 
     def check_win(self):
         for row in range(9):
-            if not self._check_row:
+            if not self._check_row(row):
                 return False
         for col in range(9):
-            if not self._check_col:
+            if not self._check_col(col):
                 return False
         for row in range(3):
             for col in range(3):
                 if not self._check_square(row, col):
                     return False
-
         self.game_over = True  # if the above conditions are met, the game is completed
         return True
 
-    def _check_block(self, block):  # block we pass in (square, row, or column) must be between 1 and 9
+    def _check_block(self, block):  # set of block we pass in (square, row, or column) must be between 1 and 9
         return set(block) == set(range(1, 10))
 
     def _check_row(self, row):
@@ -259,7 +295,8 @@ class SudokuGame(object):
                 self.puzzle[r][c]
                 for r in range(row * 3, (row + 1) * 3)
                 for c in range(col * 3, (col + 1) * 3)
-            ]
+
+        ]
 
         )
 
