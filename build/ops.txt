@@ -1,0 +1,6167 @@
+def parse_arguments():
+    r0 :: object
+    r1 :: str
+    r2, r3, parser :: object
+    r4, r5 :: str
+    r6 :: object
+    r7 :: dict
+    r8 :: str
+    r9 :: object
+    r10 :: list
+    r11 :: bool
+    r12 :: str
+    r13 :: object
+    r14, r15, r16, r17 :: str
+    r18 :: tuple
+    r19 :: object
+    r20 :: dict
+    r21 :: object
+    r22 :: str
+    r23, r24 :: object
+    r25 :: str
+    r26, r27, args :: object
+    r28 :: str
+    r29, r30 :: object
+L0:
+    r0 = argparse :: module
+    r1 = unicode_24 :: static  ('ArgumentParser')
+    r2 = getattr r0, r1
+    if is_error(r2) goto L13 (error at parse_arguments:23) else goto L1
+L1:
+    r3 = py_call(r2)
+    dec_ref r2
+    if is_error(r3) goto L13 (error at parse_arguments:23) else goto L2
+L2:
+    parser = r3
+    r4 = unicode_25 :: static  ('--board')
+    r5 = unicode_26 :: static  ('Desired board name')
+    r6 = str
+    r7 = sudoku.globals :: static
+    r8 = unicode_14 :: static  ('BOARDS')
+    r9 = r7[r8] :: dict
+    if is_error(r9) goto L14 (error at parse_arguments:28) else goto L3
+L3:
+    r10 = cast(list, r9)
+    if is_error(r10) goto L14 (error at parse_arguments:28) else goto L4
+L4:
+    r11 = True
+    r12 = unicode_27 :: static  ('add_argument')
+    r13 = getattr parser, r12
+    if is_error(r13) goto L15 (error at parse_arguments:25) else goto L5
+L5:
+    r14 = unicode_28 :: static  ('help')
+    r15 = unicode_29 :: static  ('type')
+    r16 = unicode_30 :: static  ('choices')
+    r17 = unicode_31 :: static  ('required')
+    r18 = (r4) :: tuple
+    if is_error(r18) goto L16 (error at parse_arguments:25) else goto L6
+L6:
+    r19 = box(bool, r11)
+    r20 = {r14: r5, r15: r6, r16: r10, r17: r19}
+    dec_ref r10
+    if is_error(r20) goto L17 (error at parse_arguments:25) else goto L7
+L7:
+    r21 = py_call_with_kwargs(r13, r18, r20)
+    dec_ref r13
+    dec_ref r18
+    dec_ref r20
+    if is_error(r21) goto L14 (error at parse_arguments:25) else goto L18
+L8:
+    r22 = unicode_32 :: static  ('parse_args')
+    r23 = py_method_call(parser, r22)
+    dec_ref parser
+    if is_error(r23) goto L13 (error at parse_arguments:31) else goto L9
+L9:
+    r24 = builtins :: module
+    r25 = unicode_33 :: static  ('vars')
+    r26 = getattr r24, r25
+    if is_error(r26) goto L19 (error at parse_arguments:31) else goto L10
+L10:
+    r27 = py_call(r26, r23)
+    dec_ref r26
+    dec_ref r23
+    if is_error(r27) goto L13 (error at parse_arguments:31) else goto L11
+L11:
+    args = r27
+    r28 = unicode_34 :: static  ('board')
+    r29 = args[r28] :: object
+    dec_ref args
+    if is_error(r29) goto L13 (error at parse_arguments:32) else goto L12
+L12:
+    return r29
+L13:
+    r30 = <error> :: object
+    return r30
+L14:
+    dec_ref parser
+    goto L13
+L15:
+    dec_ref parser
+    dec_ref r10
+    goto L13
+L16:
+    dec_ref parser
+    dec_ref r10
+    dec_ref r13
+    goto L13
+L17:
+    dec_ref parser
+    dec_ref r13
+    dec_ref r18
+    goto L13
+L18:
+    dec_ref r21
+    goto L8
+L19:
+    dec_ref r23
+    goto L13
+
+def SudokuUI.__init__(self, parent, game):
+    self :: sudoku.SudokuUI
+    parent, game :: object
+    r0, r1 :: bool
+    r2 :: dict
+    r3 :: str
+    r4 :: object
+    r5 :: str
+    r6 :: object
+    r7 :: short_int
+    r8 :: object
+    r9 :: short_int
+    r10 :: object
+    r11 :: tuple[object, object]
+    r12, r13, r14 :: object
+    r15 :: bool
+    r16 :: int
+    r17 :: bool
+    r18 :: object
+    r19 :: bool
+    r20 :: int
+    r21 :: bool
+    r22 :: object
+    r23 :: bool
+    r24 :: object
+    r25, r26 :: None
+L0:
+    inc_ref game
+    self.game = game; r0 = is_error
+    if not r0 goto L20 (error at __init__:41) else goto L1 :: bool
+L1:
+    inc_ref parent
+    self.parent = parent; r1 = is_error
+    if not r1 goto L20 (error at __init__:42) else goto L2 :: bool
+L2:
+    r2 = sudoku.globals :: static
+    r3 = unicode_5 :: static  ('Frame')
+    r4 = r2[r3] :: dict
+    if is_error(r4) goto L20 (error at __init__:43) else goto L3
+L3:
+    r5 = unicode_41 :: static  ('__init__')
+    r6 = py_method_call(r4, r5, self, parent)
+    dec_ref r4
+    if is_error(r6) goto L20 (error at __init__:43) else goto L21
+L4:
+    r7 = 0
+    r8 = box(short_int, r7)
+    r9 = 0
+    r10 = box(short_int, r9)
+    r11 = (r8, r10)
+    dec_ref r8
+    dec_ref r10
+    r12 = box(tuple[object, object], r11)
+    r13 = iter r12 :: object
+    dec_ref r12
+    if is_error(r13) goto L20 (error at __init__:45) else goto L5
+L5:
+    r14 = next r13 :: object
+    if is_error(r14) goto L22 else goto L8
+L6:
+    raise ValueError('not enough values to unpack')
+    if not r15 goto L20 (error at __init__:45) else goto L7 :: bool
+L7:
+    unreachable
+L8:
+    r16 = unbox(int, r14)
+    dec_ref r14
+    if is_error(r16) goto L23 (error at __init__:45) else goto L9
+L9:
+    self.row = r16; r17 = is_error
+    if not r17 goto L23 (error at __init__:45) else goto L10 :: bool
+L10:
+    r18 = next r13 :: object
+    if is_error(r18) goto L24 else goto L13
+L11:
+    raise ValueError('not enough values to unpack')
+    if not r19 goto L20 (error at __init__:45) else goto L12 :: bool
+L12:
+    unreachable
+L13:
+    r20 = unbox(int, r18)
+    dec_ref r18
+    if is_error(r20) goto L23 (error at __init__:45) else goto L14
+L14:
+    self.col = r20; r21 = is_error
+    if not r21 goto L23 (error at __init__:45) else goto L15 :: bool
+L15:
+    r22 = next r13 :: object
+    dec_ref r13
+    if is_error(r22) goto L18 else goto L25
+L16:
+    raise ValueError('too many values to unpack')
+    if not r23 goto L20 (error at __init__:45) else goto L17 :: bool
+L17:
+    unreachable
+L18:
+    r24 = self._init_ui()
+    if is_error(r24) goto L20 (error at __init__:47) else goto L26
+L19:
+    r25 = None
+    return r25
+L20:
+    r26 = <error> :: None
+    return r26
+L21:
+    dec_ref r6
+    goto L4
+L22:
+    dec_ref r13
+    goto L6
+L23:
+    dec_ref r13
+    goto L20
+L24:
+    dec_ref r13
+    goto L11
+L25:
+    dec_ref r22
+    goto L16
+L26:
+    dec_ref r24
+    goto L19
+
+def SudokuUI._init_ui(self):
+    self :: sudoku.SudokuUI
+    r0 :: object
+    r1, r2 :: str
+    r3 :: object
+    r4 :: dict
+    r5 :: str
+    r6 :: object
+    r7 :: short_int
+    r8 :: str
+    r9 :: object
+    r10, r11 :: str
+    r12 :: tuple
+    r13 :: object
+    r14 :: dict
+    r15 :: object
+    r16 :: dict
+    r17 :: str
+    r18 :: object
+    r19 :: int
+    r20 :: dict
+    r21 :: str
+    r22 :: object
+    r23 :: int
+    r24 :: dict
+    r25 :: str
+    r26 :: object
+    r27, r28 :: str
+    r29 :: tuple
+    r30, r31 :: object
+    r32 :: dict
+    r33 :: object
+    r34 :: bool
+    r35 :: object
+    r36 :: dict
+    r37 :: str
+    r38 :: object
+    r39 :: dict
+    r40 :: str
+    r41 :: object
+    r42 :: str
+    r43 :: object
+    r44, r45 :: str
+    r46 :: tuple
+    r47 :: dict
+    r48 :: object
+    r49, r50 :: str
+    r51 :: object
+    r52 :: dict
+    r53 :: str
+    r54 :: object
+    r55, r56 :: str
+    r57 :: tuple
+    r58 :: dict
+    r59, clear_button :: object
+    r60 :: dict
+    r61 :: str
+    r62 :: object
+    r63 :: dict
+    r64 :: str
+    r65 :: object
+    r66 :: str
+    r67 :: object
+    r68, r69 :: str
+    r70 :: tuple
+    r71 :: dict
+    r72, r73, r74, r75 :: object
+    r76, r77 :: str
+    r78 :: object
+    r79 :: str
+    r80, r81 :: object
+    r82, r83 :: str
+    r84 :: object
+    r85 :: str
+    r86 :: object
+    r87 :: None
+    r88, r89 :: object
+L0:
+    r0 = self.parent
+    if is_error(r0) goto L43 (error at _init_ui:50) else goto L1
+L1:
+    r1 = unicode_42 :: static  ('Sudoku')
+    r2 = unicode_43 :: static  ('title')
+    r3 = py_method_call(r0, r2, r1)
+    dec_ref r0
+    if is_error(r3) goto L43 (error at _init_ui:50) else goto L44
+L2:
+    r4 = sudoku.globals :: static
+    r5 = unicode_7 :: static  ('BOTH')
+    r6 = r4[r5] :: dict
+    if is_error(r6) goto L43 (error at _init_ui:51) else goto L3
+L3:
+    r7 = 1
+    r8 = unicode_44 :: static  ('pack')
+    r9 = getattr self, r8
+    if is_error(r9) goto L45 (error at _init_ui:51) else goto L4
+L4:
+    r10 = unicode_45 :: static  ('fill')
+    r11 = unicode_46 :: static  ('expand')
+    r12 = () :: tuple
+    if is_error(r12) goto L46 (error at _init_ui:51) else goto L5
+L5:
+    r13 = box(short_int, r7)
+    r14 = {r10: r6, r11: r13}
+    dec_ref r6
+    dec_ref r13
+    if is_error(r14) goto L47 (error at _init_ui:51) else goto L6
+L6:
+    r15 = py_call_with_kwargs(r9, r12, r14)
+    dec_ref r9
+    dec_ref r12
+    dec_ref r14
+    if is_error(r15) goto L43 (error at _init_ui:51) else goto L48
+L7:
+    r16 = sudoku.globals :: static
+    r17 = unicode_17 :: static  ('WIDTH')
+    r18 = r16[r17] :: dict
+    if is_error(r18) goto L43 (error at _init_ui:54) else goto L8
+L8:
+    r19 = unbox(int, r18)
+    dec_ref r18
+    if is_error(r19) goto L43 (error at _init_ui:54) else goto L9
+L9:
+    r20 = sudoku.globals :: static
+    r21 = unicode_18 :: static  ('HEIGHT')
+    r22 = r20[r21] :: dict
+    if is_error(r22) goto L49 (error at _init_ui:55) else goto L10
+L10:
+    r23 = unbox(int, r22)
+    dec_ref r22
+    if is_error(r23) goto L49 (error at _init_ui:55) else goto L11
+L11:
+    r24 = sudoku.globals :: static
+    r25 = unicode_4 :: static  ('Canvas')
+    r26 = r24[r25] :: dict
+    if is_error(r26) goto L50 (error at _init_ui:52) else goto L12
+L12:
+    r27 = unicode_47 :: static  ('width')
+    r28 = unicode_48 :: static  ('height')
+    r29 = (self) :: tuple
+    if is_error(r29) goto L51 (error at _init_ui:52) else goto L13
+L13:
+    r30 = box(int, r19)
+    r31 = box(int, r23)
+    r32 = {r27: r30, r28: r31}
+    dec_ref r30
+    dec_ref r31
+    if is_error(r32) goto L52 (error at _init_ui:52) else goto L14
+L14:
+    r33 = py_call_with_kwargs(r26, r29, r32)
+    dec_ref r26
+    dec_ref r29
+    dec_ref r32
+    if is_error(r33) goto L43 (error at _init_ui:52) else goto L15
+L15:
+    self.canvas = r33; r34 = is_error
+    if not r34 goto L43 (error at _init_ui:52) else goto L16 :: bool
+L16:
+    r35 = self.canvas
+    if is_error(r35) goto L43 (error at _init_ui:58) else goto L17
+L17:
+    r36 = sudoku.globals :: static
+    r37 = unicode_7 :: static  ('BOTH')
+    r38 = r36[r37] :: dict
+    if is_error(r38) goto L53 (error at _init_ui:58) else goto L18
+L18:
+    r39 = sudoku.globals :: static
+    r40 = unicode_8 :: static  ('TOP')
+    r41 = r39[r40] :: dict
+    if is_error(r41) goto L54 (error at _init_ui:58) else goto L19
+L19:
+    r42 = unicode_44 :: static  ('pack')
+    r43 = getattr r35, r42
+    dec_ref r35
+    if is_error(r43) goto L55 (error at _init_ui:58) else goto L20
+L20:
+    r44 = unicode_45 :: static  ('fill')
+    r45 = unicode_49 :: static  ('side')
+    r46 = () :: tuple
+    if is_error(r46) goto L56 (error at _init_ui:58) else goto L21
+L21:
+    r47 = {r44: r38, r45: r41}
+    dec_ref r38
+    dec_ref r41
+    if is_error(r47) goto L57 (error at _init_ui:58) else goto L22
+L22:
+    r48 = py_call_with_kwargs(r43, r46, r47)
+    dec_ref r43
+    dec_ref r46
+    dec_ref r47
+    if is_error(r48) goto L43 (error at _init_ui:58) else goto L58
+L23:
+    r49 = unicode_50 :: static  ('Clear answers')
+    r50 = unicode_51 :: static  ('_clear_answers')
+    r51 = getattr self, r50
+    if is_error(r51) goto L43 (error at _init_ui:62) else goto L24
+L24:
+    r52 = sudoku.globals :: static
+    r53 = unicode_6 :: static  ('Button')
+    r54 = r52[r53] :: dict
+    if is_error(r54) goto L59 (error at _init_ui:59) else goto L25
+L25:
+    r55 = unicode_52 :: static  ('text')
+    r56 = unicode_53 :: static  ('command')
+    r57 = (self) :: tuple
+    if is_error(r57) goto L60 (error at _init_ui:59) else goto L26
+L26:
+    r58 = {r55: r49, r56: r51}
+    dec_ref r51
+    if is_error(r58) goto L61 (error at _init_ui:59) else goto L27
+L27:
+    r59 = py_call_with_kwargs(r54, r57, r58)
+    dec_ref r54
+    dec_ref r57
+    dec_ref r58
+    if is_error(r59) goto L43 (error at _init_ui:59) else goto L28
+L28:
+    clear_button = r59
+    r60 = sudoku.globals :: static
+    r61 = unicode_7 :: static  ('BOTH')
+    r62 = r60[r61] :: dict
+    if is_error(r62) goto L62 (error at _init_ui:64) else goto L29
+L29:
+    r63 = sudoku.globals :: static
+    r64 = unicode_9 :: static  ('BOTTOM')
+    r65 = r63[r64] :: dict
+    if is_error(r65) goto L63 (error at _init_ui:64) else goto L30
+L30:
+    r66 = unicode_44 :: static  ('pack')
+    r67 = getattr clear_button, r66
+    dec_ref clear_button
+    if is_error(r67) goto L64 (error at _init_ui:64) else goto L31
+L31:
+    r68 = unicode_45 :: static  ('fill')
+    r69 = unicode_49 :: static  ('side')
+    r70 = () :: tuple
+    if is_error(r70) goto L65 (error at _init_ui:64) else goto L32
+L32:
+    r71 = {r68: r62, r69: r65}
+    dec_ref r62
+    dec_ref r65
+    if is_error(r71) goto L66 (error at _init_ui:64) else goto L33
+L33:
+    r72 = py_call_with_kwargs(r67, r70, r71)
+    dec_ref r67
+    dec_ref r70
+    dec_ref r71
+    if is_error(r72) goto L43 (error at _init_ui:64) else goto L67
+L34:
+    r73 = self._draw_grid()
+    if is_error(r73) goto L43 (error at _init_ui:66) else goto L68
+L35:
+    r74 = self._draw_puzzle()
+    if is_error(r74) goto L43 (error at _init_ui:67) else goto L69
+L36:
+    r75 = self.canvas
+    if is_error(r75) goto L43 (error at _init_ui:69) else goto L37
+L37:
+    r76 = unicode_54 :: static  ('<Button-1>')
+    r77 = unicode_55 :: static  ('_cell_clicked')
+    r78 = getattr self, r77
+    if is_error(r78) goto L70 (error at _init_ui:69) else goto L38
+L38:
+    r79 = unicode_56 :: static  ('bind')
+    r80 = py_method_call(r75, r79, r76, r78)
+    dec_ref r75
+    dec_ref r78
+    if is_error(r80) goto L43 (error at _init_ui:69) else goto L71
+L39:
+    r81 = self.canvas
+    if is_error(r81) goto L43 (error at _init_ui:70) else goto L40
+L40:
+    r82 = unicode_57 :: static  ('<Key>')
+    r83 = unicode_58 :: static  ('_key_pressed')
+    r84 = getattr self, r83
+    if is_error(r84) goto L72 (error at _init_ui:70) else goto L41
+L41:
+    r85 = unicode_56 :: static  ('bind')
+    r86 = py_method_call(r81, r85, r82, r84)
+    dec_ref r81
+    dec_ref r84
+    if is_error(r86) goto L43 (error at _init_ui:70) else goto L73
+L42:
+    r87 = None
+    r88 = box(None, r87)
+    inc_ref r88
+    return r88
+L43:
+    r89 = <error> :: object
+    return r89
+L44:
+    dec_ref r3
+    goto L2
+L45:
+    dec_ref r6
+    goto L43
+L46:
+    dec_ref r6
+    dec_ref r9
+    goto L43
+L47:
+    dec_ref r9
+    dec_ref r12
+    goto L43
+L48:
+    dec_ref r15
+    goto L7
+L49:
+    dec_ref r19 :: int
+    goto L43
+L50:
+    dec_ref r19 :: int
+    dec_ref r23 :: int
+    goto L43
+L51:
+    dec_ref r19 :: int
+    dec_ref r23 :: int
+    dec_ref r26
+    goto L43
+L52:
+    dec_ref r26
+    dec_ref r29
+    goto L43
+L53:
+    dec_ref r35
+    goto L43
+L54:
+    dec_ref r35
+    dec_ref r38
+    goto L43
+L55:
+    dec_ref r38
+    dec_ref r41
+    goto L43
+L56:
+    dec_ref r38
+    dec_ref r41
+    dec_ref r43
+    goto L43
+L57:
+    dec_ref r43
+    dec_ref r46
+    goto L43
+L58:
+    dec_ref r48
+    goto L23
+L59:
+    dec_ref r51
+    goto L43
+L60:
+    dec_ref r51
+    dec_ref r54
+    goto L43
+L61:
+    dec_ref r54
+    dec_ref r57
+    goto L43
+L62:
+    dec_ref clear_button
+    goto L43
+L63:
+    dec_ref clear_button
+    dec_ref r62
+    goto L43
+L64:
+    dec_ref r62
+    dec_ref r65
+    goto L43
+L65:
+    dec_ref r62
+    dec_ref r65
+    dec_ref r67
+    goto L43
+L66:
+    dec_ref r67
+    dec_ref r70
+    goto L43
+L67:
+    dec_ref r72
+    goto L34
+L68:
+    dec_ref r73
+    goto L35
+L69:
+    dec_ref r74
+    goto L36
+L70:
+    dec_ref r75
+    goto L43
+L71:
+    dec_ref r80
+    goto L39
+L72:
+    dec_ref r81
+    goto L43
+L73:
+    dec_ref r86
+    goto L42
+
+def SudokuUI._draw_grid(self):
+    self :: sudoku.SudokuUI
+    r0, r1, r2 :: short_int
+    i, r3, r4, r5 :: object
+    r6 :: bool
+    r7 :: short_int
+    r8, r9 :: object
+    r10 :: short_int
+    r11, r12 :: object
+    r13 :: bool
+    r14 :: object
+    r15, r16 :: str
+    color :: object
+    r17 :: dict
+    r18 :: str
+    r19 :: object
+    r20 :: int
+    r21 :: dict
+    r22 :: str
+    r23 :: object
+    r24 :: int
+    r25, r26, r27, r28, x0 :: object
+    r29 :: dict
+    r30 :: str
+    r31 :: object
+    r32 :: int
+    y0, r33 :: object
+    r34 :: dict
+    r35 :: str
+    r36 :: object
+    r37 :: int
+    r38 :: dict
+    r39 :: str
+    r40 :: object
+    r41 :: int
+    r42, r43, r44, r45, x1 :: object
+    r46 :: dict
+    r47 :: str
+    r48 :: object
+    r49 :: int
+    r50 :: dict
+    r51 :: str
+    r52 :: object
+    r53, r54 :: int
+    r55, y1, r56 :: object
+    r57 :: str
+    r58 :: object
+    r59 :: str
+    r60 :: tuple
+    r61 :: dict
+    r62 :: object
+    r63 :: dict
+    r64 :: str
+    r65 :: object
+    r66 :: int
+    r67 :: object
+    r68 :: dict
+    r69 :: str
+    r70 :: object
+    r71 :: int
+    r72 :: dict
+    r73 :: str
+    r74 :: object
+    r75 :: int
+    r76, r77, r78, r79 :: object
+    r80 :: dict
+    r81 :: str
+    r82 :: object
+    r83 :: int
+    r84 :: dict
+    r85 :: str
+    r86 :: object
+    r87, r88 :: int
+    r89 :: object
+    r90 :: dict
+    r91 :: str
+    r92 :: object
+    r93 :: int
+    r94 :: dict
+    r95 :: str
+    r96 :: object
+    r97 :: int
+    r98, r99, r100, r101, r102 :: object
+    r103 :: str
+    r104 :: object
+    r105 :: str
+    r106 :: tuple
+    r107 :: dict
+    r108 :: object
+    r109, r110 :: short_int
+    r111 :: object
+    r112 :: None
+    r113, r114 :: object
+L0:
+    r0 = 0
+    r1 = 10
+    r2 = r0
+    r3 = box(short_int, r2)
+    i = r3
+L1:
+    r4 = box(short_int, r1)
+    r5 = i < r4
+    dec_ref r4
+    if is_error(r5) goto L59 (error at _draw_grid:76) else goto L2
+L2:
+    r6 = bool r5 :: object
+    dec_ref r5
+    if is_error(r6) goto L59 (error at _draw_grid:76) else goto L3
+L3:
+    if r6 goto L4 else goto L60 :: bool
+L4:
+    r7 = 3
+    r8 = box(short_int, r7)
+    r9 = i % r8
+    dec_ref r8
+    if is_error(r9) goto L59 (error at _draw_grid:77) else goto L5
+L5:
+    r10 = 0
+    r11 = box(short_int, r10)
+    r12 = r9 == r11
+    dec_ref r9
+    dec_ref r11
+    if is_error(r12) goto L59 (error at _draw_grid:77) else goto L6
+L6:
+    r13 = bool r12 :: object
+    dec_ref r12
+    if is_error(r13) goto L59 (error at _draw_grid:77) else goto L7
+L7:
+    if r13 goto L8 else goto L9 :: bool
+L8:
+    r15 = unicode_59 :: static  ('blue')
+    inc_ref r15
+    r14 = r15
+    goto L10
+L9:
+    r16 = unicode_60 :: static  ('gray')
+    inc_ref r16
+    r14 = r16
+L10:
+    color = r14
+    r17 = sudoku.globals :: static
+    r18 = unicode_15 :: static  ('MARGIN')
+    r19 = r17[r18] :: dict
+    if is_error(r19) goto L61 (error at _draw_grid:79) else goto L11
+L11:
+    r20 = unbox(int, r19)
+    dec_ref r19
+    if is_error(r20) goto L61 (error at _draw_grid:79) else goto L12
+L12:
+    r21 = sudoku.globals :: static
+    r22 = unicode_16 :: static  ('SIDE')
+    r23 = r21[r22] :: dict
+    if is_error(r23) goto L62 (error at _draw_grid:79) else goto L13
+L13:
+    r24 = unbox(int, r23)
+    dec_ref r23
+    if is_error(r24) goto L62 (error at _draw_grid:79) else goto L14
+L14:
+    r25 = box(int, r24)
+    r26 = i * r25
+    dec_ref r25
+    if is_error(r26) goto L62 (error at _draw_grid:79) else goto L15
+L15:
+    r27 = box(int, r20)
+    r28 = r27 + r26
+    dec_ref r27
+    dec_ref r26
+    if is_error(r28) goto L61 (error at _draw_grid:79) else goto L16
+L16:
+    x0 = r28
+    r29 = sudoku.globals :: static
+    r30 = unicode_15 :: static  ('MARGIN')
+    r31 = r29[r30] :: dict
+    if is_error(r31) goto L63 (error at _draw_grid:80) else goto L17
+L17:
+    r32 = unbox(int, r31)
+    dec_ref r31
+    if is_error(r32) goto L63 (error at _draw_grid:80) else goto L18
+L18:
+    r33 = box(int, r32)
+    y0 = r33
+    r34 = sudoku.globals :: static
+    r35 = unicode_15 :: static  ('MARGIN')
+    r36 = r34[r35] :: dict
+    if is_error(r36) goto L64 (error at _draw_grid:81) else goto L19
+L19:
+    r37 = unbox(int, r36)
+    dec_ref r36
+    if is_error(r37) goto L64 (error at _draw_grid:81) else goto L20
+L20:
+    r38 = sudoku.globals :: static
+    r39 = unicode_16 :: static  ('SIDE')
+    r40 = r38[r39] :: dict
+    if is_error(r40) goto L65 (error at _draw_grid:81) else goto L21
+L21:
+    r41 = unbox(int, r40)
+    dec_ref r40
+    if is_error(r41) goto L65 (error at _draw_grid:81) else goto L22
+L22:
+    r42 = box(int, r41)
+    r43 = i * r42
+    dec_ref r42
+    if is_error(r43) goto L65 (error at _draw_grid:81) else goto L23
+L23:
+    r44 = box(int, r37)
+    r45 = r44 + r43
+    dec_ref r44
+    dec_ref r43
+    if is_error(r45) goto L64 (error at _draw_grid:81) else goto L24
+L24:
+    x1 = r45
+    r46 = sudoku.globals :: static
+    r47 = unicode_18 :: static  ('HEIGHT')
+    r48 = r46[r47] :: dict
+    if is_error(r48) goto L66 (error at _draw_grid:82) else goto L25
+L25:
+    r49 = unbox(int, r48)
+    dec_ref r48
+    if is_error(r49) goto L66 (error at _draw_grid:82) else goto L26
+L26:
+    r50 = sudoku.globals :: static
+    r51 = unicode_15 :: static  ('MARGIN')
+    r52 = r50[r51] :: dict
+    if is_error(r52) goto L67 (error at _draw_grid:82) else goto L27
+L27:
+    r53 = unbox(int, r52)
+    dec_ref r52
+    if is_error(r53) goto L67 (error at _draw_grid:82) else goto L28
+L28:
+    r54 = r49 - r53 :: int
+    dec_ref r49 :: int
+    dec_ref r53 :: int
+    r55 = box(int, r54)
+    y1 = r55
+    r56 = self.canvas
+    if is_error(r56) goto L68 (error at _draw_grid:83) else goto L29
+L29:
+    r57 = unicode_61 :: static  ('create_line')
+    r58 = getattr r56, r57
+    dec_ref r56
+    if is_error(r58) goto L68 (error at _draw_grid:83) else goto L30
+L30:
+    r59 = unicode_45 :: static  ('fill')
+    r60 = (x0, y0, x1, y1) :: tuple
+    dec_ref x0
+    dec_ref y0
+    dec_ref x1
+    dec_ref y1
+    if is_error(r60) goto L69 (error at _draw_grid:83) else goto L31
+L31:
+    r61 = {r59: color}
+    if is_error(r61) goto L70 (error at _draw_grid:83) else goto L32
+L32:
+    r62 = py_call_with_kwargs(r58, r60, r61)
+    dec_ref r58
+    dec_ref r60
+    dec_ref r61
+    if is_error(r62) goto L61 (error at _draw_grid:83) else goto L71
+L33:
+    r63 = sudoku.globals :: static
+    r64 = unicode_15 :: static  ('MARGIN')
+    r65 = r63[r64] :: dict
+    if is_error(r65) goto L61 (error at _draw_grid:85) else goto L34
+L34:
+    r66 = unbox(int, r65)
+    dec_ref r65
+    if is_error(r66) goto L61 (error at _draw_grid:85) else goto L35
+L35:
+    r67 = box(int, r66)
+    x0 = r67
+    r68 = sudoku.globals :: static
+    r69 = unicode_15 :: static  ('MARGIN')
+    r70 = r68[r69] :: dict
+    if is_error(r70) goto L63 (error at _draw_grid:86) else goto L36
+L36:
+    r71 = unbox(int, r70)
+    dec_ref r70
+    if is_error(r71) goto L63 (error at _draw_grid:86) else goto L37
+L37:
+    r72 = sudoku.globals :: static
+    r73 = unicode_16 :: static  ('SIDE')
+    r74 = r72[r73] :: dict
+    if is_error(r74) goto L72 (error at _draw_grid:86) else goto L38
+L38:
+    r75 = unbox(int, r74)
+    dec_ref r74
+    if is_error(r75) goto L72 (error at _draw_grid:86) else goto L39
+L39:
+    r76 = box(int, r75)
+    r77 = i * r76
+    dec_ref r76
+    if is_error(r77) goto L72 (error at _draw_grid:86) else goto L40
+L40:
+    r78 = box(int, r71)
+    r79 = r78 + r77
+    dec_ref r78
+    dec_ref r77
+    if is_error(r79) goto L63 (error at _draw_grid:86) else goto L41
+L41:
+    y0 = r79
+    r80 = sudoku.globals :: static
+    r81 = unicode_17 :: static  ('WIDTH')
+    r82 = r80[r81] :: dict
+    if is_error(r82) goto L64 (error at _draw_grid:87) else goto L42
+L42:
+    r83 = unbox(int, r82)
+    dec_ref r82
+    if is_error(r83) goto L64 (error at _draw_grid:87) else goto L43
+L43:
+    r84 = sudoku.globals :: static
+    r85 = unicode_15 :: static  ('MARGIN')
+    r86 = r84[r85] :: dict
+    if is_error(r86) goto L73 (error at _draw_grid:87) else goto L44
+L44:
+    r87 = unbox(int, r86)
+    dec_ref r86
+    if is_error(r87) goto L73 (error at _draw_grid:87) else goto L45
+L45:
+    r88 = r83 - r87 :: int
+    dec_ref r83 :: int
+    dec_ref r87 :: int
+    r89 = box(int, r88)
+    x1 = r89
+    r90 = sudoku.globals :: static
+    r91 = unicode_15 :: static  ('MARGIN')
+    r92 = r90[r91] :: dict
+    if is_error(r92) goto L66 (error at _draw_grid:88) else goto L46
+L46:
+    r93 = unbox(int, r92)
+    dec_ref r92
+    if is_error(r93) goto L66 (error at _draw_grid:88) else goto L47
+L47:
+    r94 = sudoku.globals :: static
+    r95 = unicode_16 :: static  ('SIDE')
+    r96 = r94[r95] :: dict
+    if is_error(r96) goto L74 (error at _draw_grid:88) else goto L48
+L48:
+    r97 = unbox(int, r96)
+    dec_ref r96
+    if is_error(r97) goto L74 (error at _draw_grid:88) else goto L49
+L49:
+    r98 = box(int, r97)
+    r99 = i * r98
+    dec_ref i
+    dec_ref r98
+    if is_error(r99) goto L75 (error at _draw_grid:88) else goto L50
+L50:
+    r100 = box(int, r93)
+    r101 = r100 + r99
+    dec_ref r100
+    dec_ref r99
+    if is_error(r101) goto L76 (error at _draw_grid:88) else goto L51
+L51:
+    y1 = r101
+    r102 = self.canvas
+    if is_error(r102) goto L77 (error at _draw_grid:89) else goto L52
+L52:
+    r103 = unicode_61 :: static  ('create_line')
+    r104 = getattr r102, r103
+    dec_ref r102
+    if is_error(r104) goto L77 (error at _draw_grid:89) else goto L53
+L53:
+    r105 = unicode_45 :: static  ('fill')
+    r106 = (x0, y0, x1, y1) :: tuple
+    dec_ref x0
+    dec_ref y0
+    dec_ref x1
+    dec_ref y1
+    if is_error(r106) goto L78 (error at _draw_grid:89) else goto L54
+L54:
+    r107 = {r105: color}
+    dec_ref color
+    if is_error(r107) goto L79 (error at _draw_grid:89) else goto L55
+L55:
+    r108 = py_call_with_kwargs(r104, r106, r107)
+    dec_ref r104
+    dec_ref r106
+    dec_ref r107
+    if is_error(r108) goto L58 (error at _draw_grid:89) else goto L80
+L56:
+    r109 = 1
+    r110 = r2 + r109 :: short_int
+    r2 = r110
+    r111 = box(short_int, r110)
+    i = r111
+    goto L1
+L57:
+    r112 = None
+    r113 = box(None, r112)
+    inc_ref r113
+    return r113
+L58:
+    r114 = <error> :: object
+    return r114
+L59:
+    dec_ref i
+    goto L58
+L60:
+    dec_ref i
+    goto L57
+L61:
+    dec_ref i
+    dec_ref color
+    goto L58
+L62:
+    dec_ref i
+    dec_ref color
+    dec_ref r20 :: int
+    goto L58
+L63:
+    dec_ref i
+    dec_ref color
+    dec_ref x0
+    goto L58
+L64:
+    dec_ref i
+    dec_ref color
+    dec_ref x0
+    dec_ref y0
+    goto L58
+L65:
+    dec_ref i
+    dec_ref color
+    dec_ref x0
+    dec_ref y0
+    dec_ref r37 :: int
+    goto L58
+L66:
+    dec_ref i
+    dec_ref color
+    dec_ref x0
+    dec_ref y0
+    dec_ref x1
+    goto L58
+L67:
+    dec_ref i
+    dec_ref color
+    dec_ref x0
+    dec_ref y0
+    dec_ref x1
+    dec_ref r49 :: int
+    goto L58
+L68:
+    dec_ref i
+    dec_ref color
+    dec_ref x0
+    dec_ref y0
+    dec_ref x1
+    dec_ref y1
+    goto L58
+L69:
+    dec_ref i
+    dec_ref color
+    dec_ref r58
+    goto L58
+L70:
+    dec_ref i
+    dec_ref color
+    dec_ref r58
+    dec_ref r60
+    goto L58
+L71:
+    dec_ref r62
+    goto L33
+L72:
+    dec_ref i
+    dec_ref color
+    dec_ref x0
+    dec_ref r71 :: int
+    goto L58
+L73:
+    dec_ref i
+    dec_ref color
+    dec_ref x0
+    dec_ref y0
+    dec_ref r83 :: int
+    goto L58
+L74:
+    dec_ref i
+    dec_ref color
+    dec_ref x0
+    dec_ref y0
+    dec_ref x1
+    dec_ref r93 :: int
+    goto L58
+L75:
+    dec_ref color
+    dec_ref x0
+    dec_ref y0
+    dec_ref x1
+    dec_ref r93 :: int
+    goto L58
+L76:
+    dec_ref color
+    dec_ref x0
+    dec_ref y0
+    dec_ref x1
+    goto L58
+L77:
+    dec_ref color
+    dec_ref x0
+    dec_ref y0
+    dec_ref x1
+    dec_ref y1
+    goto L58
+L78:
+    dec_ref color
+    dec_ref r104
+    goto L58
+L79:
+    dec_ref r104
+    dec_ref r106
+    goto L58
+L80:
+    dec_ref r108
+    goto L56
+
+def SudokuUI.find_square(self, row, col):
+    self :: sudoku.SudokuUI
+    row, col :: object
+    r0 :: list
+    square :: object
+    r1 :: short_int
+    r2, r3, row_adjustment :: object
+    r4 :: short_int
+    r5, r6, col_adjustment, r7, row_start, r8, col_start :: object
+    r9 :: list
+    r10 :: short_int
+    r11, r12, i, r13 :: object
+    r14 :: bool
+    r15 :: short_int
+    r16, r17, j, r18 :: object
+    r19 :: bool
+    r20 :: object
+    r21 :: str
+    r22, r23, r24 :: object
+    r25 :: bool
+    r26 :: short_int
+    r27, r28 :: object
+    r29 :: short_int
+    r30, r31, r32, r33 :: object
+L0:
+    r0 = []
+    if is_error(r0) goto L27 (error at find_square:92) else goto L1
+L1:
+    square = r0
+    r1 = 3
+    r2 = box(short_int, r1)
+    r3 = row % r2
+    dec_ref r2
+    if is_error(r3) goto L28 (error at find_square:93) else goto L2
+L2:
+    row_adjustment = r3
+    r4 = 3
+    r5 = box(short_int, r4)
+    r6 = col % r5
+    dec_ref r5
+    if is_error(r6) goto L29 (error at find_square:94) else goto L3
+L3:
+    col_adjustment = r6
+    r7 = row - row_adjustment
+    dec_ref row_adjustment
+    if is_error(r7) goto L30 (error at find_square:95) else goto L4
+L4:
+    row_start = r7
+    r8 = col - col_adjustment
+    dec_ref col_adjustment
+    if is_error(r8) goto L31 (error at find_square:96) else goto L5
+L5:
+    col_start = r8
+    r9 = []
+    if is_error(r9) goto L32 (error at find_square:97) else goto L6
+L6:
+    r10 = 3
+    r11 = box(short_int, r10)
+    r12 = row_start + r11
+    dec_ref r11
+    if is_error(r12) goto L33 (error at find_square:97) else goto L7
+L7:
+    inc_ref row_start
+    i = row_start
+L8:
+    r13 = i < r12
+    if is_error(r13) goto L34 (error at find_square:97) else goto L9
+L9:
+    r14 = bool r13 :: object
+    dec_ref r13
+    if is_error(r14) goto L34 (error at find_square:97) else goto L10
+L10:
+    if r14 goto L11 else goto L35 :: bool
+L11:
+    r15 = 3
+    r16 = box(short_int, r15)
+    r17 = col_start + r16
+    dec_ref r16
+    if is_error(r17) goto L34 (error at find_square:97) else goto L12
+L12:
+    inc_ref col_start
+    j = col_start
+L13:
+    r18 = j < r17
+    if is_error(r18) goto L36 (error at find_square:97) else goto L14
+L14:
+    r19 = bool r18 :: object
+    dec_ref r18
+    if is_error(r19) goto L36 (error at find_square:97) else goto L15
+L15:
+    if r19 goto L16 else goto L37 :: bool
+L16:
+    r20 = self.game
+    if is_error(r20) goto L36 (error at find_square:97) else goto L17
+L17:
+    r21 = unicode_62 :: static  ('puzzle')
+    r22 = getattr r20, r21
+    dec_ref r20
+    if is_error(r22) goto L36 (error at find_square:97) else goto L18
+L18:
+    r23 = r22[i] :: object
+    dec_ref r22
+    if is_error(r23) goto L36 (error at find_square:97) else goto L19
+L19:
+    r24 = r23[j] :: object
+    dec_ref r23
+    dec_ref j
+    if is_error(r24) goto L38 (error at find_square:97) else goto L20
+L20:
+    r25 = r9.append(r24) :: list
+    dec_ref r24
+    if not r25 goto L38 (error at find_square:97) else goto L21 :: bool
+L21:
+    r26 = 1
+    r27 = box(short_int, r26)
+    r28 = col_start + r27
+    dec_ref col_start
+    dec_ref r27
+    if is_error(r28) goto L39 (error at find_square:97) else goto L22
+L22:
+    inc_ref r28
+    col_start = r28
+    j = r28
+    goto L13
+L23:
+    r29 = 1
+    r30 = box(short_int, r29)
+    r31 = row_start + r30
+    dec_ref row_start
+    dec_ref r30
+    if is_error(r31) goto L40 (error at find_square:97) else goto L24
+L24:
+    inc_ref r31
+    row_start = r31
+    i = r31
+    goto L8
+L25:
+    r32 = square += r9
+    dec_ref square
+    dec_ref r9
+    if is_error(r32) goto L27 (error at find_square:97) else goto L26
+L26:
+    square = r32
+    return square
+L27:
+    r33 = <error> :: object
+    return r33
+L28:
+    dec_ref square
+    goto L27
+L29:
+    dec_ref square
+    dec_ref row_adjustment
+    goto L27
+L30:
+    dec_ref square
+    dec_ref col_adjustment
+    goto L27
+L31:
+    dec_ref square
+    dec_ref row_start
+    goto L27
+L32:
+    dec_ref square
+    dec_ref row_start
+    dec_ref col_start
+    goto L27
+L33:
+    dec_ref square
+    dec_ref row_start
+    dec_ref col_start
+    dec_ref r9
+    goto L27
+L34:
+    dec_ref square
+    dec_ref row_start
+    dec_ref col_start
+    dec_ref r9
+    dec_ref r12
+    dec_ref i
+    goto L27
+L35:
+    dec_ref row_start
+    dec_ref col_start
+    dec_ref r12
+    dec_ref i
+    goto L25
+L36:
+    dec_ref square
+    dec_ref row_start
+    dec_ref col_start
+    dec_ref r9
+    dec_ref r12
+    dec_ref i
+    dec_ref r17
+    dec_ref j
+    goto L27
+L37:
+    dec_ref i
+    dec_ref r17
+    dec_ref j
+    goto L23
+L38:
+    dec_ref square
+    dec_ref row_start
+    dec_ref col_start
+    dec_ref r9
+    dec_ref r12
+    dec_ref i
+    dec_ref r17
+    goto L27
+L39:
+    dec_ref square
+    dec_ref row_start
+    dec_ref r9
+    dec_ref r12
+    dec_ref i
+    dec_ref r17
+    goto L27
+L40:
+    dec_ref square
+    dec_ref col_start
+    dec_ref r9
+    dec_ref r12
+    goto L27
+
+def SudokuUI.check_conflict(self, i, j, row, col, square):
+    self :: sudoku.SudokuUI
+    i, j, row, col, square :: object
+    r0 :: list
+    conflict_locations, r1 :: object
+    r2 :: str
+    r3, r4, r5, current :: object
+    r6 :: str
+    r7 :: object
+    r8 :: short_int
+    r9, r10 :: object
+    r11 :: bool
+    r12 :: list
+    r13 :: short_int
+    r14 :: int
+    r15 :: object
+    r16 :: short_int
+    i0, r17, r18 :: object
+    r19 :: bool
+    r20 :: object
+    r21 :: str
+    r22, r23, r24, r25 :: object
+    r26 :: bool
+    r27 :: list
+    r28 :: bool
+    r29 :: short_int
+    r30 :: int
+    r31, r32 :: object
+    r33 :: str
+    r34 :: object
+    r35 :: short_int
+    r36, r37 :: object
+    r38 :: bool
+    r39 :: list
+    r40 :: short_int
+    r41 :: int
+    r42 :: object
+    r43 :: short_int
+    j0, r44, r45 :: object
+    r46 :: bool
+    r47 :: object
+    r48 :: str
+    r49, r50, r51, r52 :: object
+    r53 :: bool
+    r54 :: list
+    r55 :: bool
+    r56 :: short_int
+    r57 :: int
+    r58, r59 :: object
+    r60 :: str
+    r61 :: object
+    r62 :: short_int
+    r63, r64 :: object
+    r65 :: bool
+    r66 :: list
+    r67 :: short_int
+    r68 :: int
+    r69 :: object
+    r70 :: short_int
+    i1, r71, r72 :: object
+    r73 :: bool
+    r74, r75 :: object
+    r76 :: bool
+    r77 :: list
+    r78 :: bool
+    r79 :: short_int
+    r80 :: int
+    r81, r82, r83 :: object
+L0:
+    r0 = []
+    if is_error(r0) goto L66 (error at check_conflict:105) else goto L1
+L1:
+    conflict_locations = r0
+    r1 = self.game
+    if is_error(r1) goto L67 (error at check_conflict:106) else goto L2
+L2:
+    r2 = unicode_62 :: static  ('puzzle')
+    r3 = getattr r1, r2
+    dec_ref r1
+    if is_error(r3) goto L67 (error at check_conflict:106) else goto L3
+L3:
+    r4 = r3[i] :: object
+    dec_ref r3
+    if is_error(r4) goto L67 (error at check_conflict:106) else goto L4
+L4:
+    r5 = r4[j] :: object
+    dec_ref r4
+    if is_error(r5) goto L67 (error at check_conflict:106) else goto L5
+L5:
+    current = r5
+    r6 = unicode_63 :: static  ('count')
+    r7 = py_method_call(row, r6, current)
+    if is_error(r7) goto L68 (error at check_conflict:107) else goto L6
+L6:
+    r8 = 1
+    r9 = box(short_int, r8)
+    r10 = r7 > r9
+    dec_ref r7
+    dec_ref r9
+    if is_error(r10) goto L68 (error at check_conflict:107) else goto L7
+L7:
+    r11 = bool r10 :: object
+    dec_ref r10
+    if is_error(r11) goto L68 (error at check_conflict:107) else goto L8
+L8:
+    if r11 goto L9 else goto L26 :: bool
+L9:
+    r12 = []
+    if is_error(r12) goto L68 (error at check_conflict:108) else goto L10
+L10:
+    r13 = 0
+    r14 = len row :: object
+    r15 = box(int, r14)
+    r16 = r13
+    r17 = box(short_int, r16)
+    i0 = r17
+L11:
+    r18 = i0 < r15
+    if is_error(r18) goto L69 (error at check_conflict:108) else goto L12
+L12:
+    r19 = bool r18 :: object
+    dec_ref r18
+    if is_error(r19) goto L69 (error at check_conflict:108) else goto L13
+L13:
+    if r19 goto L14 else goto L70 :: bool
+L14:
+    r20 = self.game
+    if is_error(r20) goto L69 (error at check_conflict:108) else goto L15
+L15:
+    r21 = unicode_62 :: static  ('puzzle')
+    r22 = getattr r20, r21
+    dec_ref r20
+    if is_error(r22) goto L69 (error at check_conflict:108) else goto L16
+L16:
+    r23 = r22[i0] :: object
+    dec_ref r22
+    if is_error(r23) goto L69 (error at check_conflict:108) else goto L17
+L17:
+    r24 = r23[j] :: object
+    dec_ref r23
+    if is_error(r24) goto L69 (error at check_conflict:108) else goto L18
+L18:
+    r25 = r24 == current
+    dec_ref r24
+    if is_error(r25) goto L69 (error at check_conflict:108) else goto L19
+L19:
+    r26 = bool r25 :: object
+    dec_ref r25
+    if is_error(r26) goto L69 (error at check_conflict:108) else goto L20
+L20:
+    if r26 goto L21 else goto L71 :: bool
+L21:
+    inc_ref j
+    r27 = [i0, j]
+    if is_error(r27) goto L72 (error at check_conflict:108) else goto L22
+L22:
+    r28 = r12.append(r27) :: list
+    dec_ref r27
+    if not r28 goto L72 (error at check_conflict:108) else goto L23 :: bool
+L23:
+    r29 = 1
+    r30 = r16 + r29 :: int
+    inc_ref r30 :: int
+    r16 = r30
+    r31 = box(int, r30)
+    i0 = r31
+    goto L11
+L24:
+    r32 = conflict_locations += r12
+    dec_ref conflict_locations
+    dec_ref r12
+    if is_error(r32) goto L73 (error at check_conflict:108) else goto L25
+L25:
+    conflict_locations = r32
+L26:
+    r33 = unicode_63 :: static  ('count')
+    r34 = py_method_call(col, r33, current)
+    if is_error(r34) goto L68 (error at check_conflict:109) else goto L27
+L27:
+    r35 = 1
+    r36 = box(short_int, r35)
+    r37 = r34 > r36
+    dec_ref r34
+    dec_ref r36
+    if is_error(r37) goto L68 (error at check_conflict:109) else goto L28
+L28:
+    r38 = bool r37 :: object
+    dec_ref r37
+    if is_error(r38) goto L68 (error at check_conflict:109) else goto L29
+L29:
+    if r38 goto L30 else goto L47 :: bool
+L30:
+    r39 = []
+    if is_error(r39) goto L68 (error at check_conflict:110) else goto L31
+L31:
+    r40 = 0
+    r41 = len col :: object
+    r42 = box(int, r41)
+    r43 = r40
+    r44 = box(short_int, r43)
+    j0 = r44
+L32:
+    r45 = j0 < r42
+    if is_error(r45) goto L74 (error at check_conflict:110) else goto L33
+L33:
+    r46 = bool r45 :: object
+    dec_ref r45
+    if is_error(r46) goto L74 (error at check_conflict:110) else goto L34
+L34:
+    if r46 goto L35 else goto L75 :: bool
+L35:
+    r47 = self.game
+    if is_error(r47) goto L74 (error at check_conflict:110) else goto L36
+L36:
+    r48 = unicode_62 :: static  ('puzzle')
+    r49 = getattr r47, r48
+    dec_ref r47
+    if is_error(r49) goto L74 (error at check_conflict:110) else goto L37
+L37:
+    r50 = r49[i] :: object
+    dec_ref r49
+    if is_error(r50) goto L74 (error at check_conflict:110) else goto L38
+L38:
+    r51 = r50[j0] :: object
+    dec_ref r50
+    if is_error(r51) goto L74 (error at check_conflict:110) else goto L39
+L39:
+    r52 = r51 == current
+    dec_ref r51
+    if is_error(r52) goto L74 (error at check_conflict:110) else goto L40
+L40:
+    r53 = bool r52 :: object
+    dec_ref r52
+    if is_error(r53) goto L74 (error at check_conflict:110) else goto L41
+L41:
+    if r53 goto L42 else goto L76 :: bool
+L42:
+    inc_ref i
+    r54 = [i, j0]
+    if is_error(r54) goto L77 (error at check_conflict:110) else goto L43
+L43:
+    r55 = r39.append(r54) :: list
+    dec_ref r54
+    if not r55 goto L77 (error at check_conflict:110) else goto L44 :: bool
+L44:
+    r56 = 1
+    r57 = r43 + r56 :: int
+    inc_ref r57 :: int
+    r43 = r57
+    r58 = box(int, r57)
+    j0 = r58
+    goto L32
+L45:
+    r59 = conflict_locations += r39
+    dec_ref conflict_locations
+    dec_ref r39
+    if is_error(r59) goto L73 (error at check_conflict:110) else goto L46
+L46:
+    conflict_locations = r59
+L47:
+    r60 = unicode_63 :: static  ('count')
+    r61 = py_method_call(square, r60, current)
+    if is_error(r61) goto L68 (error at check_conflict:111) else goto L48
+L48:
+    r62 = 1
+    r63 = box(short_int, r62)
+    r64 = r61 > r63
+    dec_ref r61
+    dec_ref r63
+    if is_error(r64) goto L68 (error at check_conflict:111) else goto L49
+L49:
+    r65 = bool r64 :: object
+    dec_ref r64
+    if is_error(r65) goto L68 (error at check_conflict:111) else goto L50
+L50:
+    if r65 goto L51 else goto L78 :: bool
+L51:
+    r66 = []
+    if is_error(r66) goto L68 (error at check_conflict:112) else goto L52
+L52:
+    r67 = 0
+    r68 = len square :: object
+    r69 = box(int, r68)
+    r70 = r67
+    r71 = box(short_int, r70)
+    i1 = r71
+L53:
+    r72 = i1 < r69
+    if is_error(r72) goto L79 (error at check_conflict:112) else goto L54
+L54:
+    r73 = bool r72 :: object
+    dec_ref r72
+    if is_error(r73) goto L79 (error at check_conflict:112) else goto L55
+L55:
+    if r73 goto L56 else goto L80 :: bool
+L56:
+    r74 = square[i1] :: object
+    if is_error(r74) goto L79 (error at check_conflict:112) else goto L57
+L57:
+    r75 = r74 == current
+    dec_ref r74
+    if is_error(r75) goto L79 (error at check_conflict:112) else goto L58
+L58:
+    r76 = bool r75 :: object
+    dec_ref r75
+    if is_error(r76) goto L79 (error at check_conflict:112) else goto L59
+L59:
+    if r76 goto L60 else goto L81 :: bool
+L60:
+    inc_ref j
+    r77 = [i1, j]
+    if is_error(r77) goto L82 (error at check_conflict:112) else goto L61
+L61:
+    r78 = r66.append(r77) :: list
+    dec_ref r77
+    if not r78 goto L82 (error at check_conflict:112) else goto L62 :: bool
+L62:
+    r79 = 1
+    r80 = r70 + r79 :: int
+    inc_ref r80 :: int
+    r70 = r80
+    r81 = box(int, r80)
+    i1 = r81
+    goto L53
+L63:
+    r82 = conflict_locations += r66
+    dec_ref conflict_locations
+    dec_ref r66
+    if is_error(r82) goto L66 (error at check_conflict:112) else goto L64
+L64:
+    conflict_locations = r82
+L65:
+    return conflict_locations
+L66:
+    r83 = <error> :: object
+    return r83
+L67:
+    dec_ref conflict_locations
+    goto L66
+L68:
+    dec_ref conflict_locations
+    dec_ref current
+    goto L66
+L69:
+    dec_ref conflict_locations
+    dec_ref current
+    dec_ref r12
+    dec_ref r15
+    dec_ref i0
+    goto L66
+L70:
+    dec_ref r15
+    dec_ref i0
+    goto L24
+L71:
+    dec_ref i0
+    goto L23
+L72:
+    dec_ref conflict_locations
+    dec_ref current
+    dec_ref r12
+    dec_ref r15
+    goto L66
+L73:
+    dec_ref current
+    goto L66
+L74:
+    dec_ref conflict_locations
+    dec_ref current
+    dec_ref r39
+    dec_ref r42
+    dec_ref j0
+    goto L66
+L75:
+    dec_ref r42
+    dec_ref j0
+    goto L45
+L76:
+    dec_ref j0
+    goto L44
+L77:
+    dec_ref conflict_locations
+    dec_ref current
+    dec_ref r39
+    dec_ref r42
+    goto L66
+L78:
+    dec_ref current
+    goto L65
+L79:
+    dec_ref conflict_locations
+    dec_ref current
+    dec_ref r66
+    dec_ref r69
+    dec_ref i1
+    goto L66
+L80:
+    dec_ref current
+    dec_ref r69
+    dec_ref i1
+    goto L63
+L81:
+    dec_ref i1
+    goto L62
+L82:
+    dec_ref conflict_locations
+    dec_ref current
+    dec_ref r66
+    dec_ref r69
+    goto L66
+
+def SudokuUI._draw_puzzle(self):
+    self :: sudoku.SudokuUI
+    r0 :: object
+    r1, r2 :: str
+    r3 :: object
+    r4, r5, r6 :: short_int
+    i, r7, r8, r9 :: object
+    r10 :: bool
+    r11, r12, r13 :: short_int
+    j, r14, r15, r16 :: object
+    r17 :: bool
+    r18 :: object
+    r19 :: str
+    r20, r21, r22, answer :: object
+    r23 :: short_int
+    r24, r25 :: object
+    r26 :: bool
+    r27 :: dict
+    r28 :: str
+    r29 :: object
+    r30 :: int
+    r31 :: dict
+    r32 :: str
+    r33 :: object
+    r34 :: int
+    r35, r36, r37, r38 :: object
+    r39 :: dict
+    r40 :: str
+    r41 :: object
+    r42 :: int
+    r43 :: short_int
+    r44, r45, r46, r47, x :: object
+    r48 :: dict
+    r49 :: str
+    r50 :: object
+    r51 :: int
+    r52 :: dict
+    r53 :: str
+    r54 :: object
+    r55 :: int
+    r56, r57, r58, r59 :: object
+    r60 :: dict
+    r61 :: str
+    r62 :: object
+    r63 :: int
+    r64 :: short_int
+    r65, r66, r67, r68, y, r69 :: object
+    r70 :: str
+    r71, r72, r73, original, r74 :: object
+    r75 :: str
+    r76, r77, r78, square, r79 :: object
+    r80 :: str
+    r81, r82, r83 :: object
+    r84 :: str
+    r85, r86, r87 :: object
+    r88 :: str
+    r89, r90, r91, conflict_locations, r92 :: object
+    r93 :: bool
+    r94 :: str
+    color :: object
+    r95 :: list
+    r96 :: bool
+    r97, r98 :: str
+    r99 :: object
+    r100, r101 :: str
+    r102 :: object
+    r103, r104, r105 :: str
+    r106 :: tuple
+    r107 :: dict
+    r108 :: object
+    r109, r110 :: short_int
+    r111 :: object
+    r112, r113 :: short_int
+    r114 :: object
+    r115 :: None
+    r116, r117 :: object
+L0:
+    r0 = self.canvas
+    if is_error(r0) goto L70 (error at _draw_puzzle:116) else goto L1
+L1:
+    r1 = unicode_64 :: static  ('numbers')
+    r2 = unicode_65 :: static  ('delete')
+    r3 = py_method_call(r0, r2, r1)
+    dec_ref r0
+    if is_error(r3) goto L70 (error at _draw_puzzle:116) else goto L71
+L2:
+    r4 = 0
+    r5 = 9
+    r6 = r4
+    r7 = box(short_int, r6)
+    i = r7
+L3:
+    r8 = box(short_int, r5)
+    r9 = i < r8
+    dec_ref r8
+    if is_error(r9) goto L72 (error at _draw_puzzle:117) else goto L4
+L4:
+    r10 = bool r9 :: object
+    dec_ref r9
+    if is_error(r10) goto L72 (error at _draw_puzzle:117) else goto L5
+L5:
+    if r10 goto L6 else goto L73 :: bool
+L6:
+    r11 = 0
+    r12 = 9
+    r13 = r11
+    r14 = box(short_int, r13)
+    j = r14
+L7:
+    r15 = box(short_int, r12)
+    r16 = j < r15
+    dec_ref r15
+    if is_error(r16) goto L74 (error at _draw_puzzle:118) else goto L8
+L8:
+    r17 = bool r16 :: object
+    dec_ref r16
+    if is_error(r17) goto L74 (error at _draw_puzzle:118) else goto L9
+L9:
+    if r17 goto L10 else goto L75 :: bool
+L10:
+    r18 = self.game
+    if is_error(r18) goto L74 (error at _draw_puzzle:119) else goto L11
+L11:
+    r19 = unicode_62 :: static  ('puzzle')
+    r20 = getattr r18, r19
+    dec_ref r18
+    if is_error(r20) goto L74 (error at _draw_puzzle:119) else goto L12
+L12:
+    r21 = r20[i] :: object
+    dec_ref r20
+    if is_error(r21) goto L74 (error at _draw_puzzle:119) else goto L13
+L13:
+    r22 = r21[j] :: object
+    dec_ref r21
+    if is_error(r22) goto L74 (error at _draw_puzzle:119) else goto L14
+L14:
+    answer = r22
+    r23 = 0
+    r24 = box(short_int, r23)
+    r25 = answer != r24
+    dec_ref r24
+    if is_error(r25) goto L76 (error at _draw_puzzle:120) else goto L15
+L15:
+    r26 = bool r25 :: object
+    dec_ref r25
+    if is_error(r26) goto L76 (error at _draw_puzzle:120) else goto L16
+L16:
+    if r26 goto L17 else goto L77 :: bool
+L17:
+    r27 = sudoku.globals :: static
+    r28 = unicode_15 :: static  ('MARGIN')
+    r29 = r27[r28] :: dict
+    if is_error(r29) goto L76 (error at _draw_puzzle:121) else goto L18
+L18:
+    r30 = unbox(int, r29)
+    dec_ref r29
+    if is_error(r30) goto L76 (error at _draw_puzzle:121) else goto L19
+L19:
+    r31 = sudoku.globals :: static
+    r32 = unicode_16 :: static  ('SIDE')
+    r33 = r31[r32] :: dict
+    if is_error(r33) goto L78 (error at _draw_puzzle:121) else goto L20
+L20:
+    r34 = unbox(int, r33)
+    dec_ref r33
+    if is_error(r34) goto L78 (error at _draw_puzzle:121) else goto L21
+L21:
+    r35 = box(int, r34)
+    r36 = j * r35
+    dec_ref r35
+    if is_error(r36) goto L78 (error at _draw_puzzle:121) else goto L22
+L22:
+    r37 = box(int, r30)
+    r38 = r37 + r36
+    dec_ref r37
+    dec_ref r36
+    if is_error(r38) goto L76 (error at _draw_puzzle:121) else goto L23
+L23:
+    r39 = sudoku.globals :: static
+    r40 = unicode_16 :: static  ('SIDE')
+    r41 = r39[r40] :: dict
+    if is_error(r41) goto L79 (error at _draw_puzzle:121) else goto L24
+L24:
+    r42 = unbox(int, r41)
+    dec_ref r41
+    if is_error(r42) goto L79 (error at _draw_puzzle:121) else goto L25
+L25:
+    r43 = 2
+    r44 = box(int, r42)
+    r45 = box(short_int, r43)
+    r46 = r44 / r45
+    dec_ref r44
+    dec_ref r45
+    if is_error(r46) goto L79 (error at _draw_puzzle:121) else goto L26
+L26:
+    r47 = r38 + r46
+    dec_ref r38
+    dec_ref r46
+    if is_error(r47) goto L76 (error at _draw_puzzle:121) else goto L27
+L27:
+    x = r47
+    r48 = sudoku.globals :: static
+    r49 = unicode_15 :: static  ('MARGIN')
+    r50 = r48[r49] :: dict
+    if is_error(r50) goto L80 (error at _draw_puzzle:122) else goto L28
+L28:
+    r51 = unbox(int, r50)
+    dec_ref r50
+    if is_error(r51) goto L80 (error at _draw_puzzle:122) else goto L29
+L29:
+    r52 = sudoku.globals :: static
+    r53 = unicode_16 :: static  ('SIDE')
+    r54 = r52[r53] :: dict
+    if is_error(r54) goto L81 (error at _draw_puzzle:122) else goto L30
+L30:
+    r55 = unbox(int, r54)
+    dec_ref r54
+    if is_error(r55) goto L81 (error at _draw_puzzle:122) else goto L31
+L31:
+    r56 = box(int, r55)
+    r57 = i * r56
+    dec_ref r56
+    if is_error(r57) goto L81 (error at _draw_puzzle:122) else goto L32
+L32:
+    r58 = box(int, r51)
+    r59 = r58 + r57
+    dec_ref r58
+    dec_ref r57
+    if is_error(r59) goto L80 (error at _draw_puzzle:122) else goto L33
+L33:
+    r60 = sudoku.globals :: static
+    r61 = unicode_16 :: static  ('SIDE')
+    r62 = r60[r61] :: dict
+    if is_error(r62) goto L82 (error at _draw_puzzle:122) else goto L34
+L34:
+    r63 = unbox(int, r62)
+    dec_ref r62
+    if is_error(r63) goto L82 (error at _draw_puzzle:122) else goto L35
+L35:
+    r64 = 2
+    r65 = box(int, r63)
+    r66 = box(short_int, r64)
+    r67 = r65 / r66
+    dec_ref r65
+    dec_ref r66
+    if is_error(r67) goto L82 (error at _draw_puzzle:122) else goto L36
+L36:
+    r68 = r59 + r67
+    dec_ref r59
+    dec_ref r67
+    if is_error(r68) goto L80 (error at _draw_puzzle:122) else goto L37
+L37:
+    y = r68
+    r69 = self.game
+    if is_error(r69) goto L83 (error at _draw_puzzle:123) else goto L38
+L38:
+    r70 = unicode_66 :: static  ('start_puzzle')
+    r71 = getattr r69, r70
+    dec_ref r69
+    if is_error(r71) goto L83 (error at _draw_puzzle:123) else goto L39
+L39:
+    r72 = r71[i] :: object
+    dec_ref r71
+    if is_error(r72) goto L83 (error at _draw_puzzle:123) else goto L40
+L40:
+    r73 = r72[j] :: object
+    dec_ref r72
+    if is_error(r73) goto L83 (error at _draw_puzzle:123) else goto L41
+L41:
+    original = r73
+    r74 = builtins :: module
+    r75 = unicode_67 :: static  ('print')
+    r76 = getattr r74, r75
+    if is_error(r76) goto L84 (error at _draw_puzzle:125) else goto L42
+L42:
+    r77 = py_call(r76, i, j)
+    dec_ref r76
+    if is_error(r77) goto L84 (error at _draw_puzzle:125) else goto L85
+L43:
+    r78 = SudokuUI.find_square(self, i, j)
+    if is_error(r78) goto L84 (error at _draw_puzzle:126) else goto L44
+L44:
+    square = r78
+    r79 = builtins :: module
+    r80 = unicode_67 :: static  ('print')
+    r81 = getattr r79, r80
+    if is_error(r81) goto L86 (error at _draw_puzzle:127) else goto L45
+L45:
+    r82 = py_call(r81, square)
+    dec_ref r81
+    if is_error(r82) goto L86 (error at _draw_puzzle:127) else goto L87
+L46:
+    r83 = self.game
+    if is_error(r83) goto L86 (error at _draw_puzzle:129) else goto L47
+L47:
+    r84 = unicode_62 :: static  ('puzzle')
+    r85 = getattr r83, r84
+    dec_ref r83
+    if is_error(r85) goto L86 (error at _draw_puzzle:129) else goto L48
+L48:
+    r86 = r85[i] :: object
+    dec_ref r85
+    if is_error(r86) goto L86 (error at _draw_puzzle:129) else goto L49
+L49:
+    r87 = self.game
+    if is_error(r87) goto L88 (error at _draw_puzzle:129) else goto L50
+L50:
+    r88 = unicode_62 :: static  ('puzzle')
+    r89 = getattr r87, r88
+    dec_ref r87
+    if is_error(r89) goto L88 (error at _draw_puzzle:129) else goto L51
+L51:
+    r90 = r89[j] :: object
+    dec_ref r89
+    if is_error(r90) goto L88 (error at _draw_puzzle:129) else goto L52
+L52:
+    r91 = SudokuUI.check_conflict(self, i, j, r86, r90, square)
+    dec_ref r86
+    dec_ref r90
+    dec_ref square
+    if is_error(r91) goto L84 (error at _draw_puzzle:129) else goto L53
+L53:
+    conflict_locations = r91
+    r92 = answer == original
+    dec_ref original
+    if is_error(r92) goto L89 (error at _draw_puzzle:133) else goto L54
+L54:
+    r93 = bool r92 :: object
+    dec_ref r92
+    if is_error(r93) goto L89 (error at _draw_puzzle:133) else goto L55
+L55:
+    if r93 goto L90 else goto L57 :: bool
+L56:
+    r94 = unicode_68 :: static  ('black')
+    inc_ref r94
+    color = r94
+    goto L62
+L57:
+    inc_ref i
+    r95 = [i, j]
+    if is_error(r95) goto L91 (error at _draw_puzzle:135) else goto L58
+L58:
+    r96 = r95 in conflict_locations
+    dec_ref r95
+    dec_ref conflict_locations
+    if is_error(r96) goto L92 (error at _draw_puzzle:135) else goto L59
+L59:
+    if r96 goto L60 else goto L61 :: bool
+L60:
+    r97 = unicode_69 :: static  ('red')
+    inc_ref r97
+    color = r97
+    goto L62
+L61:
+    r98 = unicode_70 :: static  ('sea green')
+    inc_ref r98
+    color = r98
+L62:
+    r99 = self.canvas
+    if is_error(r99) goto L93 (error at _draw_puzzle:139) else goto L63
+L63:
+    r100 = unicode_64 :: static  ('numbers')
+    r101 = unicode_71 :: static  ('create_text')
+    r102 = getattr r99, r101
+    dec_ref r99
+    if is_error(r102) goto L93 (error at _draw_puzzle:139) else goto L64
+L64:
+    r103 = unicode_52 :: static  ('text')
+    r104 = unicode_72 :: static  ('tags')
+    r105 = unicode_45 :: static  ('fill')
+    r106 = (x, y) :: tuple
+    dec_ref x
+    dec_ref y
+    if is_error(r106) goto L94 (error at _draw_puzzle:139) else goto L65
+L65:
+    r107 = {r103: answer, r104: r100, r105: color}
+    dec_ref answer
+    dec_ref color
+    if is_error(r107) goto L95 (error at _draw_puzzle:139) else goto L66
+L66:
+    r108 = py_call_with_kwargs(r102, r106, r107)
+    dec_ref r102
+    dec_ref r106
+    dec_ref r107
+    if is_error(r108) goto L72 (error at _draw_puzzle:139) else goto L96
+L67:
+    r109 = 1
+    r110 = r13 + r109 :: short_int
+    r13 = r110
+    r111 = box(short_int, r110)
+    j = r111
+    goto L7
+L68:
+    r112 = 1
+    r113 = r6 + r112 :: short_int
+    r6 = r113
+    r114 = box(short_int, r113)
+    i = r114
+    goto L3
+L69:
+    r115 = None
+    r116 = box(None, r115)
+    inc_ref r116
+    return r116
+L70:
+    r117 = <error> :: object
+    return r117
+L71:
+    dec_ref r3
+    goto L2
+L72:
+    dec_ref i
+    goto L70
+L73:
+    dec_ref i
+    goto L69
+L74:
+    dec_ref i
+    dec_ref j
+    goto L70
+L75:
+    dec_ref i
+    dec_ref j
+    goto L68
+L76:
+    dec_ref i
+    dec_ref j
+    dec_ref answer
+    goto L70
+L77:
+    dec_ref j
+    dec_ref answer
+    goto L67
+L78:
+    dec_ref i
+    dec_ref j
+    dec_ref answer
+    dec_ref r30 :: int
+    goto L70
+L79:
+    dec_ref i
+    dec_ref j
+    dec_ref answer
+    dec_ref r38
+    goto L70
+L80:
+    dec_ref i
+    dec_ref j
+    dec_ref answer
+    dec_ref x
+    goto L70
+L81:
+    dec_ref i
+    dec_ref j
+    dec_ref answer
+    dec_ref x
+    dec_ref r51 :: int
+    goto L70
+L82:
+    dec_ref i
+    dec_ref j
+    dec_ref answer
+    dec_ref x
+    dec_ref r59
+    goto L70
+L83:
+    dec_ref i
+    dec_ref j
+    dec_ref answer
+    dec_ref x
+    dec_ref y
+    goto L70
+L84:
+    dec_ref i
+    dec_ref j
+    dec_ref answer
+    dec_ref x
+    dec_ref y
+    dec_ref original
+    goto L70
+L85:
+    dec_ref r77
+    goto L43
+L86:
+    dec_ref i
+    dec_ref j
+    dec_ref answer
+    dec_ref x
+    dec_ref y
+    dec_ref original
+    dec_ref square
+    goto L70
+L87:
+    dec_ref r82
+    goto L46
+L88:
+    dec_ref i
+    dec_ref j
+    dec_ref answer
+    dec_ref x
+    dec_ref y
+    dec_ref original
+    dec_ref square
+    dec_ref r86
+    goto L70
+L89:
+    dec_ref i
+    dec_ref j
+    dec_ref answer
+    dec_ref x
+    dec_ref y
+    dec_ref conflict_locations
+    goto L70
+L90:
+    dec_ref j
+    dec_ref conflict_locations
+    goto L56
+L91:
+    dec_ref i
+    dec_ref answer
+    dec_ref x
+    dec_ref y
+    dec_ref conflict_locations
+    goto L70
+L92:
+    dec_ref i
+    dec_ref answer
+    dec_ref x
+    dec_ref y
+    goto L70
+L93:
+    dec_ref i
+    dec_ref answer
+    dec_ref x
+    dec_ref y
+    dec_ref color
+    goto L70
+L94:
+    dec_ref i
+    dec_ref answer
+    dec_ref color
+    dec_ref r102
+    goto L70
+L95:
+    dec_ref i
+    dec_ref r102
+    dec_ref r106
+    goto L70
+L96:
+    dec_ref r108
+    goto L67
+
+def SudokuUI._clear_answers(self):
+    self :: sudoku.SudokuUI
+    r0 :: object
+    r1 :: str
+    r2, r3 :: object
+    r4, r5 :: str
+    r6, r7 :: object
+    r8 :: None
+    r9, r10 :: object
+L0:
+    r0 = self.game
+    if is_error(r0) goto L6 (error at _clear_answers:144) else goto L1
+L1:
+    r1 = unicode_73 :: static  ('start')
+    r2 = py_method_call(r0, r1)
+    dec_ref r0
+    if is_error(r2) goto L6 (error at _clear_answers:144) else goto L7
+L2:
+    r3 = self.canvas
+    if is_error(r3) goto L6 (error at _clear_answers:145) else goto L3
+L3:
+    r4 = unicode_74 :: static  ('victory')
+    r5 = unicode_65 :: static  ('delete')
+    r6 = py_method_call(r3, r5, r4)
+    dec_ref r3
+    if is_error(r6) goto L6 (error at _clear_answers:145) else goto L8
+L4:
+    r7 = self._draw_puzzle()
+    if is_error(r7) goto L6 (error at _clear_answers:146) else goto L9
+L5:
+    r8 = None
+    r9 = box(None, r8)
+    inc_ref r9
+    return r9
+L6:
+    r10 = <error> :: object
+    return r10
+L7:
+    dec_ref r2
+    goto L2
+L8:
+    dec_ref r6
+    goto L4
+L9:
+    dec_ref r7
+    goto L5
+
+def SudokuUI._cell_clicked(self, event):
+    self :: sudoku.SudokuUI
+    event, r0 :: object
+    r1 :: str
+    r2 :: object
+    r3 :: bool
+    r4 :: None
+    r5 :: object
+    r6 :: str
+    r7 :: object
+    r8 :: str
+    r9 :: object
+    r10 :: tuple[object, object]
+    r11, x, y, r12, r13 :: object
+    r14 :: bool
+    r15 :: object
+    r16 :: bool
+    r17 :: object
+    r18 :: bool
+    r19 :: dict
+    r20 :: str
+    r21 :: object
+    r22 :: int
+    r23, r24, r25 :: object
+    r26 :: bool
+    r27 :: dict
+    r28 :: str
+    r29 :: object
+    r30 :: int
+    r31 :: dict
+    r32 :: str
+    r33 :: object
+    r34, r35 :: int
+    r36, r37 :: object
+    r38 :: bool
+    r39 :: dict
+    r40 :: str
+    r41 :: object
+    r42 :: int
+    r43, r44, r45 :: object
+    r46 :: bool
+    r47 :: dict
+    r48 :: str
+    r49 :: object
+    r50 :: int
+    r51 :: dict
+    r52 :: str
+    r53 :: object
+    r54, r55 :: int
+    r56, r57 :: object
+    r58 :: bool
+    r59 :: object
+    r60 :: str
+    r61 :: object
+    r62 :: dict
+    r63 :: str
+    r64 :: object
+    r65 :: int
+    r66, r67 :: object
+    r68 :: dict
+    r69 :: str
+    r70 :: object
+    r71 :: int
+    r72, r73, r74, r75 :: object
+    r76 :: dict
+    r77 :: str
+    r78 :: object
+    r79 :: int
+    r80, r81 :: object
+    r82 :: dict
+    r83 :: str
+    r84 :: object
+    r85 :: int
+    r86, r87, r88, r89 :: object
+    r90 :: tuple[object, object]
+    r91, row, col, r92, r93 :: object
+    r94 :: bool
+    r95 :: object
+    r96 :: bool
+    r97 :: object
+    r98 :: bool
+    r99 :: object
+    r100 :: str
+    r101, r102, r103, current_answer, r104 :: object
+    r105 :: str
+    r106, r107, r108, original_answer :: object
+    r109 :: tuple[object, object]
+    r110 :: int
+    r111 :: object
+    r112 :: int
+    r113 :: object
+    r114 :: tuple[object, object]
+    r115, r116, r117 :: object
+    r118 :: bool
+    r119 :: short_int
+    r120 :: int
+    r121 :: object
+    r122 :: short_int
+    r123 :: int
+    r124 :: object
+    r125 :: tuple[object, object]
+    r126, r127, r128 :: object
+    r129 :: bool
+    r130 :: int
+    r131 :: bool
+    r132 :: object
+    r133 :: bool
+    r134 :: int
+    r135 :: bool
+    r136 :: object
+    r137 :: bool
+    r138 :: object
+    r139 :: str
+    r140, r141, r142 :: object
+    r143 :: short_int
+    r144, r145 :: object
+    r146 :: bool
+    r147 :: object
+    r148 :: bool
+    r149 :: tuple[object, object]
+    r150, r151, r152 :: object
+    r153 :: bool
+    r154 :: int
+    r155 :: bool
+    r156 :: object
+    r157 :: bool
+    r158 :: int
+    r159 :: bool
+    r160 :: object
+    r161 :: bool
+    r162 :: short_int
+    r163 :: int
+    r164 :: object
+    r165 :: short_int
+    r166 :: int
+    r167 :: object
+    r168 :: tuple[object, object]
+    r169, r170, r171 :: object
+    r172 :: bool
+    r173 :: int
+    r174 :: bool
+    r175 :: object
+    r176 :: bool
+    r177 :: int
+    r178 :: bool
+    r179 :: object
+    r180 :: bool
+    r181 :: object
+    r182 :: None
+    r183, r184 :: object
+L0:
+    r0 = self.game
+    if is_error(r0) goto L138 (error at _cell_clicked:149) else goto L1
+L1:
+    r1 = unicode_75 :: static  ('game_over')
+    r2 = getattr r0, r1
+    dec_ref r0
+    if is_error(r2) goto L138 (error at _cell_clicked:149) else goto L2
+L2:
+    r3 = bool r2 :: object
+    dec_ref r2
+    if is_error(r3) goto L138 (error at _cell_clicked:149) else goto L3
+L3:
+    if r3 goto L4 else goto L5 :: bool
+L4:
+    r4 = None
+    r5 = box(None, r4)
+    inc_ref r5
+    return r5
+L5:
+    r6 = unicode_76 :: static  ('x')
+    r7 = getattr event, r6
+    if is_error(r7) goto L138 (error at _cell_clicked:151) else goto L6
+L6:
+    r8 = unicode_77 :: static  ('y')
+    r9 = getattr event, r8
+    if is_error(r9) goto L139 (error at _cell_clicked:151) else goto L7
+L7:
+    r10 = (r7, r9)
+    dec_ref r7
+    dec_ref r9
+    r11 = box(tuple[object, object], r10)
+    r12 = iter r11 :: object
+    dec_ref r11
+    if is_error(r12) goto L138 (error at _cell_clicked:151) else goto L8
+L8:
+    r13 = next r12 :: object
+    if is_error(r13) goto L140 else goto L11
+L9:
+    raise ValueError('not enough values to unpack')
+    if not r14 goto L138 (error at _cell_clicked:151) else goto L10 :: bool
+L10:
+    unreachable
+L11:
+    x = r13
+    r15 = next r12 :: object
+    if is_error(r15) goto L141 else goto L14
+L12:
+    raise ValueError('not enough values to unpack')
+    if not r16 goto L138 (error at _cell_clicked:151) else goto L13 :: bool
+L13:
+    unreachable
+L14:
+    y = r15
+    r17 = next r12 :: object
+    dec_ref r12
+    if is_error(r17) goto L17 else goto L142
+L15:
+    raise ValueError('too many values to unpack')
+    if not r18 goto L138 (error at _cell_clicked:151) else goto L16 :: bool
+L16:
+    unreachable
+L17:
+    r19 = sudoku.globals :: static
+    r20 = unicode_15 :: static  ('MARGIN')
+    r21 = r19[r20] :: dict
+    if is_error(r21) goto L143 (error at _cell_clicked:152) else goto L18
+L18:
+    r22 = unbox(int, r21)
+    dec_ref r21
+    if is_error(r22) goto L143 (error at _cell_clicked:152) else goto L19
+L19:
+    r24 = box(int, r22)
+    r25 = r24 < x
+    dec_ref r24
+    if is_error(r25) goto L143 (error at _cell_clicked:152) else goto L20
+L20:
+    r26 = bool r25 :: object
+    if is_error(r26) goto L144 (error at _cell_clicked:152) else goto L21
+L21:
+    if r26 goto L145 else goto L22 :: bool
+L22:
+    r23 = r25
+    goto L29
+L23:
+    r27 = sudoku.globals :: static
+    r28 = unicode_17 :: static  ('WIDTH')
+    r29 = r27[r28] :: dict
+    if is_error(r29) goto L143 (error at _cell_clicked:152) else goto L24
+L24:
+    r30 = unbox(int, r29)
+    dec_ref r29
+    if is_error(r30) goto L143 (error at _cell_clicked:152) else goto L25
+L25:
+    r31 = sudoku.globals :: static
+    r32 = unicode_15 :: static  ('MARGIN')
+    r33 = r31[r32] :: dict
+    if is_error(r33) goto L146 (error at _cell_clicked:152) else goto L26
+L26:
+    r34 = unbox(int, r33)
+    dec_ref r33
+    if is_error(r34) goto L146 (error at _cell_clicked:152) else goto L27
+L27:
+    r35 = r30 - r34 :: int
+    dec_ref r30 :: int
+    dec_ref r34 :: int
+    r36 = box(int, r35)
+    r37 = x < r36
+    dec_ref r36
+    if is_error(r37) goto L143 (error at _cell_clicked:152) else goto L28
+L28:
+    r23 = r37
+L29:
+    r38 = bool r23 :: object
+    dec_ref r23
+    if is_error(r38) goto L143 (error at _cell_clicked:-1) else goto L30
+L30:
+    if r38 goto L31 else goto L147 :: bool
+L31:
+    r39 = sudoku.globals :: static
+    r40 = unicode_15 :: static  ('MARGIN')
+    r41 = r39[r40] :: dict
+    if is_error(r41) goto L143 (error at _cell_clicked:152) else goto L32
+L32:
+    r42 = unbox(int, r41)
+    dec_ref r41
+    if is_error(r42) goto L143 (error at _cell_clicked:152) else goto L33
+L33:
+    r44 = box(int, r42)
+    r45 = r44 < y
+    dec_ref r44
+    if is_error(r45) goto L143 (error at _cell_clicked:152) else goto L34
+L34:
+    r46 = bool r45 :: object
+    if is_error(r46) goto L148 (error at _cell_clicked:152) else goto L35
+L35:
+    if r46 goto L149 else goto L36 :: bool
+L36:
+    r43 = r45
+    goto L43
+L37:
+    r47 = sudoku.globals :: static
+    r48 = unicode_18 :: static  ('HEIGHT')
+    r49 = r47[r48] :: dict
+    if is_error(r49) goto L143 (error at _cell_clicked:152) else goto L38
+L38:
+    r50 = unbox(int, r49)
+    dec_ref r49
+    if is_error(r50) goto L143 (error at _cell_clicked:152) else goto L39
+L39:
+    r51 = sudoku.globals :: static
+    r52 = unicode_15 :: static  ('MARGIN')
+    r53 = r51[r52] :: dict
+    if is_error(r53) goto L150 (error at _cell_clicked:152) else goto L40
+L40:
+    r54 = unbox(int, r53)
+    dec_ref r53
+    if is_error(r54) goto L150 (error at _cell_clicked:152) else goto L41
+L41:
+    r55 = r50 - r54 :: int
+    dec_ref r50 :: int
+    dec_ref r54 :: int
+    r56 = box(int, r55)
+    r57 = y < r56
+    dec_ref r56
+    if is_error(r57) goto L143 (error at _cell_clicked:152) else goto L42
+L42:
+    r43 = r57
+L43:
+    r58 = bool r43 :: object
+    dec_ref r43
+    if is_error(r58) goto L143 (error at _cell_clicked:-1) else goto L44
+L44:
+    if r58 goto L45 else goto L147 :: bool
+L45:
+    r59 = self.canvas
+    if is_error(r59) goto L143 (error at _cell_clicked:153) else goto L46
+L46:
+    r60 = unicode_78 :: static  ('focus_set')
+    r61 = py_method_call(r59, r60)
+    dec_ref r59
+    if is_error(r61) goto L143 (error at _cell_clicked:153) else goto L151
+L47:
+    r62 = sudoku.globals :: static
+    r63 = unicode_15 :: static  ('MARGIN')
+    r64 = r62[r63] :: dict
+    if is_error(r64) goto L143 (error at _cell_clicked:156) else goto L48
+L48:
+    r65 = unbox(int, r64)
+    dec_ref r64
+    if is_error(r65) goto L143 (error at _cell_clicked:156) else goto L49
+L49:
+    r66 = box(int, r65)
+    r67 = y - r66
+    dec_ref y
+    dec_ref r66
+    if is_error(r67) goto L152 (error at _cell_clicked:156) else goto L50
+L50:
+    r68 = sudoku.globals :: static
+    r69 = unicode_16 :: static  ('SIDE')
+    r70 = r68[r69] :: dict
+    if is_error(r70) goto L153 (error at _cell_clicked:156) else goto L51
+L51:
+    r71 = unbox(int, r70)
+    dec_ref r70
+    if is_error(r71) goto L153 (error at _cell_clicked:156) else goto L52
+L52:
+    r72 = box(int, r71)
+    r73 = r67 / r72
+    dec_ref r67
+    dec_ref r72
+    if is_error(r73) goto L152 (error at _cell_clicked:156) else goto L53
+L53:
+    r74 = int
+    r75 = py_call(r74, r73)
+    dec_ref r73
+    if is_error(r75) goto L152 (error at _cell_clicked:156) else goto L54
+L54:
+    r76 = sudoku.globals :: static
+    r77 = unicode_15 :: static  ('MARGIN')
+    r78 = r76[r77] :: dict
+    if is_error(r78) goto L154 (error at _cell_clicked:156) else goto L55
+L55:
+    r79 = unbox(int, r78)
+    dec_ref r78
+    if is_error(r79) goto L154 (error at _cell_clicked:156) else goto L56
+L56:
+    r80 = box(int, r79)
+    r81 = x - r80
+    dec_ref x
+    dec_ref r80
+    if is_error(r81) goto L155 (error at _cell_clicked:156) else goto L57
+L57:
+    r82 = sudoku.globals :: static
+    r83 = unicode_16 :: static  ('SIDE')
+    r84 = r82[r83] :: dict
+    if is_error(r84) goto L156 (error at _cell_clicked:156) else goto L58
+L58:
+    r85 = unbox(int, r84)
+    dec_ref r84
+    if is_error(r85) goto L156 (error at _cell_clicked:156) else goto L59
+L59:
+    r86 = box(int, r85)
+    r87 = r81 / r86
+    dec_ref r81
+    dec_ref r86
+    if is_error(r87) goto L155 (error at _cell_clicked:156) else goto L60
+L60:
+    r88 = int
+    r89 = py_call(r88, r87)
+    dec_ref r87
+    if is_error(r89) goto L155 (error at _cell_clicked:156) else goto L61
+L61:
+    r90 = (r75, r89)
+    dec_ref r75
+    dec_ref r89
+    r91 = box(tuple[object, object], r90)
+    r92 = iter r91 :: object
+    dec_ref r91
+    if is_error(r92) goto L138 (error at _cell_clicked:156) else goto L62
+L62:
+    r93 = next r92 :: object
+    if is_error(r93) goto L157 else goto L65
+L63:
+    raise ValueError('not enough values to unpack')
+    if not r94 goto L138 (error at _cell_clicked:156) else goto L64 :: bool
+L64:
+    unreachable
+L65:
+    row = r93
+    r95 = next r92 :: object
+    if is_error(r95) goto L158 else goto L68
+L66:
+    raise ValueError('not enough values to unpack')
+    if not r96 goto L138 (error at _cell_clicked:156) else goto L67 :: bool
+L67:
+    unreachable
+L68:
+    col = r95
+    r97 = next r92 :: object
+    dec_ref r92
+    if is_error(r97) goto L71 else goto L159
+L69:
+    raise ValueError('too many values to unpack')
+    if not r98 goto L138 (error at _cell_clicked:156) else goto L70 :: bool
+L70:
+    unreachable
+L71:
+    r99 = self.game
+    if is_error(r99) goto L160 (error at _cell_clicked:158) else goto L72
+L72:
+    r100 = unicode_62 :: static  ('puzzle')
+    r101 = getattr r99, r100
+    dec_ref r99
+    if is_error(r101) goto L160 (error at _cell_clicked:158) else goto L73
+L73:
+    r102 = r101[row] :: object
+    dec_ref r101
+    if is_error(r102) goto L160 (error at _cell_clicked:158) else goto L74
+L74:
+    r103 = r102[col] :: object
+    dec_ref r102
+    if is_error(r103) goto L160 (error at _cell_clicked:158) else goto L75
+L75:
+    current_answer = r103
+    r104 = self.game
+    if is_error(r104) goto L161 (error at _cell_clicked:159) else goto L76
+L76:
+    r105 = unicode_66 :: static  ('start_puzzle')
+    r106 = getattr r104, r105
+    dec_ref r104
+    if is_error(r106) goto L161 (error at _cell_clicked:159) else goto L77
+L77:
+    r107 = r106[row] :: object
+    dec_ref r106
+    if is_error(r107) goto L161 (error at _cell_clicked:159) else goto L78
+L78:
+    r108 = r107[col] :: object
+    dec_ref r107
+    if is_error(r108) goto L161 (error at _cell_clicked:159) else goto L79
+L79:
+    original_answer = r108
+    r109 = (row, col)
+    r110 = self.row
+    if is_error(r110) goto L162 (error at _cell_clicked:161) else goto L80
+L80:
+    r111 = box(int, r110)
+    r112 = self.col
+    if is_error(r112) goto L163 (error at _cell_clicked:161) else goto L81
+L81:
+    r113 = box(int, r112)
+    r114 = (r111, r113)
+    dec_ref r111
+    dec_ref r113
+    r115 = box(tuple[object, object], r109)
+    r116 = box(tuple[object, object], r114)
+    r117 = r115 == r116
+    dec_ref r115
+    dec_ref r116
+    if is_error(r117) goto L164 (error at _cell_clicked:161) else goto L82
+L82:
+    r118 = bool r117 :: object
+    dec_ref r117
+    if is_error(r118) goto L164 (error at _cell_clicked:161) else goto L83
+L83:
+    if r118 goto L165 else goto L98 :: bool
+L84:
+    r119 = 1
+    r120 = -r119 :: int
+    r121 = box(int, r120)
+    r122 = 1
+    r123 = -r122 :: int
+    r124 = box(int, r123)
+    r125 = (r121, r124)
+    dec_ref r121
+    dec_ref r124
+    r126 = box(tuple[object, object], r125)
+    r127 = iter r126 :: object
+    dec_ref r126
+    if is_error(r127) goto L138 (error at _cell_clicked:162) else goto L85
+L85:
+    r128 = next r127 :: object
+    if is_error(r128) goto L166 else goto L88
+L86:
+    raise ValueError('not enough values to unpack')
+    if not r129 goto L138 (error at _cell_clicked:162) else goto L87 :: bool
+L87:
+    unreachable
+L88:
+    r130 = unbox(int, r128)
+    dec_ref r128
+    if is_error(r130) goto L167 (error at _cell_clicked:162) else goto L89
+L89:
+    self.row = r130; r131 = is_error
+    if not r131 goto L167 (error at _cell_clicked:162) else goto L90 :: bool
+L90:
+    r132 = next r127 :: object
+    if is_error(r132) goto L168 else goto L93
+L91:
+    raise ValueError('not enough values to unpack')
+    if not r133 goto L138 (error at _cell_clicked:162) else goto L92 :: bool
+L92:
+    unreachable
+L93:
+    r134 = unbox(int, r132)
+    dec_ref r132
+    if is_error(r134) goto L167 (error at _cell_clicked:162) else goto L94
+L94:
+    self.col = r134; r135 = is_error
+    if not r135 goto L167 (error at _cell_clicked:162) else goto L95 :: bool
+L95:
+    r136 = next r127 :: object
+    dec_ref r127
+    if is_error(r136) goto L136 else goto L169
+L96:
+    raise ValueError('too many values to unpack')
+    if not r137 goto L138 (error at _cell_clicked:162) else goto L97 :: bool
+L97:
+    unreachable
+L98:
+    r138 = self.game
+    if is_error(r138) goto L164 (error at _cell_clicked:164) else goto L99
+L99:
+    r139 = unicode_62 :: static  ('puzzle')
+    r140 = getattr r138, r139
+    dec_ref r138
+    if is_error(r140) goto L164 (error at _cell_clicked:164) else goto L100
+L100:
+    r141 = r140[row] :: object
+    dec_ref r140
+    if is_error(r141) goto L164 (error at _cell_clicked:164) else goto L101
+L101:
+    r142 = r141[col] :: object
+    dec_ref r141
+    if is_error(r142) goto L164 (error at _cell_clicked:164) else goto L102
+L102:
+    r143 = 0
+    r144 = box(short_int, r143)
+    r145 = r142 == r144
+    dec_ref r142
+    dec_ref r144
+    if is_error(r145) goto L164 (error at _cell_clicked:164) else goto L103
+L103:
+    r146 = bool r145 :: object
+    dec_ref r145
+    if is_error(r146) goto L164 (error at _cell_clicked:164) else goto L104
+L104:
+    if r146 goto L170 else goto L105 :: bool
+L105:
+    r147 = current_answer != original_answer
+    dec_ref current_answer
+    dec_ref original_answer
+    if is_error(r147) goto L160 (error at _cell_clicked:164) else goto L106
+L106:
+    r148 = bool r147 :: object
+    dec_ref r147
+    if is_error(r148) goto L160 (error at _cell_clicked:164) else goto L107
+L107:
+    if r148 goto L108 else goto L171 :: bool
+L108:
+    r149 = (row, col)
+    dec_ref row
+    dec_ref col
+    r150 = box(tuple[object, object], r149)
+    r151 = iter r150 :: object
+    dec_ref r150
+    if is_error(r151) goto L138 (error at _cell_clicked:165) else goto L109
+L109:
+    r152 = next r151 :: object
+    if is_error(r152) goto L172 else goto L112
+L110:
+    raise ValueError('not enough values to unpack')
+    if not r153 goto L138 (error at _cell_clicked:165) else goto L111 :: bool
+L111:
+    unreachable
+L112:
+    r154 = unbox(int, r152)
+    dec_ref r152
+    if is_error(r154) goto L173 (error at _cell_clicked:165) else goto L113
+L113:
+    self.row = r154; r155 = is_error
+    if not r155 goto L173 (error at _cell_clicked:165) else goto L114 :: bool
+L114:
+    r156 = next r151 :: object
+    if is_error(r156) goto L174 else goto L117
+L115:
+    raise ValueError('not enough values to unpack')
+    if not r157 goto L138 (error at _cell_clicked:165) else goto L116 :: bool
+L116:
+    unreachable
+L117:
+    r158 = unbox(int, r156)
+    dec_ref r156
+    if is_error(r158) goto L173 (error at _cell_clicked:165) else goto L118
+L118:
+    self.col = r158; r159 = is_error
+    if not r159 goto L173 (error at _cell_clicked:165) else goto L119 :: bool
+L119:
+    r160 = next r151 :: object
+    dec_ref r151
+    if is_error(r160) goto L136 else goto L175
+L120:
+    raise ValueError('too many values to unpack')
+    if not r161 goto L138 (error at _cell_clicked:165) else goto L121 :: bool
+L121:
+    unreachable
+L122:
+    r162 = 1
+    r163 = -r162 :: int
+    r164 = box(int, r163)
+    r165 = 1
+    r166 = -r165 :: int
+    r167 = box(int, r166)
+    r168 = (r164, r167)
+    dec_ref r164
+    dec_ref r167
+    r169 = box(tuple[object, object], r168)
+    r170 = iter r169 :: object
+    dec_ref r169
+    if is_error(r170) goto L138 (error at _cell_clicked:168) else goto L123
+L123:
+    r171 = next r170 :: object
+    if is_error(r171) goto L176 else goto L126
+L124:
+    raise ValueError('not enough values to unpack')
+    if not r172 goto L138 (error at _cell_clicked:168) else goto L125 :: bool
+L125:
+    unreachable
+L126:
+    r173 = unbox(int, r171)
+    dec_ref r171
+    if is_error(r173) goto L177 (error at _cell_clicked:168) else goto L127
+L127:
+    self.row = r173; r174 = is_error
+    if not r174 goto L177 (error at _cell_clicked:168) else goto L128 :: bool
+L128:
+    r175 = next r170 :: object
+    if is_error(r175) goto L178 else goto L131
+L129:
+    raise ValueError('not enough values to unpack')
+    if not r176 goto L138 (error at _cell_clicked:168) else goto L130 :: bool
+L130:
+    unreachable
+L131:
+    r177 = unbox(int, r175)
+    dec_ref r175
+    if is_error(r177) goto L177 (error at _cell_clicked:168) else goto L132
+L132:
+    self.col = r177; r178 = is_error
+    if not r178 goto L177 (error at _cell_clicked:168) else goto L133 :: bool
+L133:
+    r179 = next r170 :: object
+    dec_ref r170
+    if is_error(r179) goto L136 else goto L179
+L134:
+    raise ValueError('too many values to unpack')
+    if not r180 goto L138 (error at _cell_clicked:168) else goto L135 :: bool
+L135:
+    unreachable
+L136:
+    r181 = self._draw_cursor()
+    if is_error(r181) goto L138 (error at _cell_clicked:170) else goto L180
+L137:
+    r182 = None
+    r183 = box(None, r182)
+    inc_ref r183
+    return r183
+L138:
+    r184 = <error> :: object
+    return r184
+L139:
+    dec_ref r7
+    goto L138
+L140:
+    dec_ref r12
+    goto L9
+L141:
+    dec_ref x
+    dec_ref r12
+    goto L12
+L142:
+    dec_ref x
+    dec_ref y
+    dec_ref r17
+    goto L15
+L143:
+    dec_ref x
+    dec_ref y
+    goto L138
+L144:
+    dec_ref x
+    dec_ref y
+    dec_ref r25
+    goto L138
+L145:
+    dec_ref r25
+    goto L23
+L146:
+    dec_ref x
+    dec_ref y
+    dec_ref r30 :: int
+    goto L138
+L147:
+    dec_ref x
+    dec_ref y
+    goto L122
+L148:
+    dec_ref x
+    dec_ref y
+    dec_ref r45
+    goto L138
+L149:
+    dec_ref r45
+    goto L37
+L150:
+    dec_ref x
+    dec_ref y
+    dec_ref r50 :: int
+    goto L138
+L151:
+    dec_ref r61
+    goto L47
+L152:
+    dec_ref x
+    goto L138
+L153:
+    dec_ref x
+    dec_ref r67
+    goto L138
+L154:
+    dec_ref x
+    dec_ref r75
+    goto L138
+L155:
+    dec_ref r75
+    goto L138
+L156:
+    dec_ref r75
+    dec_ref r81
+    goto L138
+L157:
+    dec_ref r92
+    goto L63
+L158:
+    dec_ref row
+    dec_ref r92
+    goto L66
+L159:
+    dec_ref row
+    dec_ref col
+    dec_ref r97
+    goto L69
+L160:
+    dec_ref row
+    dec_ref col
+    goto L138
+L161:
+    dec_ref row
+    dec_ref col
+    dec_ref current_answer
+    goto L138
+L162:
+    dec_ref row
+    dec_ref col
+    dec_ref current_answer
+    dec_ref original_answer
+    dec_ref r109
+    goto L138
+L163:
+    dec_ref row
+    dec_ref col
+    dec_ref current_answer
+    dec_ref original_answer
+    dec_ref r109
+    dec_ref r111
+    goto L138
+L164:
+    dec_ref row
+    dec_ref col
+    dec_ref current_answer
+    dec_ref original_answer
+    goto L138
+L165:
+    dec_ref row
+    dec_ref col
+    dec_ref current_answer
+    dec_ref original_answer
+    goto L84
+L166:
+    dec_ref r127
+    goto L86
+L167:
+    dec_ref r127
+    goto L138
+L168:
+    dec_ref r127
+    goto L91
+L169:
+    dec_ref r136
+    goto L96
+L170:
+    dec_ref current_answer
+    dec_ref original_answer
+    goto L108
+L171:
+    dec_ref row
+    dec_ref col
+    goto L136
+L172:
+    dec_ref r151
+    goto L110
+L173:
+    dec_ref r151
+    goto L138
+L174:
+    dec_ref r151
+    goto L115
+L175:
+    dec_ref r160
+    goto L120
+L176:
+    dec_ref r170
+    goto L124
+L177:
+    dec_ref r170
+    goto L138
+L178:
+    dec_ref r170
+    goto L129
+L179:
+    dec_ref r179
+    goto L134
+L180:
+    dec_ref r181
+    goto L137
+
+def SudokuUI._draw_cursor(self):
+    self :: sudoku.SudokuUI
+    r0 :: object
+    r1, r2 :: str
+    r3 :: object
+    r4 :: int
+    r5 :: object
+    r6 :: short_int
+    r7, r8 :: object
+    r9 :: bool
+    r10 :: int
+    r11 :: object
+    r12 :: short_int
+    r13, r14 :: object
+    r15 :: bool
+    r16 :: dict
+    r17 :: str
+    r18 :: object
+    r19, r20 :: int
+    r21 :: object
+    r22 :: dict
+    r23 :: str
+    r24 :: object
+    r25 :: int
+    r26, r27, r28, r29 :: object
+    r30 :: short_int
+    r31, r32, x0 :: object
+    r33 :: dict
+    r34 :: str
+    r35 :: object
+    r36, r37 :: int
+    r38 :: object
+    r39 :: dict
+    r40 :: str
+    r41 :: object
+    r42 :: int
+    r43, r44, r45, r46 :: object
+    r47 :: short_int
+    r48, r49, y0 :: object
+    r50 :: dict
+    r51 :: str
+    r52 :: object
+    r53, r54 :: int
+    r55 :: object
+    r56 :: short_int
+    r57, r58 :: object
+    r59 :: dict
+    r60 :: str
+    r61 :: object
+    r62 :: int
+    r63, r64, r65, r66 :: object
+    r67 :: short_int
+    r68, r69, x1 :: object
+    r70 :: dict
+    r71 :: str
+    r72 :: object
+    r73, r74 :: int
+    r75 :: object
+    r76 :: short_int
+    r77, r78 :: object
+    r79 :: dict
+    r80 :: str
+    r81 :: object
+    r82 :: int
+    r83, r84, r85, r86 :: object
+    r87 :: short_int
+    r88, r89, y1, r90 :: object
+    r91, r92, r93 :: str
+    r94 :: object
+    r95, r96 :: str
+    r97 :: tuple
+    r98 :: dict
+    r99 :: object
+    r100 :: None
+    r101, r102 :: object
+L0:
+    r0 = self.canvas
+    if is_error(r0) goto L50 (error at _draw_cursor:173) else goto L1
+L1:
+    r1 = unicode_79 :: static  ('cursor')
+    r2 = unicode_65 :: static  ('delete')
+    r3 = py_method_call(r0, r2, r1)
+    dec_ref r0
+    if is_error(r3) goto L50 (error at _draw_cursor:173) else goto L51
+L2:
+    r4 = self.row
+    if is_error(r4) goto L50 (error at _draw_cursor:175) else goto L3
+L3:
+    r5 = box(int, r4)
+    r6 = 0
+    r7 = box(short_int, r6)
+    r8 = r5 >= r7
+    dec_ref r5
+    dec_ref r7
+    if is_error(r8) goto L50 (error at _draw_cursor:175) else goto L4
+L4:
+    r9 = bool r8 :: object
+    dec_ref r8
+    if is_error(r9) goto L50 (error at _draw_cursor:175) else goto L5
+L5:
+    if r9 goto L6 else goto L49 :: bool
+L6:
+    r10 = self.col
+    if is_error(r10) goto L50 (error at _draw_cursor:175) else goto L7
+L7:
+    r11 = box(int, r10)
+    r12 = 0
+    r13 = box(short_int, r12)
+    r14 = r11 >= r13
+    dec_ref r11
+    dec_ref r13
+    if is_error(r14) goto L50 (error at _draw_cursor:175) else goto L8
+L8:
+    r15 = bool r14 :: object
+    dec_ref r14
+    if is_error(r15) goto L50 (error at _draw_cursor:175) else goto L9
+L9:
+    if r15 goto L10 else goto L49 :: bool
+L10:
+    r16 = sudoku.globals :: static
+    r17 = unicode_15 :: static  ('MARGIN')
+    r18 = r16[r17] :: dict
+    if is_error(r18) goto L50 (error at _draw_cursor:176) else goto L11
+L11:
+    r19 = unbox(int, r18)
+    dec_ref r18
+    if is_error(r19) goto L50 (error at _draw_cursor:176) else goto L12
+L12:
+    r20 = self.col
+    if is_error(r20) goto L52 (error at _draw_cursor:176) else goto L13
+L13:
+    r21 = box(int, r20)
+    r22 = sudoku.globals :: static
+    r23 = unicode_16 :: static  ('SIDE')
+    r24 = r22[r23] :: dict
+    if is_error(r24) goto L53 (error at _draw_cursor:176) else goto L14
+L14:
+    r25 = unbox(int, r24)
+    dec_ref r24
+    if is_error(r25) goto L53 (error at _draw_cursor:176) else goto L15
+L15:
+    r26 = box(int, r25)
+    r27 = r21 * r26
+    dec_ref r21
+    dec_ref r26
+    if is_error(r27) goto L52 (error at _draw_cursor:176) else goto L16
+L16:
+    r28 = box(int, r19)
+    r29 = r28 + r27
+    dec_ref r28
+    dec_ref r27
+    if is_error(r29) goto L50 (error at _draw_cursor:176) else goto L17
+L17:
+    r30 = 1
+    r31 = box(short_int, r30)
+    r32 = r29 + r31
+    dec_ref r29
+    dec_ref r31
+    if is_error(r32) goto L50 (error at _draw_cursor:176) else goto L18
+L18:
+    x0 = r32
+    r33 = sudoku.globals :: static
+    r34 = unicode_15 :: static  ('MARGIN')
+    r35 = r33[r34] :: dict
+    if is_error(r35) goto L54 (error at _draw_cursor:177) else goto L19
+L19:
+    r36 = unbox(int, r35)
+    dec_ref r35
+    if is_error(r36) goto L54 (error at _draw_cursor:177) else goto L20
+L20:
+    r37 = self.row
+    if is_error(r37) goto L55 (error at _draw_cursor:177) else goto L21
+L21:
+    r38 = box(int, r37)
+    r39 = sudoku.globals :: static
+    r40 = unicode_16 :: static  ('SIDE')
+    r41 = r39[r40] :: dict
+    if is_error(r41) goto L56 (error at _draw_cursor:177) else goto L22
+L22:
+    r42 = unbox(int, r41)
+    dec_ref r41
+    if is_error(r42) goto L56 (error at _draw_cursor:177) else goto L23
+L23:
+    r43 = box(int, r42)
+    r44 = r38 * r43
+    dec_ref r38
+    dec_ref r43
+    if is_error(r44) goto L55 (error at _draw_cursor:177) else goto L24
+L24:
+    r45 = box(int, r36)
+    r46 = r45 + r44
+    dec_ref r45
+    dec_ref r44
+    if is_error(r46) goto L54 (error at _draw_cursor:177) else goto L25
+L25:
+    r47 = 1
+    r48 = box(short_int, r47)
+    r49 = r46 + r48
+    dec_ref r46
+    dec_ref r48
+    if is_error(r49) goto L54 (error at _draw_cursor:177) else goto L26
+L26:
+    y0 = r49
+    r50 = sudoku.globals :: static
+    r51 = unicode_15 :: static  ('MARGIN')
+    r52 = r50[r51] :: dict
+    if is_error(r52) goto L57 (error at _draw_cursor:178) else goto L27
+L27:
+    r53 = unbox(int, r52)
+    dec_ref r52
+    if is_error(r53) goto L57 (error at _draw_cursor:178) else goto L28
+L28:
+    r54 = self.col
+    if is_error(r54) goto L58 (error at _draw_cursor:178) else goto L29
+L29:
+    r55 = box(int, r54)
+    r56 = 1
+    r57 = box(short_int, r56)
+    r58 = r55 + r57
+    dec_ref r55
+    dec_ref r57
+    if is_error(r58) goto L58 (error at _draw_cursor:178) else goto L30
+L30:
+    r59 = sudoku.globals :: static
+    r60 = unicode_16 :: static  ('SIDE')
+    r61 = r59[r60] :: dict
+    if is_error(r61) goto L59 (error at _draw_cursor:178) else goto L31
+L31:
+    r62 = unbox(int, r61)
+    dec_ref r61
+    if is_error(r62) goto L59 (error at _draw_cursor:178) else goto L32
+L32:
+    r63 = box(int, r62)
+    r64 = r58 * r63
+    dec_ref r58
+    dec_ref r63
+    if is_error(r64) goto L58 (error at _draw_cursor:178) else goto L33
+L33:
+    r65 = box(int, r53)
+    r66 = r65 + r64
+    dec_ref r65
+    dec_ref r64
+    if is_error(r66) goto L57 (error at _draw_cursor:178) else goto L34
+L34:
+    r67 = 1
+    r68 = box(short_int, r67)
+    r69 = r66 - r68
+    dec_ref r66
+    dec_ref r68
+    if is_error(r69) goto L57 (error at _draw_cursor:178) else goto L35
+L35:
+    x1 = r69
+    r70 = sudoku.globals :: static
+    r71 = unicode_15 :: static  ('MARGIN')
+    r72 = r70[r71] :: dict
+    if is_error(r72) goto L60 (error at _draw_cursor:179) else goto L36
+L36:
+    r73 = unbox(int, r72)
+    dec_ref r72
+    if is_error(r73) goto L60 (error at _draw_cursor:179) else goto L37
+L37:
+    r74 = self.row
+    if is_error(r74) goto L61 (error at _draw_cursor:179) else goto L38
+L38:
+    r75 = box(int, r74)
+    r76 = 1
+    r77 = box(short_int, r76)
+    r78 = r75 + r77
+    dec_ref r75
+    dec_ref r77
+    if is_error(r78) goto L61 (error at _draw_cursor:179) else goto L39
+L39:
+    r79 = sudoku.globals :: static
+    r80 = unicode_16 :: static  ('SIDE')
+    r81 = r79[r80] :: dict
+    if is_error(r81) goto L62 (error at _draw_cursor:179) else goto L40
+L40:
+    r82 = unbox(int, r81)
+    dec_ref r81
+    if is_error(r82) goto L62 (error at _draw_cursor:179) else goto L41
+L41:
+    r83 = box(int, r82)
+    r84 = r78 * r83
+    dec_ref r78
+    dec_ref r83
+    if is_error(r84) goto L61 (error at _draw_cursor:179) else goto L42
+L42:
+    r85 = box(int, r73)
+    r86 = r85 + r84
+    dec_ref r85
+    dec_ref r84
+    if is_error(r86) goto L60 (error at _draw_cursor:179) else goto L43
+L43:
+    r87 = 1
+    r88 = box(short_int, r87)
+    r89 = r86 - r88
+    dec_ref r86
+    dec_ref r88
+    if is_error(r89) goto L60 (error at _draw_cursor:179) else goto L44
+L44:
+    y1 = r89
+    r90 = self.canvas
+    if is_error(r90) goto L63 (error at _draw_cursor:181) else goto L45
+L45:
+    r91 = unicode_69 :: static  ('red')
+    r92 = unicode_79 :: static  ('cursor')
+    r93 = unicode_80 :: static  ('create_rectangle')
+    r94 = getattr r90, r93
+    dec_ref r90
+    if is_error(r94) goto L63 (error at _draw_cursor:181) else goto L46
+L46:
+    r95 = unicode_81 :: static  ('outline')
+    r96 = unicode_72 :: static  ('tags')
+    r97 = (x0, y0, x1, y1) :: tuple
+    dec_ref x0
+    dec_ref y0
+    dec_ref x1
+    dec_ref y1
+    if is_error(r97) goto L64 (error at _draw_cursor:181) else goto L47
+L47:
+    r98 = {r95: r91, r96: r92}
+    if is_error(r98) goto L65 (error at _draw_cursor:181) else goto L48
+L48:
+    r99 = py_call_with_kwargs(r94, r97, r98)
+    dec_ref r94
+    dec_ref r97
+    dec_ref r98
+    if is_error(r99) goto L50 (error at _draw_cursor:181) else goto L66
+L49:
+    r100 = None
+    r101 = box(None, r100)
+    inc_ref r101
+    return r101
+L50:
+    r102 = <error> :: object
+    return r102
+L51:
+    dec_ref r3
+    goto L2
+L52:
+    dec_ref r19 :: int
+    goto L50
+L53:
+    dec_ref r19 :: int
+    dec_ref r21
+    goto L50
+L54:
+    dec_ref x0
+    goto L50
+L55:
+    dec_ref x0
+    dec_ref r36 :: int
+    goto L50
+L56:
+    dec_ref x0
+    dec_ref r36 :: int
+    dec_ref r38
+    goto L50
+L57:
+    dec_ref x0
+    dec_ref y0
+    goto L50
+L58:
+    dec_ref x0
+    dec_ref y0
+    dec_ref r53 :: int
+    goto L50
+L59:
+    dec_ref x0
+    dec_ref y0
+    dec_ref r53 :: int
+    dec_ref r58
+    goto L50
+L60:
+    dec_ref x0
+    dec_ref y0
+    dec_ref x1
+    goto L50
+L61:
+    dec_ref x0
+    dec_ref y0
+    dec_ref x1
+    dec_ref r73 :: int
+    goto L50
+L62:
+    dec_ref x0
+    dec_ref y0
+    dec_ref x1
+    dec_ref r73 :: int
+    dec_ref r78
+    goto L50
+L63:
+    dec_ref x0
+    dec_ref y0
+    dec_ref x1
+    dec_ref y1
+    goto L50
+L64:
+    dec_ref r94
+    goto L50
+L65:
+    dec_ref r94
+    dec_ref r97
+    goto L50
+L66:
+    dec_ref r99
+    goto L49
+
+def SudokuUI._key_pressed(self, event):
+    self :: sudoku.SudokuUI
+    event, r0 :: object
+    r1 :: str
+    r2 :: object
+    r3 :: bool
+    r4 :: None
+    r5 :: object
+    r6 :: int
+    r7 :: object
+    r8 :: short_int
+    r9, r10 :: object
+    r11 :: bool
+    r12 :: int
+    r13 :: object
+    r14 :: short_int
+    r15, r16 :: object
+    r17 :: bool
+    r18 :: str
+    r19 :: object
+    r20 :: str
+    r21 :: bool
+    r22 :: str
+    r23, r24, r25, r26 :: object
+    r27 :: str
+    r28 :: object
+    r29 :: int
+    r30, r31 :: object
+    r32 :: int
+    r33 :: object
+    r34 :: bool
+    r35 :: short_int
+    r36 :: int
+    r37 :: object
+    r38 :: short_int
+    r39 :: int
+    r40 :: object
+    r41 :: tuple[object, object]
+    r42, r43, r44 :: object
+    r45 :: bool
+    r46 :: int
+    r47 :: bool
+    r48 :: object
+    r49 :: bool
+    r50 :: int
+    r51 :: bool
+    r52 :: object
+    r53 :: bool
+    r54, r55, r56 :: object
+    r57 :: str
+    r58 :: object
+    r59 :: bool
+    r60 :: object
+    r61 :: None
+    r62, r63 :: object
+L0:
+    r0 = self.game
+    if is_error(r0) goto L46 (error at _key_pressed:184) else goto L1
+L1:
+    r1 = unicode_75 :: static  ('game_over')
+    r2 = getattr r0, r1
+    dec_ref r0
+    if is_error(r2) goto L46 (error at _key_pressed:184) else goto L2
+L2:
+    r3 = bool r2 :: object
+    dec_ref r2
+    if is_error(r3) goto L46 (error at _key_pressed:184) else goto L3
+L3:
+    if r3 goto L4 else goto L5 :: bool
+L4:
+    r4 = None
+    r5 = box(None, r4)
+    inc_ref r5
+    return r5
+L5:
+    r6 = self.row
+    if is_error(r6) goto L46 (error at _key_pressed:186) else goto L6
+L6:
+    r7 = box(int, r6)
+    r8 = 0
+    r9 = box(short_int, r8)
+    r10 = r7 >= r9
+    dec_ref r7
+    dec_ref r9
+    if is_error(r10) goto L46 (error at _key_pressed:186) else goto L7
+L7:
+    r11 = bool r10 :: object
+    dec_ref r10
+    if is_error(r11) goto L46 (error at _key_pressed:186) else goto L8
+L8:
+    if r11 goto L9 else goto L45 :: bool
+L9:
+    r12 = self.col
+    if is_error(r12) goto L46 (error at _key_pressed:186) else goto L10
+L10:
+    r13 = box(int, r12)
+    r14 = 0
+    r15 = box(short_int, r14)
+    r16 = r13 >= r15
+    dec_ref r13
+    dec_ref r15
+    if is_error(r16) goto L46 (error at _key_pressed:186) else goto L11
+L11:
+    r17 = bool r16 :: object
+    dec_ref r16
+    if is_error(r17) goto L46 (error at _key_pressed:186) else goto L12
+L12:
+    if r17 goto L13 else goto L45 :: bool
+L13:
+    r18 = unicode_82 :: static  ('char')
+    r19 = getattr event, r18
+    if is_error(r19) goto L46 (error at _key_pressed:186) else goto L14
+L14:
+    r20 = unicode_83 :: static  ('1234567890')
+    r21 = r19 in r20
+    dec_ref r19
+    if is_error(r21) goto L46 (error at _key_pressed:186) else goto L15
+L15:
+    if r21 goto L16 else goto L45 :: bool
+L16:
+    r22 = unicode_82 :: static  ('char')
+    r23 = getattr event, r22
+    if is_error(r23) goto L46 (error at _key_pressed:187) else goto L17
+L17:
+    r24 = int
+    r25 = py_call(r24, r23)
+    dec_ref r23
+    if is_error(r25) goto L46 (error at _key_pressed:187) else goto L18
+L18:
+    r26 = self.game
+    if is_error(r26) goto L47 (error at _key_pressed:187) else goto L19
+L19:
+    r27 = unicode_62 :: static  ('puzzle')
+    r28 = getattr r26, r27
+    dec_ref r26
+    if is_error(r28) goto L47 (error at _key_pressed:187) else goto L20
+L20:
+    r29 = self.row
+    if is_error(r29) goto L48 (error at _key_pressed:187) else goto L21
+L21:
+    r30 = box(int, r29)
+    r31 = r28[r30] :: object
+    dec_ref r28
+    dec_ref r30
+    if is_error(r31) goto L47 (error at _key_pressed:187) else goto L22
+L22:
+    r32 = self.col
+    if is_error(r32) goto L49 (error at _key_pressed:187) else goto L23
+L23:
+    r33 = box(int, r32)
+    r34 = r31.__setitem__(r33, r25) :: object
+    dec_ref r31
+    dec_ref r33
+    dec_ref r25
+    if not r34 goto L46 (error at _key_pressed:187) else goto L24 :: bool
+L24:
+    r35 = 1
+    r36 = -r35 :: int
+    r37 = box(int, r36)
+    r38 = 1
+    r39 = -r38 :: int
+    r40 = box(int, r39)
+    r41 = (r37, r40)
+    dec_ref r37
+    dec_ref r40
+    r42 = box(tuple[object, object], r41)
+    r43 = iter r42 :: object
+    dec_ref r42
+    if is_error(r43) goto L46 (error at _key_pressed:188) else goto L25
+L25:
+    r44 = next r43 :: object
+    if is_error(r44) goto L50 else goto L28
+L26:
+    raise ValueError('not enough values to unpack')
+    if not r45 goto L46 (error at _key_pressed:188) else goto L27 :: bool
+L27:
+    unreachable
+L28:
+    r46 = unbox(int, r44)
+    dec_ref r44
+    if is_error(r46) goto L51 (error at _key_pressed:188) else goto L29
+L29:
+    self.col = r46; r47 = is_error
+    if not r47 goto L51 (error at _key_pressed:188) else goto L30 :: bool
+L30:
+    r48 = next r43 :: object
+    if is_error(r48) goto L52 else goto L33
+L31:
+    raise ValueError('not enough values to unpack')
+    if not r49 goto L46 (error at _key_pressed:188) else goto L32 :: bool
+L32:
+    unreachable
+L33:
+    r50 = unbox(int, r48)
+    dec_ref r48
+    if is_error(r50) goto L51 (error at _key_pressed:188) else goto L34
+L34:
+    self.row = r50; r51 = is_error
+    if not r51 goto L51 (error at _key_pressed:188) else goto L35 :: bool
+L35:
+    r52 = next r43 :: object
+    dec_ref r43
+    if is_error(r52) goto L38 else goto L53
+L36:
+    raise ValueError('too many values to unpack')
+    if not r53 goto L46 (error at _key_pressed:188) else goto L37 :: bool
+L37:
+    unreachable
+L38:
+    r54 = self._draw_puzzle()
+    if is_error(r54) goto L46 (error at _key_pressed:189) else goto L54
+L39:
+    r55 = self._draw_cursor()
+    if is_error(r55) goto L46 (error at _key_pressed:190) else goto L55
+L40:
+    r56 = self.game
+    if is_error(r56) goto L46 (error at _key_pressed:191) else goto L41
+L41:
+    r57 = unicode_84 :: static  ('check_win')
+    r58 = py_method_call(r56, r57)
+    dec_ref r56
+    if is_error(r58) goto L46 (error at _key_pressed:191) else goto L42
+L42:
+    r59 = bool r58 :: object
+    dec_ref r58
+    if is_error(r59) goto L46 (error at _key_pressed:191) else goto L43
+L43:
+    if r59 goto L44 else goto L45 :: bool
+L44:
+    r60 = self._draw_victory()
+    if is_error(r60) goto L46 (error at _key_pressed:192) else goto L56
+L45:
+    r61 = None
+    r62 = box(None, r61)
+    inc_ref r62
+    return r62
+L46:
+    r63 = <error> :: object
+    return r63
+L47:
+    dec_ref r25
+    goto L46
+L48:
+    dec_ref r25
+    dec_ref r28
+    goto L46
+L49:
+    dec_ref r25
+    dec_ref r31
+    goto L46
+L50:
+    dec_ref r43
+    goto L26
+L51:
+    dec_ref r43
+    goto L46
+L52:
+    dec_ref r43
+    goto L31
+L53:
+    dec_ref r52
+    goto L36
+L54:
+    dec_ref r54
+    goto L39
+L55:
+    dec_ref r55
+    goto L40
+L56:
+    dec_ref r60
+    goto L45
+
+def SudokuUI._draw_victory(self):
+    self :: sudoku.SudokuUI
+    r0 :: dict
+    r1 :: str
+    r2 :: object
+    r3 :: int
+    r4 :: dict
+    r5 :: str
+    r6 :: object
+    r7 :: int
+    r8 :: short_int
+    r9 :: int
+    r10, r11, r12, x0, y0 :: object
+    r13 :: dict
+    r14 :: str
+    r15 :: object
+    r16 :: int
+    r17 :: dict
+    r18 :: str
+    r19 :: object
+    r20 :: int
+    r21 :: short_int
+    r22 :: int
+    r23, r24, r25, x1, y1, r26 :: object
+    r27, r28, r29, r30 :: str
+    r31 :: object
+    r32, r33, r34 :: str
+    r35 :: tuple
+    r36 :: dict
+    r37 :: object
+    r38 :: dict
+    r39 :: str
+    r40 :: object
+    r41 :: int
+    r42 :: short_int
+    r43 :: dict
+    r44 :: str
+    r45 :: object
+    r46, r47 :: int
+    r48, r49, r50 :: object
+    r51 :: dict
+    r52 :: str
+    r53 :: object
+    r54 :: int
+    r55 :: short_int
+    r56, r57, r58, r59, x, y, r60 :: object
+    r61, r62, r63, r64 :: str
+    r65 :: short_int
+    r66 :: object
+    r67 :: tuple[str, object]
+    r68 :: object
+    r69 :: tuple[object, object]
+    r70 :: str
+    r71 :: object
+    r72, r73, r74, r75 :: str
+    r76 :: tuple
+    r77 :: object
+    r78 :: dict
+    r79 :: object
+    r80 :: None
+    r81, r82 :: object
+L0:
+    r0 = sudoku.globals :: static
+    r1 = unicode_15 :: static  ('MARGIN')
+    r2 = r0[r1] :: dict
+    if is_error(r2) goto L31 (error at _draw_victory:196) else goto L1
+L1:
+    r3 = unbox(int, r2)
+    dec_ref r2
+    if is_error(r3) goto L31 (error at _draw_victory:196) else goto L2
+L2:
+    r4 = sudoku.globals :: static
+    r5 = unicode_16 :: static  ('SIDE')
+    r6 = r4[r5] :: dict
+    if is_error(r6) goto L32 (error at _draw_victory:196) else goto L3
+L3:
+    r7 = unbox(int, r6)
+    dec_ref r6
+    if is_error(r7) goto L32 (error at _draw_victory:196) else goto L4
+L4:
+    r8 = 2
+    r9 = r7 * r8 :: int
+    dec_ref r7 :: int
+    r10 = box(int, r9)
+    r11 = box(int, r3)
+    r12 = r11 + r10
+    dec_ref r11
+    dec_ref r10
+    if is_error(r12) goto L31 (error at _draw_victory:196) else goto L5
+L5:
+    inc_ref r12
+    x0 = r12
+    y0 = r12
+    r13 = sudoku.globals :: static
+    r14 = unicode_15 :: static  ('MARGIN')
+    r15 = r13[r14] :: dict
+    if is_error(r15) goto L33 (error at _draw_victory:197) else goto L6
+L6:
+    r16 = unbox(int, r15)
+    dec_ref r15
+    if is_error(r16) goto L33 (error at _draw_victory:197) else goto L7
+L7:
+    r17 = sudoku.globals :: static
+    r18 = unicode_16 :: static  ('SIDE')
+    r19 = r17[r18] :: dict
+    if is_error(r19) goto L34 (error at _draw_victory:197) else goto L8
+L8:
+    r20 = unbox(int, r19)
+    dec_ref r19
+    if is_error(r20) goto L34 (error at _draw_victory:197) else goto L9
+L9:
+    r21 = 7
+    r22 = r20 * r21 :: int
+    dec_ref r20 :: int
+    r23 = box(int, r22)
+    r24 = box(int, r16)
+    r25 = r24 + r23
+    dec_ref r24
+    dec_ref r23
+    if is_error(r25) goto L33 (error at _draw_victory:197) else goto L10
+L10:
+    inc_ref r25
+    x1 = r25
+    y1 = r25
+    r26 = self.canvas
+    if is_error(r26) goto L35 (error at _draw_victory:198) else goto L11
+L11:
+    r27 = unicode_74 :: static  ('victory')
+    r28 = unicode_85 :: static  ('dark orange')
+    r29 = unicode_86 :: static  ('orange')
+    r30 = unicode_87 :: static  ('create_oval')
+    r31 = getattr r26, r30
+    dec_ref r26
+    if is_error(r31) goto L35 (error at _draw_victory:198) else goto L12
+L12:
+    r32 = unicode_72 :: static  ('tags')
+    r33 = unicode_88 :: static  ('color')
+    r34 = unicode_81 :: static  ('outline')
+    r35 = (x0, y0, x1, y1) :: tuple
+    dec_ref x0
+    dec_ref y0
+    dec_ref x1
+    dec_ref y1
+    if is_error(r35) goto L36 (error at _draw_victory:198) else goto L13
+L13:
+    r36 = {r32: r27, r33: r28, r34: r29}
+    if is_error(r36) goto L37 (error at _draw_victory:198) else goto L14
+L14:
+    r37 = py_call_with_kwargs(r31, r35, r36)
+    dec_ref r31
+    dec_ref r35
+    dec_ref r36
+    if is_error(r37) goto L31 (error at _draw_victory:198) else goto L38
+L15:
+    r38 = sudoku.globals :: static
+    r39 = unicode_15 :: static  ('MARGIN')
+    r40 = r38[r39] :: dict
+    if is_error(r40) goto L31 (error at _draw_victory:201) else goto L16
+L16:
+    r41 = unbox(int, r40)
+    dec_ref r40
+    if is_error(r41) goto L31 (error at _draw_victory:201) else goto L17
+L17:
+    r42 = 4
+    r43 = sudoku.globals :: static
+    r44 = unicode_16 :: static  ('SIDE')
+    r45 = r43[r44] :: dict
+    if is_error(r45) goto L39 (error at _draw_victory:201) else goto L18
+L18:
+    r46 = unbox(int, r45)
+    dec_ref r45
+    if is_error(r46) goto L39 (error at _draw_victory:201) else goto L19
+L19:
+    r47 = r42 * r46 :: int
+    dec_ref r46 :: int
+    r48 = box(int, r47)
+    r49 = box(int, r41)
+    r50 = r49 + r48
+    dec_ref r49
+    dec_ref r48
+    if is_error(r50) goto L31 (error at _draw_victory:201) else goto L20
+L20:
+    r51 = sudoku.globals :: static
+    r52 = unicode_16 :: static  ('SIDE')
+    r53 = r51[r52] :: dict
+    if is_error(r53) goto L40 (error at _draw_victory:201) else goto L21
+L21:
+    r54 = unbox(int, r53)
+    dec_ref r53
+    if is_error(r54) goto L40 (error at _draw_victory:201) else goto L22
+L22:
+    r55 = 2
+    r56 = box(int, r54)
+    r57 = box(short_int, r55)
+    r58 = r56 / r57
+    dec_ref r56
+    dec_ref r57
+    if is_error(r58) goto L40 (error at _draw_victory:201) else goto L23
+L23:
+    r59 = r50 + r58
+    dec_ref r50
+    dec_ref r58
+    if is_error(r59) goto L31 (error at _draw_victory:201) else goto L24
+L24:
+    inc_ref r59
+    x = r59
+    y = r59
+    r60 = self.canvas
+    if is_error(r60) goto L41 (error at _draw_victory:202) else goto L25
+L25:
+    r61 = unicode_89 :: static  ('You win!')
+    r62 = unicode_90 :: static  ('winner')
+    r63 = unicode_91 :: static  ('white')
+    r64 = unicode_92 :: static  ('Arial')
+    r65 = 32
+    r66 = box(short_int, r65)
+    r67 = (r64, r66)
+    dec_ref r66
+    r68 = box(tuple[str, object], r67)
+    r69 = unbox(tuple[object, object], r68)
+    dec_ref r68
+    if is_error(r69) goto L42 (error at _draw_victory:204) else goto L26
+L26:
+    r70 = unicode_71 :: static  ('create_text')
+    r71 = getattr r60, r70
+    dec_ref r60
+    if is_error(r71) goto L43 (error at _draw_victory:202) else goto L27
+L27:
+    r72 = unicode_52 :: static  ('text')
+    r73 = unicode_72 :: static  ('tags')
+    r74 = unicode_45 :: static  ('fill')
+    r75 = unicode_93 :: static  ('font')
+    r76 = (x, y) :: tuple
+    dec_ref x
+    dec_ref y
+    if is_error(r76) goto L44 (error at _draw_victory:202) else goto L28
+L28:
+    r77 = box(tuple[object, object], r69)
+    r78 = {r72: r61, r73: r62, r74: r63, r75: r77}
+    dec_ref r77
+    if is_error(r78) goto L45 (error at _draw_victory:202) else goto L29
+L29:
+    r79 = py_call_with_kwargs(r71, r76, r78)
+    dec_ref r71
+    dec_ref r76
+    dec_ref r78
+    if is_error(r79) goto L31 (error at _draw_victory:202) else goto L46
+L30:
+    r80 = None
+    r81 = box(None, r80)
+    inc_ref r81
+    return r81
+L31:
+    r82 = <error> :: object
+    return r82
+L32:
+    dec_ref r3 :: int
+    goto L31
+L33:
+    dec_ref x0
+    dec_ref y0
+    goto L31
+L34:
+    dec_ref x0
+    dec_ref y0
+    dec_ref r16 :: int
+    goto L31
+L35:
+    dec_ref x0
+    dec_ref y0
+    dec_ref x1
+    dec_ref y1
+    goto L31
+L36:
+    dec_ref r31
+    goto L31
+L37:
+    dec_ref r31
+    dec_ref r35
+    goto L31
+L38:
+    dec_ref r37
+    goto L15
+L39:
+    dec_ref r41 :: int
+    goto L31
+L40:
+    dec_ref r50
+    goto L31
+L41:
+    dec_ref x
+    dec_ref y
+    goto L31
+L42:
+    dec_ref x
+    dec_ref y
+    dec_ref r60
+    goto L31
+L43:
+    dec_ref x
+    dec_ref y
+    dec_ref r69
+    goto L31
+L44:
+    dec_ref r69
+    dec_ref r71
+    goto L31
+L45:
+    dec_ref r71
+    dec_ref r76
+    goto L31
+L46:
+    dec_ref r79
+    goto L30
+
+def SudokuBoard.__init__(self, board_file):
+    self :: sudoku.SudokuBoard
+    board_file, r0 :: object
+    r1 :: bool
+    r2 :: None
+    r3, r4 :: object
+L0:
+    r0 = SudokuBoard._create_board(self, board_file)
+    if is_error(r0) goto L3 (error at __init__:212) else goto L1
+L1:
+    self.board = r0; r1 = is_error
+    if not r1 goto L3 (error at __init__:212) else goto L2 :: bool
+L2:
+    r2 = None
+    r3 = box(None, r2)
+    inc_ref r3
+    return r3
+L3:
+    r4 = <error> :: object
+    return r4
+
+def SudokuBoard._create_board(self, board_file):
+    self :: sudoku.SudokuBoard
+    board_file :: object
+    r0 :: list
+    board, r1, r2, r3, line :: object
+    r4 :: str
+    r5 :: object
+    r6 :: int
+    r7 :: object
+    r8 :: short_int
+    r9, r10 :: object
+    r11 :: bool
+    r12 :: str
+    r13, r14 :: object
+    r15 :: bool
+    r16 :: list
+    r17 :: str
+    r18, r19, r20, r21, c, r22, r23 :: object
+    r24 :: short_int
+    r25, r26 :: object
+    r27 :: bool
+    r28, r29 :: object
+    r30 :: short_int
+    r31, r32 :: object
+    r33 :: bool
+    r34 :: str
+    r35, r36 :: object
+    r37 :: bool
+    r38 :: short_int
+    r39 :: int
+    r40, r41, r42, r43 :: object
+    r44 :: str
+    r45 :: object
+    r46, r47 :: bool
+    r48 :: int
+    r49 :: object
+    r50 :: short_int
+    r51, r52 :: object
+    r53 :: bool
+    r54 :: str
+    r55, r56 :: object
+    r57 :: bool
+    r58 :: object
+L0:
+    r0 = []
+    if is_error(r0) goto L39 (error at _create_board:215) else goto L1
+L1:
+    board = r0
+    r1 = iter board_file :: object
+    if is_error(r1) goto L40 (error at _create_board:217) else goto L2
+L2:
+    r2 = next r1 :: object
+    if is_error(r2) goto L41 else goto L3
+L3:
+    r3 = cast(object, r2)
+    if is_error(r3) goto L42 (error at _create_board:217) else goto L4
+L4:
+    line = r3
+    r4 = unicode_96 :: static  ('strip')
+    r5 = py_method_call(line, r4)
+    dec_ref line
+    if is_error(r5) goto L42 (error at _create_board:218) else goto L5
+L5:
+    line = r5
+    r6 = len line :: object
+    r7 = box(int, r6)
+    r8 = 9
+    r9 = box(short_int, r8)
+    r10 = r7 != r9
+    dec_ref r7
+    dec_ref r9
+    if is_error(r10) goto L43 (error at _create_board:221) else goto L6
+L6:
+    r11 = bool r10 :: object
+    dec_ref r10
+    if is_error(r11) goto L43 (error at _create_board:221) else goto L7
+L7:
+    if r11 goto L44 else goto L11 :: bool
+L8:
+    r12 = unicode_97 :: static  ('Each line in the Sudoku puzzle must be 9 chars long')
+    r13 = sudoku.SudokuError :: type
+    r14 = py_call(r13, r12)
+    if is_error(r14) goto L39 (error at _create_board:222) else goto L9
+L9:
+    raise_exception(r14); r15 = 0
+    dec_ref r14
+    if not r15 goto L39 (error at _create_board:222) else goto L10 :: bool
+L10:
+    unreachable
+L11:
+    r16 = []
+    if is_error(r16) goto L43 (error at _create_board:227) else goto L12
+L12:
+    r17 = unicode_98 :: static  ('append')
+    r18 = py_method_call(board, r17, r16)
+    dec_ref r16
+    if is_error(r18) goto L43 (error at _create_board:227) else goto L45
+L13:
+    r19 = iter line :: object
+    dec_ref line
+    if is_error(r19) goto L42 (error at _create_board:230) else goto L14
+L14:
+    r20 = next r19 :: object
+    if is_error(r20) goto L46 else goto L15
+L15:
+    r21 = cast(object, r20)
+    if is_error(r21) goto L47 (error at _create_board:230) else goto L16
+L16:
+    c = r21
+    r22 = int
+    r23 = py_call(r22, c)
+    if is_error(r23) goto L48 (error at _create_board:232) else goto L17
+L17:
+    r24 = 0
+    r25 = box(short_int, r24)
+    r26 = r23 < r25
+    dec_ref r23
+    dec_ref r25
+    if is_error(r26) goto L48 (error at _create_board:232) else goto L18
+L18:
+    r27 = bool r26 :: object
+    dec_ref r26
+    if is_error(r27) goto L48 (error at _create_board:232) else goto L19
+L19:
+    if r27 goto L49 else goto L20 :: bool
+L20:
+    r28 = int
+    r29 = py_call(r28, c)
+    if is_error(r29) goto L48 (error at _create_board:232) else goto L21
+L21:
+    r30 = 9
+    r31 = box(short_int, r30)
+    r32 = r29 > r31
+    dec_ref r29
+    dec_ref r31
+    if is_error(r32) goto L48 (error at _create_board:232) else goto L22
+L22:
+    r33 = bool r32 :: object
+    dec_ref r32
+    if is_error(r33) goto L48 (error at _create_board:232) else goto L23
+L23:
+    if r33 goto L49 else goto L27 :: bool
+L24:
+    r34 = unicode_99 :: static  ('Character must be an integer')
+    r35 = sudoku.SudokuError :: type
+    r36 = py_call(r35, r34)
+    if is_error(r36) goto L39 (error at _create_board:233) else goto L25
+L25:
+    raise_exception(r36); r37 = 0
+    dec_ref r36
+    if not r37 goto L39 (error at _create_board:233) else goto L26 :: bool
+L26:
+    unreachable
+L27:
+    r38 = 1
+    r39 = -r38 :: int
+    r40 = box(int, r39)
+    r41 = board[r40] :: object
+    dec_ref r40
+    if is_error(r41) goto L48 (error at _create_board:237) else goto L28
+L28:
+    r42 = int
+    r43 = py_call(r42, c)
+    dec_ref c
+    if is_error(r43) goto L50 (error at _create_board:237) else goto L29
+L29:
+    r44 = unicode_98 :: static  ('append')
+    r45 = py_method_call(r41, r44, r43)
+    dec_ref r41
+    dec_ref r43
+    if is_error(r45) goto L47 (error at _create_board:237) else goto L51
+L30:
+    r46 = no_err_occurred
+    if not r46 goto L42 (error at _create_board:230) else goto L2 :: bool
+L31:
+    r47 = no_err_occurred
+    if not r47 goto L40 (error at _create_board:217) else goto L32 :: bool
+L32:
+    r48 = len board :: object
+    r49 = box(int, r48)
+    r50 = 9
+    r51 = box(short_int, r50)
+    r52 = r49 != r51
+    dec_ref r49
+    dec_ref r51
+    if is_error(r52) goto L40 (error at _create_board:240) else goto L33
+L33:
+    r53 = bool r52 :: object
+    dec_ref r52
+    if is_error(r53) goto L40 (error at _create_board:240) else goto L34
+L34:
+    if r53 goto L52 else goto L38 :: bool
+L35:
+    r54 = unicode_100 :: static  ('Each Sudoku puzzle must be 9 lines long ')
+    r55 = sudoku.SudokuError :: type
+    r56 = py_call(r55, r54)
+    if is_error(r56) goto L39 (error at _create_board:241) else goto L36
+L36:
+    raise_exception(r56); r57 = 0
+    dec_ref r56
+    if not r57 goto L39 (error at _create_board:241) else goto L37 :: bool
+L37:
+    unreachable
+L38:
+    return board
+L39:
+    r58 = <error> :: object
+    return r58
+L40:
+    dec_ref board
+    goto L39
+L41:
+    dec_ref r1
+    goto L31
+L42:
+    dec_ref board
+    dec_ref r1
+    goto L39
+L43:
+    dec_ref board
+    dec_ref r1
+    dec_ref line
+    goto L39
+L44:
+    dec_ref board
+    dec_ref r1
+    dec_ref line
+    goto L8
+L45:
+    dec_ref r18
+    goto L13
+L46:
+    dec_ref r19
+    goto L30
+L47:
+    dec_ref board
+    dec_ref r1
+    dec_ref r19
+    goto L39
+L48:
+    dec_ref board
+    dec_ref r1
+    dec_ref r19
+    dec_ref c
+    goto L39
+L49:
+    dec_ref board
+    dec_ref r1
+    dec_ref r19
+    dec_ref c
+    goto L24
+L50:
+    dec_ref board
+    dec_ref r1
+    dec_ref r19
+    dec_ref r41
+    goto L39
+L51:
+    dec_ref r45
+    goto L14
+L52:
+    dec_ref board
+    goto L35
+
+def SudokuGame.__init__(self, board_file):
+    self :: sudoku.SudokuGame
+    board_file :: object
+    r0 :: bool
+    r1 :: sudoku.SudokuBoard
+    r2 :: object
+    r3 :: bool
+    r4 :: None
+    r5, r6 :: object
+L0:
+    inc_ref board_file
+    self.board_file = board_file; r0 = is_error
+    if not r0 goto L5 (error at __init__:256) else goto L1 :: bool
+L1:
+    r1 = SudokuBoard(board_file)
+    if is_error(r1) goto L5 (error at __init__:257) else goto L2
+L2:
+    r2 = r1.board
+    dec_ref r1
+    if is_error(r2) goto L5 (error at __init__:257) else goto L3
+L3:
+    self.start_puzzle = r2; r3 = is_error
+    if not r3 goto L5 (error at __init__:257) else goto L4 :: bool
+L4:
+    r4 = None
+    r5 = box(None, r4)
+    inc_ref r5
+    return r5
+L5:
+    r6 = <error> :: object
+    return r6
+
+def SudokuGame.start(self):
+    self :: sudoku.SudokuGame
+    r0 :: bool
+    r1 :: object
+    r2 :: bool
+    r3 :: list
+    r4 :: bool
+    r5, r6, r7 :: short_int
+    i, r8, r9, r10 :: object
+    r11 :: bool
+    r12 :: object
+    r13 :: list
+    r14 :: str
+    r15 :: object
+    r16, r17, r18 :: short_int
+    j, r19, r20, r21 :: object
+    r22 :: bool
+    r23, r24, r25, r26, r27 :: object
+    r28 :: str
+    r29 :: object
+    r30, r31 :: short_int
+    r32 :: object
+    r33, r34 :: short_int
+    r35 :: object
+    r36 :: None
+    r37, r38 :: object
+L0:
+    r0 = False
+    r1 = box(bool, r0)
+    inc_ref r1
+    self.game_over = r1; r2 = is_error
+    if not r2 goto L23 (error at start:260) else goto L1 :: bool
+L1:
+    r3 = []
+    if is_error(r3) goto L23 (error at start:261) else goto L2
+L2:
+    self.puzzle = r3; r4 = is_error
+    if not r4 goto L23 (error at start:261) else goto L3 :: bool
+L3:
+    r5 = 0
+    r6 = 9
+    r7 = r5
+    r8 = box(short_int, r7)
+    i = r8
+L4:
+    r9 = box(short_int, r6)
+    r10 = i < r9
+    dec_ref r9
+    if is_error(r10) goto L24 (error at start:262) else goto L5
+L5:
+    r11 = bool r10 :: object
+    dec_ref r10
+    if is_error(r11) goto L24 (error at start:262) else goto L6
+L6:
+    if r11 goto L7 else goto L25 :: bool
+L7:
+    r12 = self.puzzle
+    if is_error(r12) goto L24 (error at start:263) else goto L8
+L8:
+    r13 = []
+    if is_error(r13) goto L26 (error at start:263) else goto L9
+L9:
+    r14 = unicode_98 :: static  ('append')
+    r15 = py_method_call(r12, r14, r13)
+    dec_ref r12
+    dec_ref r13
+    if is_error(r15) goto L24 (error at start:263) else goto L27
+L10:
+    r16 = 0
+    r17 = 9
+    r18 = r16
+    r19 = box(short_int, r18)
+    j = r19
+L11:
+    r20 = box(short_int, r17)
+    r21 = j < r20
+    dec_ref r20
+    if is_error(r21) goto L28 (error at start:264) else goto L12
+L12:
+    r22 = bool r21 :: object
+    dec_ref r21
+    if is_error(r22) goto L28 (error at start:264) else goto L13
+L13:
+    if r22 goto L14 else goto L29 :: bool
+L14:
+    r23 = self.puzzle
+    if is_error(r23) goto L28 (error at start:265) else goto L15
+L15:
+    r24 = r23[i] :: object
+    dec_ref r23
+    if is_error(r24) goto L28 (error at start:265) else goto L16
+L16:
+    r25 = self.start_puzzle
+    if is_error(r25) goto L30 (error at start:265) else goto L17
+L17:
+    r26 = r25[i] :: object
+    dec_ref r25
+    if is_error(r26) goto L30 (error at start:265) else goto L18
+L18:
+    r27 = r26[j] :: object
+    dec_ref r26
+    dec_ref j
+    if is_error(r27) goto L31 (error at start:265) else goto L19
+L19:
+    r28 = unicode_98 :: static  ('append')
+    r29 = py_method_call(r24, r28, r27)
+    dec_ref r24
+    dec_ref r27
+    if is_error(r29) goto L24 (error at start:265) else goto L32
+L20:
+    r30 = 1
+    r31 = r18 + r30 :: short_int
+    r18 = r31
+    r32 = box(short_int, r31)
+    j = r32
+    goto L11
+L21:
+    r33 = 1
+    r34 = r7 + r33 :: short_int
+    r7 = r34
+    r35 = box(short_int, r34)
+    i = r35
+    goto L4
+L22:
+    r36 = None
+    r37 = box(None, r36)
+    inc_ref r37
+    return r37
+L23:
+    r38 = <error> :: object
+    return r38
+L24:
+    dec_ref i
+    goto L23
+L25:
+    dec_ref i
+    goto L22
+L26:
+    dec_ref i
+    dec_ref r12
+    goto L23
+L27:
+    dec_ref r15
+    goto L10
+L28:
+    dec_ref i
+    dec_ref j
+    goto L23
+L29:
+    dec_ref i
+    dec_ref j
+    goto L21
+L30:
+    dec_ref i
+    dec_ref j
+    dec_ref r24
+    goto L23
+L31:
+    dec_ref i
+    dec_ref r24
+    goto L23
+L32:
+    dec_ref r29
+    goto L20
+
+def SudokuGame.check_win(self):
+    self :: sudoku.SudokuGame
+    r0, r1, r2 :: short_int
+    row, r3, r4, r5 :: object
+    r6 :: bool
+    r7 :: object
+    r8, r9 :: bool
+    r10 :: object
+    r11, r12 :: short_int
+    r13 :: object
+    r14, r15, r16 :: short_int
+    col, r17, r18, r19 :: object
+    r20 :: bool
+    r21 :: object
+    r22, r23 :: bool
+    r24 :: object
+    r25, r26 :: short_int
+    r27 :: object
+    r28, r29, r30 :: short_int
+    r31, r32, r33 :: object
+    r34 :: bool
+    r35, r36, r37 :: short_int
+    r38, r39, r40 :: object
+    r41 :: bool
+    r42 :: object
+    r43, r44 :: bool
+    r45 :: object
+    r46, r47 :: short_int
+    r48 :: object
+    r49, r50 :: short_int
+    r51 :: object
+    r52 :: bool
+    r53 :: object
+    r54, r55 :: bool
+    r56, r57 :: object
+L0:
+    r0 = 0
+    r1 = 9
+    r2 = r0
+    r3 = box(short_int, r2)
+    row = r3
+L1:
+    r4 = box(short_int, r1)
+    r5 = row < r4
+    dec_ref r4
+    if is_error(r5) goto L35 (error at check_win:268) else goto L2
+L2:
+    r6 = bool r5 :: object
+    dec_ref r5
+    if is_error(r6) goto L35 (error at check_win:268) else goto L3
+L3:
+    if r6 goto L4 else goto L36 :: bool
+L4:
+    r7 = self._check_row(row)
+    dec_ref row
+    if is_error(r7) goto L34 (error at check_win:269) else goto L5
+L5:
+    r8 = bool r7 :: object
+    dec_ref r7
+    if is_error(r8) goto L34 (error at check_win:269) else goto L6
+L6:
+    if r8 goto L8 else goto L7 :: bool
+L7:
+    r9 = False
+    r10 = box(bool, r9)
+    inc_ref r10
+    return r10
+L8:
+    r11 = 1
+    r12 = r2 + r11 :: short_int
+    r2 = r12
+    r13 = box(short_int, r12)
+    row = r13
+    goto L1
+L9:
+    r14 = 0
+    r15 = 9
+    r16 = r14
+    r17 = box(short_int, r16)
+    col = r17
+L10:
+    r18 = box(short_int, r15)
+    r19 = col < r18
+    dec_ref r18
+    if is_error(r19) goto L37 (error at check_win:271) else goto L11
+L11:
+    r20 = bool r19 :: object
+    dec_ref r19
+    if is_error(r20) goto L37 (error at check_win:271) else goto L12
+L12:
+    if r20 goto L13 else goto L38 :: bool
+L13:
+    r21 = self._check_col(col)
+    dec_ref col
+    if is_error(r21) goto L34 (error at check_win:272) else goto L14
+L14:
+    r22 = bool r21 :: object
+    dec_ref r21
+    if is_error(r22) goto L34 (error at check_win:272) else goto L15
+L15:
+    if r22 goto L17 else goto L16 :: bool
+L16:
+    r23 = False
+    r24 = box(bool, r23)
+    inc_ref r24
+    return r24
+L17:
+    r25 = 1
+    r26 = r16 + r25 :: short_int
+    r16 = r26
+    r27 = box(short_int, r26)
+    col = r27
+    goto L10
+L18:
+    r28 = 0
+    r29 = 3
+    r30 = r28
+    r31 = box(short_int, r30)
+    row = r31
+L19:
+    r32 = box(short_int, r29)
+    r33 = row < r32
+    dec_ref r32
+    if is_error(r33) goto L35 (error at check_win:274) else goto L20
+L20:
+    r34 = bool r33 :: object
+    dec_ref r33
+    if is_error(r34) goto L35 (error at check_win:274) else goto L21
+L21:
+    if r34 goto L22 else goto L39 :: bool
+L22:
+    r35 = 0
+    r36 = 3
+    r37 = r35
+    r38 = box(short_int, r37)
+    col = r38
+L23:
+    r39 = box(short_int, r36)
+    r40 = col < r39
+    dec_ref r39
+    if is_error(r40) goto L40 (error at check_win:275) else goto L24
+L24:
+    r41 = bool r40 :: object
+    dec_ref r40
+    if is_error(r41) goto L40 (error at check_win:275) else goto L25
+L25:
+    if r41 goto L26 else goto L41 :: bool
+L26:
+    r42 = self._check_square(row, col)
+    dec_ref col
+    if is_error(r42) goto L35 (error at check_win:276) else goto L27
+L27:
+    r43 = bool r42 :: object
+    dec_ref r42
+    if is_error(r43) goto L35 (error at check_win:276) else goto L28
+L28:
+    if r43 goto L30 else goto L42 :: bool
+L29:
+    r44 = False
+    r45 = box(bool, r44)
+    inc_ref r45
+    return r45
+L30:
+    r46 = 1
+    r47 = r37 + r46 :: short_int
+    r37 = r47
+    r48 = box(short_int, r47)
+    col = r48
+    goto L23
+L31:
+    r49 = 1
+    r50 = r30 + r49 :: short_int
+    r30 = r50
+    r51 = box(short_int, r50)
+    row = r51
+    goto L19
+L32:
+    r52 = True
+    r53 = box(bool, r52)
+    inc_ref r53
+    self.game_over = r53; r54 = is_error
+    if not r54 goto L34 (error at check_win:278) else goto L33 :: bool
+L33:
+    r55 = True
+    r56 = box(bool, r55)
+    inc_ref r56
+    return r56
+L34:
+    r57 = <error> :: object
+    return r57
+L35:
+    dec_ref row
+    goto L34
+L36:
+    dec_ref row
+    goto L9
+L37:
+    dec_ref col
+    goto L34
+L38:
+    dec_ref col
+    goto L18
+L39:
+    dec_ref row
+    goto L32
+L40:
+    dec_ref row
+    dec_ref col
+    goto L34
+L41:
+    dec_ref row
+    dec_ref col
+    goto L31
+L42:
+    dec_ref row
+    goto L29
+
+def SudokuGame._check_block(self, block):
+    self :: sudoku.SudokuGame
+    block :: object
+    r0 :: set
+    r1, r2 :: short_int
+    r3 :: object
+    r4 :: str
+    r5, r6, r7, r8 :: object
+    r9 :: set
+    r10, r11 :: object
+L0:
+    r0 = set block :: object
+    if is_error(r0) goto L6 (error at _check_block:282) else goto L1
+L1:
+    r1 = 1
+    r2 = 10
+    r3 = builtins :: module
+    r4 = unicode_103 :: static  ('range')
+    r5 = getattr r3, r4
+    if is_error(r5) goto L7 (error at _check_block:282) else goto L2
+L2:
+    r6 = box(short_int, r1)
+    r7 = box(short_int, r2)
+    r8 = py_call(r5, r6, r7)
+    dec_ref r5
+    dec_ref r6
+    dec_ref r7
+    if is_error(r8) goto L7 (error at _check_block:282) else goto L3
+L3:
+    r9 = set r8 :: object
+    dec_ref r8
+    if is_error(r9) goto L7 (error at _check_block:282) else goto L4
+L4:
+    r10 = r0 == r9
+    dec_ref r0
+    dec_ref r9
+    if is_error(r10) goto L6 (error at _check_block:282) else goto L5
+L5:
+    return r10
+L6:
+    r11 = <error> :: object
+    return r11
+L7:
+    dec_ref r0
+    goto L6
+
+def SudokuGame._check_row(self, row):
+    self :: sudoku.SudokuGame
+    row, r0, r1, r2, r3 :: object
+L0:
+    r0 = self.puzzle
+    if is_error(r0) goto L4 (error at _check_row:285) else goto L1
+L1:
+    r1 = r0[row] :: object
+    dec_ref r0
+    if is_error(r1) goto L4 (error at _check_row:285) else goto L2
+L2:
+    r2 = self._check_block(r1)
+    dec_ref r1
+    if is_error(r2) goto L4 (error at _check_row:285) else goto L3
+L3:
+    return r2
+L4:
+    r3 = <error> :: object
+    return r3
+
+def SudokuGame._check_col(self, col):
+    self :: sudoku.SudokuGame
+    col :: object
+    r0 :: list
+    r1, r2, r3 :: short_int
+    row, r4, r5, r6 :: object
+    r7 :: bool
+    r8, r9, r10 :: object
+    r11 :: bool
+    r12, r13 :: short_int
+    r14, r15, r16 :: object
+L0:
+    r0 = []
+    if is_error(r0) goto L12 (error at _check_col:289) else goto L1
+L1:
+    r1 = 0
+    r2 = 9
+    r3 = r1
+    r4 = box(short_int, r3)
+    row = r4
+L2:
+    r5 = box(short_int, r2)
+    r6 = row < r5
+    dec_ref r5
+    if is_error(r6) goto L13 (error at _check_col:289) else goto L3
+L3:
+    r7 = bool r6 :: object
+    dec_ref r6
+    if is_error(r7) goto L13 (error at _check_col:289) else goto L4
+L4:
+    if r7 goto L5 else goto L14 :: bool
+L5:
+    r8 = self.puzzle
+    if is_error(r8) goto L13 (error at _check_col:289) else goto L6
+L6:
+    r9 = r8[row] :: object
+    dec_ref r8
+    dec_ref row
+    if is_error(r9) goto L15 (error at _check_col:289) else goto L7
+L7:
+    r10 = r9[col] :: object
+    dec_ref r9
+    if is_error(r10) goto L15 (error at _check_col:289) else goto L8
+L8:
+    r11 = r0.append(r10) :: list
+    dec_ref r10
+    if not r11 goto L15 (error at _check_col:289) else goto L9 :: bool
+L9:
+    r12 = 1
+    r13 = r3 + r12 :: short_int
+    r3 = r13
+    r14 = box(short_int, r13)
+    row = r14
+    goto L2
+L10:
+    r15 = self._check_block(r0)
+    dec_ref r0
+    if is_error(r15) goto L12 (error at _check_col:288) else goto L11
+L11:
+    return r15
+L12:
+    r16 = <error> :: object
+    return r16
+L13:
+    dec_ref r0
+    dec_ref row
+    goto L12
+L14:
+    dec_ref row
+    goto L10
+L15:
+    dec_ref r0
+    goto L12
+
+def SudokuGame._check_square(self, row, col):
+    self :: sudoku.SudokuGame
+    row, col :: object
+    r0 :: list
+    r1 :: short_int
+    r2, r3 :: object
+    r4 :: short_int
+    r5, r6 :: object
+    r7 :: short_int
+    r8, r9, r10, r, r11 :: object
+    r12 :: bool
+    r13 :: short_int
+    r14, r15 :: object
+    r16 :: short_int
+    r17, r18 :: object
+    r19 :: short_int
+    r20, r21, r22, c, r23 :: object
+    r24 :: bool
+    r25, r26, r27 :: object
+    r28 :: bool
+    r29 :: short_int
+    r30, r31 :: object
+    r32 :: short_int
+    r33, r34, r35, r36 :: object
+L0:
+    r0 = []
+    if is_error(r0) goto L25 (error at _check_square:294) else goto L1
+L1:
+    r1 = 3
+    r2 = box(short_int, r1)
+    r3 = row * r2
+    dec_ref r2
+    if is_error(r3) goto L26 (error at _check_square:296) else goto L2
+L2:
+    r4 = 1
+    r5 = box(short_int, r4)
+    r6 = row + r5
+    dec_ref r5
+    if is_error(r6) goto L27 (error at _check_square:296) else goto L3
+L3:
+    r7 = 3
+    r8 = box(short_int, r7)
+    r9 = r6 * r8
+    dec_ref r6
+    dec_ref r8
+    if is_error(r9) goto L27 (error at _check_square:296) else goto L4
+L4:
+    r10 = r3
+    inc_ref r10
+    r = r10
+L5:
+    r11 = r < r9
+    if is_error(r11) goto L28 (error at _check_square:294) else goto L6
+L6:
+    r12 = bool r11 :: object
+    dec_ref r11
+    if is_error(r12) goto L28 (error at _check_square:294) else goto L7
+L7:
+    if r12 goto L8 else goto L29 :: bool
+L8:
+    r13 = 3
+    r14 = box(short_int, r13)
+    r15 = col * r14
+    dec_ref r14
+    if is_error(r15) goto L28 (error at _check_square:297) else goto L9
+L9:
+    r16 = 1
+    r17 = box(short_int, r16)
+    r18 = col + r17
+    dec_ref r17
+    if is_error(r18) goto L30 (error at _check_square:297) else goto L10
+L10:
+    r19 = 3
+    r20 = box(short_int, r19)
+    r21 = r18 * r20
+    dec_ref r18
+    dec_ref r20
+    if is_error(r21) goto L30 (error at _check_square:297) else goto L11
+L11:
+    r22 = r15
+    inc_ref r22
+    c = r22
+L12:
+    r23 = c < r21
+    if is_error(r23) goto L31 (error at _check_square:294) else goto L13
+L13:
+    r24 = bool r23 :: object
+    dec_ref r23
+    if is_error(r24) goto L31 (error at _check_square:294) else goto L14
+L14:
+    if r24 goto L15 else goto L32 :: bool
+L15:
+    r25 = self.puzzle
+    if is_error(r25) goto L31 (error at _check_square:295) else goto L16
+L16:
+    r26 = r25[r] :: object
+    dec_ref r25
+    if is_error(r26) goto L31 (error at _check_square:295) else goto L17
+L17:
+    r27 = r26[c] :: object
+    dec_ref r26
+    dec_ref c
+    if is_error(r27) goto L33 (error at _check_square:295) else goto L18
+L18:
+    r28 = r0.append(r27) :: list
+    dec_ref r27
+    if not r28 goto L33 (error at _check_square:294) else goto L19 :: bool
+L19:
+    r29 = 1
+    r30 = box(short_int, r29)
+    r31 = r22 + r30
+    dec_ref r22
+    dec_ref r30
+    if is_error(r31) goto L34 (error at _check_square:294) else goto L20
+L20:
+    inc_ref r31
+    r22 = r31
+    c = r31
+    goto L12
+L21:
+    r32 = 1
+    r33 = box(short_int, r32)
+    r34 = r10 + r33
+    dec_ref r10
+    dec_ref r33
+    if is_error(r34) goto L35 (error at _check_square:294) else goto L22
+L22:
+    inc_ref r34
+    r10 = r34
+    r = r34
+    goto L5
+L23:
+    r35 = self._check_block(r0)
+    dec_ref r0
+    if is_error(r35) goto L25 (error at _check_square:293) else goto L24
+L24:
+    return r35
+L25:
+    r36 = <error> :: object
+    return r36
+L26:
+    dec_ref r0
+    goto L25
+L27:
+    dec_ref r0
+    dec_ref r3
+    goto L25
+L28:
+    dec_ref r0
+    dec_ref r9
+    dec_ref r10
+    dec_ref r
+    goto L25
+L29:
+    dec_ref r9
+    dec_ref r10
+    dec_ref r
+    goto L23
+L30:
+    dec_ref r0
+    dec_ref r9
+    dec_ref r10
+    dec_ref r
+    dec_ref r15
+    goto L25
+L31:
+    dec_ref r0
+    dec_ref r9
+    dec_ref r10
+    dec_ref r
+    dec_ref r21
+    dec_ref r22
+    dec_ref c
+    goto L25
+L32:
+    dec_ref r
+    dec_ref r21
+    dec_ref r22
+    dec_ref c
+    goto L21
+L33:
+    dec_ref r0
+    dec_ref r9
+    dec_ref r10
+    dec_ref r
+    dec_ref r21
+    dec_ref r22
+    goto L25
+L34:
+    dec_ref r0
+    dec_ref r9
+    dec_ref r10
+    dec_ref r
+    dec_ref r21
+    goto L25
+L35:
+    dec_ref r0
+    dec_ref r9
+    goto L25
+
+def __top_level__():
+    r0, r1 :: object
+    r2 :: bool
+    r3 :: str
+    r4 :: object
+    r5 :: dict
+    r6, r7 :: object
+    r8 :: bool
+    r9 :: str
+    r10 :: object
+    r11 :: dict
+    r12 :: str
+    r13 :: object
+    r14 :: str
+    r15 :: bool
+    r16, r17 :: object
+    r18 :: bool
+    r19 :: str
+    r20, r21 :: object
+    r22 :: dict
+    r23 :: str
+    r24 :: object
+    r25 :: str
+    r26 :: bool
+    r27 :: str
+    r28 :: object
+    r29 :: str
+    r30 :: bool
+    r31 :: str
+    r32 :: object
+    r33 :: str
+    r34 :: bool
+    r35 :: str
+    r36 :: object
+    r37 :: str
+    r38 :: bool
+    r39 :: str
+    r40 :: object
+    r41 :: str
+    r42 :: bool
+    r43 :: str
+    r44 :: object
+    r45 :: str
+    r46 :: bool
+    r47 :: str
+    r48 :: object
+    r49 :: str
+    r50 :: bool
+    r51, r52, r53, r54 :: str
+    r55 :: list
+    r56 :: dict
+    r57 :: str
+    r58 :: bool
+    r59 :: short_int
+    r60 :: dict
+    r61 :: str
+    r62 :: object
+    r63 :: bool
+    r64 :: short_int
+    r65 :: dict
+    r66 :: str
+    r67 :: object
+    r68 :: bool
+    r69 :: dict
+    r70 :: str
+    r71 :: object
+    r72 :: int
+    r73 :: short_int
+    r74 :: int
+    r75 :: dict
+    r76 :: str
+    r77 :: object
+    r78 :: int
+    r79 :: short_int
+    r80, r81 :: int
+    r82 :: dict
+    r83 :: str
+    r84 :: object
+    r85 :: bool
+    r86 :: dict
+    r87 :: str
+    r88 :: object
+    r89 :: bool
+    r90 :: object
+    r91 :: str
+    r92 :: object
+    r93 :: tuple
+    r94 :: str
+    r95, r96 :: object
+    r97, r98 :: str
+    r99 :: tuple
+    r100 :: bool
+    r101 :: dict
+    r102 :: str
+    r103 :: bool
+    r104 :: dict
+    r105 :: str
+    r106 :: object
+    r107 :: tuple
+    r108 :: str
+    r109, r110 :: object
+    r111 :: bool
+    r112, r113, r114, r115, r116, r117, r118 :: str
+    r119 :: tuple
+    r120 :: bool
+    r121 :: dict
+    r122 :: str
+    r123 :: bool
+    r124 :: object
+    r125 :: str
+    r126 :: object
+    r127 :: tuple
+    r128 :: str
+    r129, r130 :: object
+    r131 :: bool
+    r132, r133 :: str
+    r134 :: tuple
+    r135 :: bool
+    r136 :: dict
+    r137 :: str
+    r138 :: bool
+    r139 :: object
+    r140 :: str
+    r141 :: object
+    r142 :: tuple
+    r143 :: str
+    r144, r145 :: object
+    r146 :: bool
+    r147, r148, r149, r150, r151 :: str
+    r152 :: tuple
+    r153 :: bool
+    r154 :: dict
+    r155 :: str
+    r156 :: bool
+    r157 :: dict
+    r158 :: str
+    r159 :: object
+    r160, r161 :: str
+    r162 :: bool
+    r163 :: object
+    r164 :: dict
+    r165 :: str
+    r166 :: bool
+    r167 :: str
+    r168 :: dict
+    r169 :: str
+    r170, r171 :: object
+    r172, r173 :: str
+    r174 :: object
+    r175 :: str
+    r176, r177, r178 :: object
+    r179 :: str
+    r180 :: object
+    r181 :: str
+    r182, r183 :: object
+    r184, r185 :: bool
+    r186 :: dict
+    r187 :: str
+    r188 :: bool
+    r189 :: dict
+    r190 :: str
+    r191 :: object
+    r192 :: sudoku.SudokuGame
+    r193 :: dict
+    r194 :: str
+    r195 :: bool
+    r196 :: dict
+    r197 :: str
+    r198 :: object
+    r199 :: sudoku.SudokuGame
+    r200 :: object
+    r201 :: dict
+    r202 :: str
+    r203, r204 :: object
+    r205 :: dict
+    r206 :: str
+    r207 :: bool
+    r208 :: dict
+    r209 :: str
+    r210 :: object
+    r211 :: dict
+    r212 :: str
+    r213 :: object
+    r214 :: sudoku.SudokuGame
+    r215 :: sudoku.SudokuUI
+    r216 :: dict
+    r217 :: str
+    r218 :: object
+    r219 :: str
+    r220 :: dict
+    r221 :: str
+    r222 :: object
+    r223 :: int
+    r224 :: dict
+    r225 :: str
+    r226 :: object
+    r227 :: int
+    r228 :: short_int
+    r229 :: int
+    r230 :: tuple[int, int]
+    r231, r232 :: object
+    r233, r234 :: str
+    r235 :: object
+    r236 :: dict
+    r237 :: str
+    r238 :: object
+    r239 :: str
+    r240 :: object
+    r241 :: tuple[object, object, object]
+    r242 :: bool
+    r243 :: tuple[object, object, object]
+    r244, r245, r246, r247 :: object
+    r248, r249, r250 :: bool
+    r251, r252, r253 :: tuple[object, object, object]
+    r254, r255 :: object
+    r256, r257 :: bool
+    r258, r259 :: None
+L0:
+    r0 = builtins :: module
+    r1 = builtins.None :: object
+    r2 = r0 is not r1
+    if r2 goto L3 else goto L1 :: bool
+L1:
+    r3 = unicode_0 :: static  ('builtins')
+    r4 = import r3 :: str
+    if is_error(r4) goto L121 (error at <module>:-1) else goto L2
+L2:
+    builtins = r4 :: module
+    dec_ref r4
+L3:
+    r5 = sudoku.globals :: static
+    r6 = argparse :: module
+    r7 = builtins.None :: object
+    r8 = r6 is not r7
+    if r8 goto L6 else goto L4 :: bool
+L4:
+    r9 = unicode_1 :: static  ('argparse')
+    r10 = import r9 :: str
+    if is_error(r10) goto L121 (error at <module>:1) else goto L5
+L5:
+    argparse = r10 :: module
+    dec_ref r10
+L6:
+    r11 = get_module_dict
+    r12 = unicode_1 :: static  ('argparse')
+    r13 = r11[r12] :: dict
+    if is_error(r13) goto L121 (error at <module>:1) else goto L7
+L7:
+    r14 = unicode_1 :: static  ('argparse')
+    r15 = r5.__setitem__(r14, r13) :: dict
+    dec_ref r13
+    if not r15 goto L121 (error at <module>:1) else goto L8 :: bool
+L8:
+    r16 = tkinter :: module
+    r17 = builtins.None :: object
+    r18 = r16 is not r17
+    if r18 goto L11 else goto L9 :: bool
+L9:
+    r19 = unicode_2 :: static  ('tkinter')
+    r20 = import r19 :: str
+    if is_error(r20) goto L121 (error at <module>:2) else goto L10
+L10:
+    tkinter = r20 :: module
+    dec_ref r20
+L11:
+    r21 = tkinter :: module
+    r22 = sudoku.globals :: static
+    r23 = unicode_3 :: static  ('Tk')
+    r24 = getattr r21, r23
+    if is_error(r24) goto L121 (error at <module>:2) else goto L12
+L12:
+    r25 = unicode_3 :: static  ('Tk')
+    r26 = r22.__setitem__(r25, r24) :: dict
+    dec_ref r24
+    if not r26 goto L121 (error at <module>:2) else goto L13 :: bool
+L13:
+    r27 = unicode_4 :: static  ('Canvas')
+    r28 = getattr r21, r27
+    if is_error(r28) goto L121 (error at <module>:2) else goto L14
+L14:
+    r29 = unicode_4 :: static  ('Canvas')
+    r30 = r22.__setitem__(r29, r28) :: dict
+    dec_ref r28
+    if not r30 goto L121 (error at <module>:2) else goto L15 :: bool
+L15:
+    r31 = unicode_5 :: static  ('Frame')
+    r32 = getattr r21, r31
+    if is_error(r32) goto L121 (error at <module>:2) else goto L16
+L16:
+    r33 = unicode_5 :: static  ('Frame')
+    r34 = r22.__setitem__(r33, r32) :: dict
+    dec_ref r32
+    if not r34 goto L121 (error at <module>:2) else goto L17 :: bool
+L17:
+    r35 = unicode_6 :: static  ('Button')
+    r36 = getattr r21, r35
+    if is_error(r36) goto L121 (error at <module>:2) else goto L18
+L18:
+    r37 = unicode_6 :: static  ('Button')
+    r38 = r22.__setitem__(r37, r36) :: dict
+    dec_ref r36
+    if not r38 goto L121 (error at <module>:2) else goto L19 :: bool
+L19:
+    r39 = unicode_7 :: static  ('BOTH')
+    r40 = getattr r21, r39
+    if is_error(r40) goto L121 (error at <module>:2) else goto L20
+L20:
+    r41 = unicode_7 :: static  ('BOTH')
+    r42 = r22.__setitem__(r41, r40) :: dict
+    dec_ref r40
+    if not r42 goto L121 (error at <module>:2) else goto L21 :: bool
+L21:
+    r43 = unicode_8 :: static  ('TOP')
+    r44 = getattr r21, r43
+    if is_error(r44) goto L121 (error at <module>:2) else goto L22
+L22:
+    r45 = unicode_8 :: static  ('TOP')
+    r46 = r22.__setitem__(r45, r44) :: dict
+    dec_ref r44
+    if not r46 goto L121 (error at <module>:2) else goto L23 :: bool
+L23:
+    r47 = unicode_9 :: static  ('BOTTOM')
+    r48 = getattr r21, r47
+    if is_error(r48) goto L121 (error at <module>:2) else goto L24
+L24:
+    r49 = unicode_9 :: static  ('BOTTOM')
+    r50 = r22.__setitem__(r49, r48) :: dict
+    dec_ref r48
+    if not r50 goto L121 (error at <module>:2) else goto L25 :: bool
+L25:
+    r51 = unicode_10 :: static  ('debug')
+    r52 = unicode_11 :: static  ('n00b')
+    r53 = unicode_12 :: static  ('l33t')
+    r54 = unicode_13 :: static  ('error')
+    inc_ref r51
+    inc_ref r52
+    inc_ref r53
+    inc_ref r54
+    r55 = [r51, r52, r53, r54]
+    if is_error(r55) goto L121 (error at <module>:4) else goto L26
+L26:
+    r56 = sudoku.globals :: static
+    r57 = unicode_14 :: static  ('BOARDS')
+    r58 = r56.__setitem__(r57, r55) :: dict
+    dec_ref r55
+    if not r58 goto L121 (error at <module>:4) else goto L27 :: bool
+L27:
+    r59 = 20
+    r60 = sudoku.globals :: static
+    r61 = unicode_15 :: static  ('MARGIN')
+    r62 = box(short_int, r59)
+    r63 = r60.__setitem__(r61, r62) :: dict
+    dec_ref r62
+    if not r63 goto L121 (error at <module>:5) else goto L28 :: bool
+L28:
+    r64 = 50
+    r65 = sudoku.globals :: static
+    r66 = unicode_16 :: static  ('SIDE')
+    r67 = box(short_int, r64)
+    r68 = r65.__setitem__(r66, r67) :: dict
+    dec_ref r67
+    if not r68 goto L121 (error at <module>:6) else goto L29 :: bool
+L29:
+    r69 = sudoku.globals :: static
+    r70 = unicode_15 :: static  ('MARGIN')
+    r71 = r69[r70] :: dict
+    if is_error(r71) goto L121 (error at <module>:7) else goto L30
+L30:
+    r72 = unbox(int, r71)
+    dec_ref r71
+    if is_error(r72) goto L121 (error at <module>:7) else goto L31
+L31:
+    r73 = 2
+    r74 = r72 * r73 :: int
+    dec_ref r72 :: int
+    r75 = sudoku.globals :: static
+    r76 = unicode_16 :: static  ('SIDE')
+    r77 = r75[r76] :: dict
+    if is_error(r77) goto L122 (error at <module>:7) else goto L32
+L32:
+    r78 = unbox(int, r77)
+    dec_ref r77
+    if is_error(r78) goto L122 (error at <module>:7) else goto L33
+L33:
+    r79 = 9
+    r80 = r78 * r79 :: int
+    dec_ref r78 :: int
+    r81 = r74 + r80 :: int
+    dec_ref r74 :: int
+    dec_ref r80 :: int
+    r82 = sudoku.globals :: static
+    r83 = unicode_17 :: static  ('WIDTH')
+    inc_ref r81 :: int
+    r84 = box(int, r81)
+    r85 = r82.__setitem__(r83, r84) :: dict
+    dec_ref r84
+    if not r85 goto L123 (error at <module>:7) else goto L34 :: bool
+L34:
+    r86 = sudoku.globals :: static
+    r87 = unicode_18 :: static  ('HEIGHT')
+    r88 = box(int, r81)
+    r89 = r86.__setitem__(r87, r88) :: dict
+    dec_ref r88
+    if not r89 goto L121 (error at <module>:7) else goto L35 :: bool
+L35:
+    r90 = builtins :: module
+    r91 = unicode_19 :: static  ('Exception')
+    r92 = getattr r90, r91
+    if is_error(r92) goto L121 (error at <module>:10) else goto L36
+L36:
+    r93 = (r92) :: tuple
+    dec_ref r92
+    if is_error(r93) goto L121 (error at <module>:10) else goto L37
+L37:
+    r94 = unicode_20 :: static  ('sudoku')
+    r95 = sudoku.SudokuError_template :: type
+    r96 = pytype_from_template(r95, r93, r94)
+    dec_ref r93
+    if is_error(r96) goto L121 (error at <module>:10) else goto L38
+L38:
+    r97 = unicode_21 :: static  ('__mypyc_attrs__')
+    r98 = unicode_22 :: static  ('__dict__')
+    r99 = (r98) :: tuple
+    if is_error(r99) goto L124 (error at <module>:10) else goto L39
+L39:
+    r100 = setattr r96, r97, r99
+    dec_ref r99
+    if not r100 goto L124 (error at <module>:10) else goto L40 :: bool
+L40:
+    sudoku.SudokuError = r96 :: type
+    r101 = sudoku.globals :: static
+    r102 = unicode_23 :: static  ('SudokuError')
+    r103 = r101.__setitem__(r102, r96) :: dict
+    dec_ref r96
+    if not r103 goto L121 (error at <module>:10) else goto L41 :: bool
+L41:
+    r104 = sudoku.globals :: static
+    r105 = unicode_5 :: static  ('Frame')
+    r106 = r104[r105] :: dict
+    if is_error(r106) goto L121 (error at <module>:35) else goto L42
+L42:
+    r107 = (r106) :: tuple
+    dec_ref r106
+    if is_error(r107) goto L121 (error at <module>:35) else goto L43
+L43:
+    r108 = unicode_20 :: static  ('sudoku')
+    r109 = sudoku.SudokuUI_template :: type
+    r110 = pytype_from_template(r109, r107, r108)
+    dec_ref r107
+    if is_error(r110) goto L121 (error at <module>:35) else goto L44
+L44:
+    r111 = SudokuUI_trait_vtable_setup()
+    if is_error(r111) goto L125 (error at <module>:-1) else goto L45
+L45:
+    r112 = unicode_21 :: static  ('__mypyc_attrs__')
+    r113 = unicode_35 :: static  ('canvas')
+    r114 = unicode_36 :: static  ('col')
+    r115 = unicode_37 :: static  ('game')
+    r116 = unicode_38 :: static  ('parent')
+    r117 = unicode_39 :: static  ('row')
+    r118 = unicode_22 :: static  ('__dict__')
+    r119 = (r113, r114, r115, r116, r117, r118) :: tuple
+    if is_error(r119) goto L125 (error at <module>:35) else goto L46
+L46:
+    r120 = setattr r110, r112, r119
+    dec_ref r119
+    if not r120 goto L125 (error at <module>:35) else goto L47 :: bool
+L47:
+    sudoku.SudokuUI = r110 :: type
+    r121 = sudoku.globals :: static
+    r122 = unicode_40 :: static  ('SudokuUI')
+    r123 = r121.__setitem__(r122, r110) :: dict
+    dec_ref r110
+    if not r123 goto L121 (error at <module>:35) else goto L48 :: bool
+L48:
+    r124 = builtins :: module
+    r125 = unicode_94 :: static  ('object')
+    r126 = getattr r124, r125
+    if is_error(r126) goto L121 (error at <module>:207) else goto L49
+L49:
+    r127 = (r126) :: tuple
+    dec_ref r126
+    if is_error(r127) goto L121 (error at <module>:207) else goto L50
+L50:
+    r128 = unicode_20 :: static  ('sudoku')
+    r129 = sudoku.SudokuBoard_template :: type
+    r130 = pytype_from_template(r129, r127, r128)
+    dec_ref r127
+    if is_error(r130) goto L121 (error at <module>:207) else goto L51
+L51:
+    r131 = SudokuBoard_trait_vtable_setup()
+    if is_error(r131) goto L126 (error at <module>:-1) else goto L52
+L52:
+    r132 = unicode_21 :: static  ('__mypyc_attrs__')
+    r133 = unicode_34 :: static  ('board')
+    r134 = (r133) :: tuple
+    if is_error(r134) goto L126 (error at <module>:207) else goto L53
+L53:
+    r135 = setattr r130, r132, r134
+    dec_ref r134
+    if not r135 goto L126 (error at <module>:207) else goto L54 :: bool
+L54:
+    sudoku.SudokuBoard = r130 :: type
+    r136 = sudoku.globals :: static
+    r137 = unicode_95 :: static  ('SudokuBoard')
+    r138 = r136.__setitem__(r137, r130) :: dict
+    dec_ref r130
+    if not r138 goto L121 (error at <module>:207) else goto L55 :: bool
+L55:
+    r139 = builtins :: module
+    r140 = unicode_94 :: static  ('object')
+    r141 = getattr r139, r140
+    if is_error(r141) goto L121 (error at <module>:249) else goto L56
+L56:
+    r142 = (r141) :: tuple
+    dec_ref r141
+    if is_error(r142) goto L121 (error at <module>:249) else goto L57
+L57:
+    r143 = unicode_20 :: static  ('sudoku')
+    r144 = sudoku.SudokuGame_template :: type
+    r145 = pytype_from_template(r144, r142, r143)
+    dec_ref r142
+    if is_error(r145) goto L121 (error at <module>:249) else goto L58
+L58:
+    r146 = SudokuGame_trait_vtable_setup()
+    if is_error(r146) goto L127 (error at <module>:-1) else goto L59
+L59:
+    r147 = unicode_21 :: static  ('__mypyc_attrs__')
+    r148 = unicode_101 :: static  ('board_file')
+    r149 = unicode_75 :: static  ('game_over')
+    r150 = unicode_62 :: static  ('puzzle')
+    r151 = unicode_66 :: static  ('start_puzzle')
+    r152 = (r148, r149, r150, r151) :: tuple
+    if is_error(r152) goto L127 (error at <module>:249) else goto L60
+L60:
+    r153 = setattr r145, r147, r152
+    dec_ref r152
+    if not r153 goto L127 (error at <module>:249) else goto L61 :: bool
+L61:
+    sudoku.SudokuGame = r145 :: type
+    r154 = sudoku.globals :: static
+    r155 = unicode_102 :: static  ('SudokuGame')
+    r156 = r154.__setitem__(r155, r145) :: dict
+    dec_ref r145
+    if not r156 goto L121 (error at <module>:249) else goto L62 :: bool
+L62:
+    r157 = sudoku.globals :: static
+    r158 = unicode_104 :: static  ('__name__')
+    r159 = r157[r158] :: dict
+    if is_error(r159) goto L121 (error at <module>:304) else goto L63
+L63:
+    r160 = cast(str, r159)
+    if is_error(r160) goto L121 (error at <module>:304) else goto L64
+L64:
+    r161 = unicode_105 :: static  ('__main__')
+    r162 = r160 == r161
+    dec_ref r160
+    if is_error(r162) goto L121 (error at <module>:304) else goto L65
+L65:
+    if r162 goto L66 else goto L120 :: bool
+L66:
+    r163 = parse_arguments()
+    if is_error(r163) goto L121 (error at <module>:305) else goto L67
+L67:
+    r164 = sudoku.globals :: static
+    r165 = unicode_106 :: static  ('board_name')
+    r166 = r164.__setitem__(r165, r163) :: dict
+    dec_ref r163
+    if not r166 goto L121 (error at <module>:305) else goto L68 :: bool
+L68:
+    r167 = unicode_107 :: static  ('%s.sudoku')
+    r168 = sudoku.globals :: static
+    r169 = unicode_106 :: static  ('board_name')
+    r170 = r168[r169] :: dict
+    if is_error(r170) goto L121 (error at <module>:308) else goto L69
+L69:
+    r171 = r167 % r170
+    dec_ref r170
+    if is_error(r171) goto L121 (error at <module>:308) else goto L70
+L70:
+    r172 = cast(str, r171)
+    if is_error(r172) goto L121 (error at <module>:308) else goto L71
+L71:
+    r173 = unicode_108 :: static  ('r')
+    r174 = builtins :: module
+    r175 = unicode_109 :: static  ('open')
+    r176 = getattr r174, r175
+    if is_error(r176) goto L128 (error at <module>:308) else goto L72
+L72:
+    r177 = py_call(r176, r172, r173)
+    dec_ref r176
+    dec_ref r172
+    if is_error(r177) goto L121 (error at <module>:308) else goto L73
+L73:
+    r178 = type r177 :: object
+    r179 = unicode_110 :: static  ('__exit__')
+    r180 = getattr r178, r179
+    if is_error(r180) goto L129 (error at <module>:308) else goto L74
+L74:
+    r181 = unicode_111 :: static  ('__enter__')
+    r182 = getattr r178, r181
+    dec_ref r178
+    if is_error(r182) goto L130 (error at <module>:308) else goto L75
+L75:
+    r183 = py_call(r182, r177)
+    dec_ref r182
+    if is_error(r183) goto L130 (error at <module>:308) else goto L76
+L76:
+    r184 = True
+    r185 = r184
+L77:
+    r186 = sudoku.globals :: static
+    r187 = unicode_112 :: static  ('boards_file')
+    r188 = r186.__setitem__(r187, r183) :: dict
+    dec_ref r183
+    if not r188 goto L101 (error at <module>:308) else goto L78 :: bool
+L78:
+    r189 = sudoku.globals :: static
+    r190 = unicode_112 :: static  ('boards_file')
+    r191 = r189[r190] :: dict
+    if is_error(r191) goto L101 (error at <module>:309) else goto L79
+L79:
+    r192 = SudokuGame(r191)
+    dec_ref r191
+    if is_error(r192) goto L101 (error at <module>:309) else goto L80
+L80:
+    r193 = sudoku.globals :: static
+    r194 = unicode_37 :: static  ('game')
+    r195 = r193.__setitem__(r194, r192) :: dict
+    dec_ref r192
+    if not r195 goto L101 (error at <module>:309) else goto L81 :: bool
+L81:
+    r196 = sudoku.globals :: static
+    r197 = unicode_37 :: static  ('game')
+    r198 = r196[r197] :: dict
+    if is_error(r198) goto L101 (error at <module>:310) else goto L82
+L82:
+    r199 = cast(sudoku.SudokuGame, r198)
+    if is_error(r199) goto L101 (error at <module>:310) else goto L83
+L83:
+    r200 = r199.start()
+    dec_ref r199
+    if is_error(r200) goto L101 (error at <module>:310) else goto L131
+L84:
+    r201 = sudoku.globals :: static
+    r202 = unicode_3 :: static  ('Tk')
+    r203 = r201[r202] :: dict
+    if is_error(r203) goto L101 (error at <module>:313) else goto L85
+L85:
+    r204 = py_call(r203)
+    dec_ref r203
+    if is_error(r204) goto L101 (error at <module>:313) else goto L86
+L86:
+    r205 = sudoku.globals :: static
+    r206 = unicode_113 :: static  ('root')
+    r207 = r205.__setitem__(r206, r204) :: dict
+    dec_ref r204
+    if not r207 goto L101 (error at <module>:313) else goto L87 :: bool
+L87:
+    r208 = sudoku.globals :: static
+    r209 = unicode_113 :: static  ('root')
+    r210 = r208[r209] :: dict
+    if is_error(r210) goto L101 (error at <module>:314) else goto L88
+L88:
+    r211 = sudoku.globals :: static
+    r212 = unicode_37 :: static  ('game')
+    r213 = r211[r212] :: dict
+    if is_error(r213) goto L132 (error at <module>:314) else goto L89
+L89:
+    r214 = cast(sudoku.SudokuGame, r213)
+    if is_error(r214) goto L132 (error at <module>:314) else goto L90
+L90:
+    r215 = SudokuUI(r210, r214)
+    dec_ref r210
+    dec_ref r214
+    if is_error(r215) goto L101 (error at <module>:314) else goto L133
+L91:
+    r216 = sudoku.globals :: static
+    r217 = unicode_113 :: static  ('root')
+    r218 = r216[r217] :: dict
+    if is_error(r218) goto L101 (error at <module>:315) else goto L92
+L92:
+    r219 = unicode_114 :: static  ('%dx%d')
+    r220 = sudoku.globals :: static
+    r221 = unicode_17 :: static  ('WIDTH')
+    r222 = r220[r221] :: dict
+    if is_error(r222) goto L134 (error at <module>:315) else goto L93
+L93:
+    r223 = unbox(int, r222)
+    dec_ref r222
+    if is_error(r223) goto L134 (error at <module>:315) else goto L94
+L94:
+    r224 = sudoku.globals :: static
+    r225 = unicode_18 :: static  ('HEIGHT')
+    r226 = r224[r225] :: dict
+    if is_error(r226) goto L135 (error at <module>:315) else goto L95
+L95:
+    r227 = unbox(int, r226)
+    dec_ref r226
+    if is_error(r227) goto L135 (error at <module>:315) else goto L96
+L96:
+    r228 = 40
+    r229 = r227 + r228 :: int
+    dec_ref r227 :: int
+    r230 = (r223, r229)
+    dec_ref r223 :: int
+    dec_ref r229 :: int
+    r231 = box(tuple[int, int], r230)
+    r232 = r219 % r231
+    dec_ref r231
+    if is_error(r232) goto L134 (error at <module>:315) else goto L97
+L97:
+    r233 = cast(str, r232)
+    if is_error(r233) goto L134 (error at <module>:315) else goto L98
+L98:
+    r234 = unicode_115 :: static  ('geometry')
+    r235 = py_method_call(r218, r234, r233)
+    dec_ref r218
+    dec_ref r233
+    if is_error(r235) goto L101 (error at <module>:315) else goto L136
+L99:
+    r236 = sudoku.globals :: static
+    r237 = unicode_113 :: static  ('root')
+    r238 = r236[r237] :: dict
+    if is_error(r238) goto L101 (error at <module>:316) else goto L100
+L100:
+    r239 = unicode_116 :: static  ('mainloop')
+    r240 = py_method_call(r238, r239)
+    dec_ref r238
+    if is_error(r240) goto L101 (error at <module>:316) else goto L137
+L101:
+    r241 = error_catch
+    r242 = False
+    r185 = r242
+    r243 = get_exc_info
+    r244 = r243[0]
+    r245 = r243[1]
+    r246 = r243[2]
+    dec_ref r243
+    r247 = py_call(r180, r177, r244, r245, r246)
+    dec_ref r244
+    dec_ref r245
+    dec_ref r246
+    if is_error(r247) goto L107 (error at <module>:308) else goto L102
+L102:
+    r248 = bool r247 :: object
+    dec_ref r247
+    if is_error(r248) goto L107 (error at <module>:308) else goto L103
+L103:
+    if r248 goto L106 else goto L104 :: bool
+L104:
+    reraise_exc; r249 = 0
+    if not r249 goto L107 else goto L138 :: bool
+L105:
+    unreachable
+L106:
+    restore_exc_info r241
+    dec_ref r241
+    goto L109
+L107:
+    restore_exc_info r241
+    dec_ref r241
+    r250 = keep_propagating
+    if not r250 goto L110 else goto L139 :: bool
+L108:
+    unreachable
+L109:
+    r252 = <error> :: tuple[object, object, object]
+    r251 = r252
+    goto L111
+L110:
+    r253 = error_catch
+    r251 = r253
+L111:
+    if r185 goto L112 else goto L140 :: bool
+L112:
+    r254 = builtins.None :: object
+    r255 = py_call(r180, r177, r254, r254, r254)
+    dec_ref r180
+    dec_ref r177
+    if is_error(r255) goto L116 (error at <module>:308) else goto L141
+L113:
+    if is_error(r251) goto L120 else goto L114
+L114:
+    reraise_exc; r256 = 0
+    if not r256 goto L116 else goto L142 :: bool
+L115:
+    unreachable
+L116:
+    if is_error(r251) goto L118 else goto L117
+L117:
+    restore_exc_info r251
+    dec_ref r251
+L118:
+    r257 = keep_propagating
+    if not r257 goto L121 else goto L119 :: bool
+L119:
+    unreachable
+L120:
+    r258 = None
+    return r258
+L121:
+    r259 = <error> :: None
+    return r259
+L122:
+    dec_ref r74 :: int
+    goto L121
+L123:
+    dec_ref r81 :: int
+    goto L121
+L124:
+    dec_ref r96
+    goto L121
+L125:
+    dec_ref r110
+    goto L121
+L126:
+    dec_ref r130
+    goto L121
+L127:
+    dec_ref r145
+    goto L121
+L128:
+    dec_ref r172
+    goto L121
+L129:
+    dec_ref r177
+    dec_ref r178
+    goto L121
+L130:
+    dec_ref r177
+    dec_ref r180
+    goto L121
+L131:
+    dec_ref r200
+    goto L84
+L132:
+    dec_ref r210
+    goto L101
+L133:
+    dec_ref r215
+    goto L91
+L134:
+    dec_ref r218
+    goto L101
+L135:
+    dec_ref r218
+    dec_ref r223 :: int
+    goto L101
+L136:
+    dec_ref r235
+    goto L99
+L137:
+    dec_ref r240
+    goto L109
+L138:
+    dec_ref r177
+    dec_ref r180
+    dec_ref r241
+    goto L105
+L139:
+    dec_ref r177
+    dec_ref r180
+    goto L108
+L140:
+    dec_ref r177
+    dec_ref r180
+    goto L113
+L141:
+    dec_ref r255
+    goto L113
+L142:
+    dec_ref r251
+    goto L115

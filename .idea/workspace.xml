@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="17e7c499-cc3e-429a-922e-e66198e34e10" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test_sudoku.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/tristan.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui_workspace.egg-info/requires.txt" beforeDir="false" afterPath="$PROJECT_DIR$/gui_workspace.egg-info/requires.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sudoku.py" beforeDir="false" afterPath="$PROJECT_DIR$/sudoku.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_misc.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_misc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_sudoku.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_sudoku.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,22 +137,22 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="507" y="212" key="FileChooserDialogImpl/0.0.1440.900@0.0.1440.900" timestamp="1581350259529" />
-    <state width="1419" height="245" key="GridCell.Tab.0.bottom" timestamp="1581521985809">
+    <state width="1419" height="245" key="GridCell.Tab.0.bottom" timestamp="1581859025022">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1581521985809" />
-    <state width="1419" height="245" key="GridCell.Tab.0.center" timestamp="1581521985808">
+    <state width="1419" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1581859025022" />
+    <state width="1419" height="245" key="GridCell.Tab.0.center" timestamp="1581859025021">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1581521985808" />
-    <state width="1419" height="245" key="GridCell.Tab.0.left" timestamp="1581521985807">
+    <state width="1419" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1581859025021" />
+    <state width="1419" height="245" key="GridCell.Tab.0.left" timestamp="1581859025020">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1581521985807" />
-    <state width="1419" height="245" key="GridCell.Tab.0.right" timestamp="1581521985809">
+    <state width="1419" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1581859025020" />
+    <state width="1419" height="245" key="GridCell.Tab.0.right" timestamp="1581859025022">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1419" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1581521985809" />
+    <state width="1419" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1581859025022" />
     <state x="229" y="89" key="SettingsEditor" timestamp="1581349518004">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

@@ -32,14 +32,113 @@ def parse_arguments():
     return args['board']
 
 
+class SudokuBoard(object):
+    """
+    Sudoku board representation
+    """
+    def __init__(self, board_file):
+        self.board = SudokuBoard._create_board(self, board_file)
+
+    def _create_board(self, board_file):
+        board = []
+
+        for line in board_file:
+            line = line.strip()
+
+            # raise error if line is shorter or longer than 9 characters
+            if len(line) != 9:
+                raise SudokuError(
+                    "Each line in the Sudoku puzzle must be 9 chars long"
+                )
+
+            # create a list for the line
+            board.append([])
+
+            # then iterate over each character
+            for c in line:
+                # Raise error if character is not between 0 and 9
+                if int(c) < 0 or int(c) > 9:
+                    raise SudokuError(
+                        "Character must be an integer"
+                    )
+                # Add to the latest list for the line
+                board[-1].append(int(c))
+
+        # raise an error if there are not 9 lines
+        if len(board) != 9:
+            raise SudokuError(
+                "Each Sudoku puzzle must be 9 lines long "
+            )
+
+        # return the constructed board
+        return board
+
+
+class SudokuGame(object):
+    """
+    A Sudoku game, in charge of storing the state of the board
+    and checking whether the puzzle is complete
+    """
+
+    def __init__(self, board_file):
+        self.board_file = board_file
+        self.start_puzzle = SudokuBoard(board_file).board
+        self.is_started = True
+
+    def start(self):
+        self.game_over = False
+        self.puzzle = []
+        for i in range(9):
+            self.puzzle.append([])
+            for j in range(9):
+                self.puzzle[i].append(self.start_puzzle[i][j])
+
+    def check_win(self):
+        for row in range(9):
+            if not self._check_row(row):
+                return False
+        for col in range(9):
+            if not self._check_col(col):
+                return False
+        for row in range(3):
+            for col in range(3):
+                if not self._check_square(row, col):
+                    return False
+        self.game_over = True  # if the above conditions are met, the game is completed
+        return True
+
+    def _check_block(self, block):  # set of block we pass in (square, row, or column) must be between 1 and 9
+        return set(block) == set(range(1, 10))
+
+    def _check_row(self, row):
+        return self._check_block(self.puzzle[row])
+
+    def _check_col(self, col):
+        return self._check_block(
+            [self.puzzle[row][col] for row in range(9)]
+        )
+
+    def _check_square(self, row, col):
+        return self._check_block(
+            [
+                self.puzzle[r][c]
+                for r in range(row * 3, (row + 1) * 3)
+                for c in range(col * 3, (col + 1) * 3)
+
+        ]
+
+        )
+
+
 class SudokuUI(Frame):
     """
     The Tkinter UI, responsible for drawing the board and accepting user input
     """
-
-    def __init__(self, parent, game):
+    def __init__(self, parent: Tk, game: SudokuGame):
         self.game = game
+        print(type(self.game))
         self.parent = parent
+        print(type(self.parent))
         Frame.__init__(self, parent)
 
         self.row, self.col = 0, 0
@@ -94,13 +193,14 @@ class SudokuUI(Frame):
         col_adjustment = col % 3
         row_start = row - row_adjustment  # position to start counting from (i.e. where square begins)
         col_start = col - col_adjustment
-        square += [self.game.puzzle[i][j] for i in range(row_start, row_start + 3) for j in range(col_start, col_start + 3)]
+        square += [self.game.puzzle[i][j] for i in range(row_start, row_start + 3)
+                   for j in range(col_start, col_start + 3)]
         return square  # return list with all the numbers in the current square
 
     def check_conflict(self, i, j, row, col, square):
         """
         Function to check conflicts. Takes three lists (row, col, and square)
-        and returns a list of conflict locations
+        as well as the current cell location and returns a list of conflict locations
         """
         conflict_locations = []  # list to store conflict locations on board
         current = self.game.puzzle[i][j]  # current number
@@ -109,7 +209,7 @@ class SudokuUI(Frame):
         if col.count(current) > 1:
             conflict_locations += [[i, j] for j in range(len(col)) if self.game.puzzle[i][j] == current]
         if square.count(current) > 1:
-            conflict_locations += [[i, j] for i in range(len(square)) if square[i] == current]
+            conflict_locations += [[i, j] for i in range(len(square)) if self.game.puzzle[i][j] == current]
         return conflict_locations
 
     def _draw_puzzle(self):
@@ -122,11 +222,10 @@ class SudokuUI(Frame):
                     y = MARGIN + i * SIDE + SIDE / 2
                     original = self.game.start_puzzle[i][j]  # numbers given by the board
                     # list of numbers in current square
-                    print(i, j)
                     square = SudokuUI.find_square(self, i, j)
-                    print(square)
                     # find locations of any conflicts (if applicable)
-                    conflict_locations = SudokuUI.check_conflict(self, i, j, self.game.puzzle[i], self.game.puzzle[j], square)
+                    column = [self.game.puzzle[i][j] for i in range(len(self.game.puzzle))]
+                    conflict_locations = SudokuUI.check_conflict(self, i, j, self.game.puzzle[i], column, square)
                     # if len(conflict_locations) > 0:
                     #     print(conflict_locations)
 
@@ -202,103 +301,6 @@ class SudokuUI(Frame):
         self.canvas.create_text(
             x, y, text='You win!', tags='winner',
             fill='white', font=('Arial', 32))
-
-
-class SudokuBoard(object):
-    """
-    Sudoku board representation
-    """
-    def __init__(self, board_file):
-        self.board = SudokuBoard._create_board(self, board_file)
-
-    def _create_board(self, board_file):
-        board = []
-
-        for line in board_file:
-            line = line.strip()
-
-            # raise error if line is shorter or longer than 9 characters
-            if len(line) != 9:
-                raise SudokuError(
-                    "Each line in the Sudoku puzzle must be 9 chars long"
-                )
-
-            # create a list for the line
-            board.append([])
-
-            # then iterate over each character
-            for c in line:
-                # Raise error if character is not between 0 and 9
-                if int(c) < 0 or int(c) > 9:
-                    raise SudokuError(
-                        "Character must be an integer"
-                    )
-                # Add to the latest list for the line
-                board[-1].append(int(c))
-
-        # raise an error if there are not 9 lines
-        if len(board) != 9:
-            raise SudokuError(
-                "Each Sudoku puzzle must be 9 lines long "
-            )
-
-        # return the constructed board
-        return board
-
-
-class SudokuGame(object):
-    """
-    A Sudoku game, in charge of storing the state of the board
-    and checking whether the puzzle is complete
-    """
-
-    def __init__(self, board_file):
-        self.board_file = board_file
-        self.start_puzzle = SudokuBoard(board_file).board
-
-    def start(self):
-        self.game_over = False
-        self.puzzle = []
-        for i in range(9):
-            self.puzzle.append([])
-            for j in range(9):
-                self.puzzle[i].append(self.start_puzzle[i][j])
-
-    def check_win(self):
-        for row in range(9):
-            if not self._check_row(row):
-                return False
-        for col in range(9):
-            if not self._check_col(col):
-                return False
-        for row in range(3):
-            for col in range(3):
-                if not self._check_square(row, col):
-                    return False
-        self.game_over = True  # if the above conditions are met, the game is completed
-        return True
-
-    def _check_block(self, block):  # set of block we pass in (square, row, or column) must be between 1 and 9
-        return set(block) == set(range(1, 10))
-
-    def _check_row(self, row):
-        return self._check_block(self.puzzle[row])
-
-    def _check_col(self, col):
-        return self._check_block(
-            [self.puzzle[row][col] for row in range(9)]
-        )
-
-    def _check_square(self, row, col):
-        return self._check_block(
-            [
-                self.puzzle[r][c]
-                for r in range(row * 3, (row + 1) * 3)
-                for c in range(col * 3, (col + 1) * 3)
-
-        ]
-
-        )
 
 
 if __name__ == '__main__':

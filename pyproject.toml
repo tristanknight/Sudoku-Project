@@ -6,6 +6,7 @@ authors = ["Tristan Knight <tristanknight217@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+mypy = "^0.761"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
