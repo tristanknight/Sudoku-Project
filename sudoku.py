@@ -93,41 +93,45 @@ class SudokuGame(object):
             for j in range(9):
                 self.puzzle[i].append(self.start_puzzle[i][j])
 
+    def find_square(self, row, col):
+        square = []  # initialize square as an empty list
+        row_adjustment = row % 3  # adjustment needed (0 = beginning of square, 2 = end of square)
+        col_adjustment = col % 3
+        row_start = row - row_adjustment  # position to start counting from (i.e. where square begins)
+        col_start = col - col_adjustment
+        square += [self.puzzle[i][j] for i in range(row_start, row_start + 3)
+                   for j in range(col_start, col_start + 3)]
+        return square  # return list with all the numbers in the current square
+
+    def check_conflict(self, i, j, row, col, square):
+        """
+        Function to check conflicts. Takes three lists (row, col, and square)
+        as well as the current cell location and returns a list of conflict locations
+        """
+        conflict_locations = []  # list to store conflict locations on board
+        current = self.puzzle[i][j]  # current number
+        if row.count(current) > 1:
+            conflict_locations += [[i, j] for i in range(len(row)) if self.puzzle[i][j] == current]
+        if col.count(current) > 1:
+            conflict_locations += [[i, j] for j in range(len(col)) if self.puzzle[i][j] == current]
+        if square.count(current) > 1:
+            conflict_locations += [[i, j] for i in range(len(square)) if self.puzzle[i][j] == current]
+        return conflict_locations
+
     def check_win(self):
-        for row in range(9):
-            if not self._check_row(row):
-                return False
-        for col in range(9):
-            if not self._check_col(col):
-                return False
-        for row in range(3):
-            for col in range(3):
-                if not self._check_square(row, col):
+        total_errors = 0
+        for i in range(9):
+            for j in range(9):
+                row = self.puzzle[i]
+                column = [self.puzzle[i][j] for i in range(len(self.puzzle))]
+                square = self.find_square(i, j)
+                # if there is a conflict or the cell is empty, there is an error
+                if self.check_conflict(i, j, row, column, square) != [] or self.puzzle[i][j] == 0:
+                    total_errors += 1
                     return False
-        self.game_over = True  # if the above conditions are met, the game is completed
-        return True
-
-    def _check_block(self, block):  # set of block we pass in (square, row, or column) must be between 1 and 9
-        return set(block) == set(range(1, 10))
-
-    def _check_row(self, row):
-        return self._check_block(self.puzzle[row])
-
-    def _check_col(self, col):
-        return self._check_block(
-            [self.puzzle[row][col] for row in range(9)]
-        )
-
-    def _check_square(self, row, col):
-        return self._check_block(
-            [
-                self.puzzle[r][c]
-                for r in range(row * 3, (row + 1) * 3)
-                for c in range(col * 3, (col + 1) * 3)
-
-        ]
-
-        )
+        if total_errors == 0:
+            self.game_over = True
+            return True
 
 
 class SudokuUI(Frame):
@@ -187,31 +191,6 @@ class SudokuUI(Frame):
             y1 = MARGIN + i * SIDE
             self.canvas.create_line(x0, y0, x1, y1, fill=color)
 
-    def find_square(self, row, col):
-        square = []  # initialize square as an empty list
-        row_adjustment = row % 3  # adjustment needed (0 = beginning of square, 2 = end of square)
-        col_adjustment = col % 3
-        row_start = row - row_adjustment  # position to start counting from (i.e. where square begins)
-        col_start = col - col_adjustment
-        square += [self.game.puzzle[i][j] for i in range(row_start, row_start + 3)
-                   for j in range(col_start, col_start + 3)]
-        return square  # return list with all the numbers in the current square
-
-    def check_conflict(self, i, j, row, col, square):
-        """
-        Function to check conflicts. Takes three lists (row, col, and square)
-        as well as the current cell location and returns a list of conflict locations
-        """
-        conflict_locations = []  # list to store conflict locations on board
-        current = self.game.puzzle[i][j]  # current number
-        if row.count(current) > 1:
-            conflict_locations += [[i, j] for i in range(len(row)) if self.game.puzzle[i][j] == current]
-        if col.count(current) > 1:
-            conflict_locations += [[i, j] for j in range(len(col)) if self.game.puzzle[i][j] == current]
-        if square.count(current) > 1:
-            conflict_locations += [[i, j] for i in range(len(square)) if self.game.puzzle[i][j] == current]
-        return conflict_locations
-
     def _draw_puzzle(self):
         self.canvas.delete('numbers')  # clears out previous numbers
         for i in range(9):  # iterate over all rows and columns
@@ -222,13 +201,10 @@ class SudokuUI(Frame):
                     y = MARGIN + i * SIDE + SIDE / 2
                     original = self.game.start_puzzle[i][j]  # numbers given by the board
                     # list of numbers in current square
-                    square = SudokuUI.find_square(self, i, j)
+                    square = SudokuGame.find_square(self.game, i, j)
                     # find locations of any conflicts (if applicable)
                     column = [self.game.puzzle[i][j] for i in range(len(self.game.puzzle))]
-                    conflict_locations = SudokuUI.check_conflict(self, i, j, self.game.puzzle[i], column, square)
-                    # if len(conflict_locations) > 0:
-                    #     print(conflict_locations)
-
+                    conflict_locations = SudokuGame.check_conflict(self.game, i, j, self.game.puzzle[i], column, square)
                     if answer == original:
                         color = 'black'
                     elif [i, j] in conflict_locations:
@@ -287,10 +263,11 @@ class SudokuUI(Frame):
             self.col, self.row = -1, -1
             self._draw_puzzle()
             self._draw_cursor()
+            print(self.game.check_win())
             if self.game.check_win():
                 self._draw_victory()
 
-    def _draw_victory(self):
+    def _draw_victory(self):  # draw victory message when game is successfully completed
         # Create an oval (which will be a circle)
         x0 = y0 = MARGIN + SIDE * 2
         x1 = y1 = MARGIN + SIDE * 7

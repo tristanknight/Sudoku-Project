@@ -19,7 +19,8 @@ class TestSudokuUI(unittest.TestCase):
                                     [0, 0, 1, 2, 0, 3, 5, 4, 0], [0, 0, 0, 0, 5, 8, 0, 0, 0], [9, 0, 3, 0, 0, 4, 0, 2, 8], [0, 0, 8, 0, 0, 0, 0, 5, 7]]
         mock_sudoku_game = MockSudokuGame(puzzle)
         tk = Tk()
-        sudoku_ui = SudokuUI(game=mock_sudoku_game, parent=tk)
+        board_file = None
+        sudoku_game = SudokuGame(board_file)
         row = puzzle[1]
         column = [puzzle[n][2] for n in range(len(puzzle))]  # where n is the row and 1 is the column
         square = [2, 1, 0, 3, 8, 5, 0, 5, 0]
@@ -29,7 +30,7 @@ class TestSudokuUI(unittest.TestCase):
         print(column)
         print(square)
         self.assertEqual(square.count(puzzle[1][2]), 2)
-        self.assertEqual(sudoku_ui.check_conflict(1, 2, row, column, square), [[1, 2], [2, 1]])
+        self.assertEqual(sudoku_game.check_conflict(1, 2, row, column, square), [[1, 2], [2, 1]])
 
 
 if __name__ == '__main__':
